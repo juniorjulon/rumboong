@@ -15,7 +15,7 @@ const pillars = [
 ];
 
 const ValueSection = () => (
-  <section id="propuesta" className="py-24">
+  <section id="propuesta" className="py-24 bg-white">
     <div className="container mx-auto px-4">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
