@@ -23,7 +23,7 @@ const activities = [
 ];
 
 const ActivitiesSection = () => (
-  <section id="actividades" className="py-24 bg-section-alt">
+  <section id="actividades" className="py-24 bg-teal">
     <div className="container mx-auto px-4">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
