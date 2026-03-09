@@ -42,9 +42,9 @@ const ValueSection = () => (
             transition={{ delay: i * 0.15 }}
             className="text-center p-8 rounded-xl bg-white border-2 border-light-blue text-foreground"
           >
-            <level.icon className="mx-auto mb-4" size={40} />
-            <h3 className="font-heading text-xl font-bold mb-2">{level.title}</h3>
-            <p className="font-body text-primary-foreground/80 text-sm">{level.desc}</p>
+            <level.icon className="mx-auto mb-4 text-light-blue" size={40} />
+            <h3 className="font-heading text-xl font-bold mb-2 text-foreground">{level.title}</h3>
+            <p className="font-body text-muted-foreground text-sm">{level.desc}</p>
           </motion.div>
         ))}
       </div>
