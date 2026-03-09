@@ -31,10 +31,10 @@ const ActivitiesSection = () => (
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <span className="inline-block font-heading text-xs font-semibold tracking-widest uppercase text-secondary mb-4">
+        <span className="inline-block font-heading text-xs font-semibold tracking-widest uppercase text-accent mb-4">
           En acción
         </span>
-        <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-foreground">
+        <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-teal-foreground">
           Nuestras actividades
         </h2>
       </motion.div>
