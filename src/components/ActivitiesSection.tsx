@@ -23,7 +23,7 @@ const activities = [
 ];
 
 const ActivitiesSection = () => (
-  <section id="actividades" className="py-24 bg-teal">
+  <section id="actividades" className="py-24 bg-primary">
     <div className="container mx-auto px-4">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -31,10 +31,10 @@ const ActivitiesSection = () => (
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <span className="inline-block font-heading text-xs font-semibold tracking-widest uppercase text-accent mb-4">
+        <span className="inline-block font-heading text-xs font-semibold tracking-widest uppercase text-primary-foreground/70 mb-4">
           En acción
         </span>
-        <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-teal-foreground">
+        <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-primary-foreground">
           Nuestras actividades
         </h2>
       </motion.div>
