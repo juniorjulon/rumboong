@@ -15,7 +15,7 @@ const pillars = [
 ];
 
 const ValueSection = () => (
-  <section id="propuesta" className="py-24">
+  <section id="propuesta" className="py-24 bg-white">
     <div className="container mx-auto px-4">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -40,11 +40,11 @@ const ValueSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.15 }}
-            className="text-center p-8 rounded-xl bg-primary text-primary-foreground"
+            className="text-center p-8 rounded-xl bg-white border-2 border-light-blue text-foreground"
           >
-            <level.icon className="mx-auto mb-4" size={40} />
-            <h3 className="font-heading text-xl font-bold mb-2">{level.title}</h3>
-            <p className="font-body text-primary-foreground/80 text-sm">{level.desc}</p>
+            <level.icon className="mx-auto mb-4 text-light-blue" size={40} />
+            <h3 className="font-heading text-xl font-bold mb-2 text-foreground">{level.title}</h3>
+            <p className="font-body text-muted-foreground text-sm">{level.desc}</p>
           </motion.div>
         ))}
       </div>
@@ -69,7 +69,7 @@ const ValueSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="p-6 rounded-xl bg-card border border-border shadow-sm hover:shadow-md transition-shadow"
+            className="p-6 rounded-xl bg-muted border-l-4 border-l-teal border border-border shadow-sm hover:shadow-md transition-shadow"
           >
             <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center mb-4">
               <pillar.icon className="text-accent-foreground" size={24} />

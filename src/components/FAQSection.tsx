@@ -29,7 +29,7 @@ const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-24 bg-section-alt">
+    <section id="faq" className="py-24 bg-white">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -53,7 +53,7 @@ const FAQSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="bg-card rounded-lg border border-border overflow-hidden"
+              className="bg-muted rounded-lg border border-border overflow-hidden hover:border-l-4 hover:border-l-accent transition-all"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}

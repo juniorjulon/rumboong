@@ -23,7 +23,7 @@ const activities = [
 ];
 
 const ActivitiesSection = () => (
-  <section id="actividades" className="py-24 bg-section-alt">
+  <section id="actividades" className="py-24 bg-teal">
     <div className="container mx-auto px-4">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -31,10 +31,10 @@ const ActivitiesSection = () => (
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <span className="inline-block font-heading text-xs font-semibold tracking-widest uppercase text-secondary mb-4">
+        <span className="inline-block font-heading text-xs font-semibold tracking-widest uppercase text-accent mb-4">
           En acción
         </span>
-        <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-foreground">
+        <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-teal-foreground">
           Nuestras actividades
         </h2>
       </motion.div>
@@ -47,7 +47,7 @@ const ActivitiesSection = () => (
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-card rounded-xl overflow-hidden shadow-md border border-border flex flex-col md:flex-row"
+            className="bg-white rounded-xl overflow-hidden shadow-md border border-border flex flex-col md:flex-row"
           >
             {/* Image placeholder — reemplazar con foto real del evento */}
             <div className="md:w-2/5 h-56 md:h-auto">

@@ -9,7 +9,7 @@ const team = [
 ];
 
 const TeamSection = () => (
-  <section id="equipo" className="py-24">
+  <section id="equipo" className="py-24 bg-muted">
     <div className="container mx-auto px-4">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
