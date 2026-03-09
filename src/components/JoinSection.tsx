@@ -51,24 +51,28 @@ const JoinSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.15 }}
-            className="bg-card rounded-xl p-8 text-center shadow-lg"
+            className="bg-card rounded-xl p-8 text-center shadow-lg flex flex-col h-full"
           >
-            <span className="text-4xl mb-4 block">{col.emoji}</span>
-            <h3 className="font-heading text-xl font-bold text-foreground mb-3">{col.title}</h3>
-            <p className="font-body text-sm text-muted-foreground mb-6">{col.desc}</p>
+            <div className="flex-1">
+              <span className="text-4xl mb-4 block">{col.emoji}</span>
+              <h3 className="font-heading text-xl font-bold text-foreground mb-3">{col.title}</h3>
+              <p className="font-body text-sm text-muted-foreground mb-6">{col.desc}</p>
+            </div>
 
-            {col.note && (
-              <div className="w-32 h-32 mx-auto mb-4 bg-muted rounded-lg flex items-center justify-center text-xs text-muted-foreground">
-                QR Placeholder
-              </div>
-            )}
+            <div className="mt-auto">
+              {col.note && (
+                <div className="w-32 h-32 mx-auto mb-4 bg-muted rounded-lg flex items-center justify-center text-xs text-muted-foreground">
+                  QR Placeholder
+                </div>
+              )}
 
-            <a
-              href="mailto:contacto@rumbo.org.pe"
-              className="inline-flex items-center justify-center rounded-lg bg-primary text-primary-foreground font-heading font-semibold px-6 py-3 text-sm hover:bg-secondary transition"
-            >
-              {col.cta}
-            </a>
+              <a
+                href="mailto:contacto@rumbo.org.pe"
+                className="inline-flex items-center justify-center rounded-lg bg-primary text-primary-foreground font-heading font-semibold px-6 py-3 text-sm hover:bg-secondary transition"
+              >
+                {col.cta}
+              </a>
+            </div>
           </motion.div>
         ))}
       </div>
