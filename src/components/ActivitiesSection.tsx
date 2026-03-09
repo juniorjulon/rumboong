@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { CalendarDays, Users, Quote } from "lucide-react";
 import activity1 from "@/assets/activity-1.jpg";
 import activity2 from "@/assets/activity-2.jpg";
+import CardCarousel from "./CardCarousel";
 
 const activities = [
   {
@@ -22,6 +23,26 @@ const activities = [
   },
 ];
 
+const ActivityCard = ({ act }: { act: typeof activities[number] }) => (
+  <div className="bg-white rounded-xl overflow-hidden shadow-md border border-border flex flex-col md:flex-row h-full">
+    <div className="md:w-2/5 h-56 md:h-auto">
+      <img src={act.image} alt={`Taller ${act.workshop} en ${act.school}`} className="w-full h-full object-cover" />
+    </div>
+    <div className="p-6 md:p-8 flex-1 flex flex-col justify-center">
+      <h3 className="font-heading text-lg font-bold text-foreground mb-1">{act.school}</h3>
+      <p className="font-heading text-sm font-semibold text-secondary mb-4">{act.workshop}</p>
+      <div className="flex items-center gap-6 text-sm text-muted-foreground mb-4">
+        <span className="flex items-center gap-1.5"><CalendarDays size={16} /> {act.date}</span>
+        <span className="flex items-center gap-1.5"><Users size={16} /> {act.students} estudiantes</span>
+      </div>
+      <blockquote className="border-l-4 border-accent pl-4 italic text-muted-foreground text-sm">
+        <Quote size={14} className="inline mr-1 text-accent" />
+        {act.testimonial}
+      </blockquote>
+    </div>
+  </div>
+);
+
 const ActivitiesSection = () => (
   <section id="actividades" className="py-24 bg-primary">
     <div className="container mx-auto px-4">
@@ -39,7 +60,8 @@ const ActivitiesSection = () => (
         </h2>
       </motion.div>
 
-      <div className="space-y-12 max-w-4xl mx-auto">
+      {/* Desktop: stacked layout */}
+      <div className="hidden md:block space-y-12 max-w-4xl mx-auto">
         {activities.map((act, i) => (
           <motion.div
             key={i}
@@ -47,29 +69,19 @@ const ActivitiesSection = () => (
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-white rounded-xl overflow-hidden shadow-md border border-border flex flex-col md:flex-row"
           >
-            {/* Image placeholder — reemplazar con foto real del evento */}
-            <div className="md:w-2/5 h-56 md:h-auto">
-              <img src={act.image} alt={`Taller ${act.workshop} en ${act.school}`} className="w-full h-full object-cover" />
-            </div>
-
-            <div className="p-6 md:p-8 flex-1 flex flex-col justify-center">
-              <h3 className="font-heading text-lg font-bold text-foreground mb-1">{act.school}</h3>
-              <p className="font-heading text-sm font-semibold text-secondary mb-4">{act.workshop}</p>
-
-              <div className="flex items-center gap-6 text-sm text-muted-foreground mb-4">
-                <span className="flex items-center gap-1.5"><CalendarDays size={16} /> {act.date}</span>
-                <span className="flex items-center gap-1.5"><Users size={16} /> {act.students} estudiantes</span>
-              </div>
-
-              <blockquote className="border-l-4 border-accent pl-4 italic text-muted-foreground text-sm">
-                <Quote size={14} className="inline mr-1 text-accent" />
-                {act.testimonial}
-              </blockquote>
-            </div>
+            <ActivityCard act={act} />
           </motion.div>
         ))}
+      </div>
+
+      {/* Mobile: carousel */}
+      <div className="md:hidden">
+        <CardCarousel arrowColorClass="text-primary">
+          {activities.map((act, i) => (
+            <ActivityCard key={i} act={act} />
+          ))}
+        </CardCarousel>
       </div>
     </div>
   </section>
