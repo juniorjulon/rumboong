@@ -40,7 +40,7 @@ const ValueSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.15 }}
-            className="text-center p-8 rounded-xl bg-primary text-primary-foreground"
+            className="text-center p-8 rounded-xl bg-white border-2 border-light-blue text-foreground"
           >
             <level.icon className="mx-auto mb-4" size={40} />
             <h3 className="font-heading text-xl font-bold mb-2">{level.title}</h3>
