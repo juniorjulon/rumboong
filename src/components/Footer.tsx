@@ -16,13 +16,13 @@ const Footer = () => {
 
           {/* Redes sociales placeholder — reemplazar con enlaces reales */}
           <div className="flex items-center gap-6">
-            <a href="#" aria-label="Instagram" className="text-background/60 hover:text-accent transition-colors">
+            <a href="#" aria-label="Instagram" className="text-primary-foreground/60 hover:text-accent transition-colors">
               <Instagram size={22} />
             </a>
-            <a href="#" aria-label="Facebook" className="text-background/60 hover:text-accent transition-colors">
+            <a href="#" aria-label="Facebook" className="text-primary-foreground/60 hover:text-accent transition-colors">
               <Facebook size={22} />
             </a>
-            <a href="mailto:contacto@rumbo.org.pe" aria-label="Email" className="text-background/60 hover:text-accent transition-colors">
+            <a href="mailto:contacto@rumbo.org.pe" aria-label="Email" className="text-primary-foreground/60 hover:text-accent transition-colors">
               <Mail size={22} />
             </a>
           </div>
