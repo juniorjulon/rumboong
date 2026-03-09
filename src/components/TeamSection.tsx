@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Linkedin } from "lucide-react";
+import CardCarousel from "./CardCarousel";
 
 const team = [
   { name: "Ana Rodríguez", role: "Directora General", line: "Educación y gestión social", linkedin: "#" },
@@ -7,6 +8,28 @@ const team = [
   { name: "Lucía Flores", role: "Directora de Alianzas", line: "Relaciones institucionales", linkedin: "#" },
   { name: "Jorge Quispe", role: "Líder de Voluntarios", line: "Liderazgo juvenil", linkedin: "#" },
 ];
+
+const MemberCard = ({ member }: { member: typeof team[number] }) => (
+  <div className="text-center group">
+    <div className="w-32 h-32 mx-auto rounded-full bg-muted mb-4 overflow-hidden border-4 border-accent/30 group-hover:border-accent transition-colors">
+      <div className="w-full h-full flex items-center justify-center text-muted-foreground font-heading text-3xl font-bold">
+        {member.name.charAt(0)}
+      </div>
+    </div>
+    <h3 className="font-heading text-base font-bold text-foreground">{member.name}</h3>
+    <p className="font-heading text-sm font-semibold text-secondary">{member.role}</p>
+    <p className="font-body text-xs text-muted-foreground mt-1">{member.line}</p>
+    <a
+      href={member.linkedin}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-1 text-primary hover:text-secondary mt-3 text-sm font-semibold transition-colors"
+      aria-label={`LinkedIn de ${member.name}`}
+    >
+      <Linkedin size={16} /> LinkedIn
+    </a>
+  </div>
+);
 
 const TeamSection = () => (
   <section id="equipo" className="py-24 bg-muted">
@@ -25,7 +48,8 @@ const TeamSection = () => (
         </h2>
       </motion.div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+      {/* Desktop: grid */}
+      <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
         {team.map((member, i) => (
           <motion.div
             key={i}
@@ -33,30 +57,19 @@ const TeamSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="text-center group"
           >
-            {/* Imagen placeholder — reemplazar con foto real del miembro */}
-            <div className="w-32 h-32 mx-auto rounded-full bg-muted mb-4 overflow-hidden border-4 border-accent/30 group-hover:border-accent transition-colors">
-              <div className="w-full h-full flex items-center justify-center text-muted-foreground font-heading text-3xl font-bold">
-                {member.name.charAt(0)}
-              </div>
-            </div>
-
-            <h3 className="font-heading text-base font-bold text-foreground">{member.name}</h3>
-            <p className="font-heading text-sm font-semibold text-secondary">{member.role}</p>
-            <p className="font-body text-xs text-muted-foreground mt-1">{member.line}</p>
-
-            <a
-              href={member.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-primary hover:text-secondary mt-3 text-sm font-semibold transition-colors"
-              aria-label={`LinkedIn de ${member.name}`}
-            >
-              <Linkedin size={16} /> LinkedIn
-            </a>
+            <MemberCard member={member} />
           </motion.div>
         ))}
+      </div>
+
+      {/* Mobile: carousel */}
+      <div className="sm:hidden">
+        <CardCarousel>
+          {team.map((member, i) => (
+            <MemberCard key={i} member={member} />
+          ))}
+        </CardCarousel>
       </div>
     </div>
   </section>
