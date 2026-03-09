@@ -47,7 +47,7 @@ const ActivitiesSection = () => (
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-card rounded-xl overflow-hidden shadow-md border border-border flex flex-col md:flex-row"
+            className="bg-white rounded-xl overflow-hidden shadow-md border border-border flex flex-col md:flex-row"
           >
             {/* Image placeholder — reemplazar con foto real del evento */}
             <div className="md:w-2/5 h-56 md:h-auto">

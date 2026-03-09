@@ -53,7 +53,7 @@ const FAQSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="bg-card rounded-lg border border-border overflow-hidden"
+              className="bg-muted rounded-lg border border-border overflow-hidden hover:border-l-4 hover:border-l-accent transition-all"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}

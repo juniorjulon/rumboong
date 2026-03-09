@@ -69,7 +69,7 @@ const ValueSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="p-6 rounded-xl bg-card border border-border shadow-sm hover:shadow-md transition-shadow"
+            className="p-6 rounded-xl bg-muted border-l-4 border-l-teal border border-border shadow-sm hover:shadow-md transition-shadow"
           >
             <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center mb-4">
               <pillar.icon className="text-accent-foreground" size={24} />

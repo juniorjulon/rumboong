@@ -28,8 +28,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-background/10 mt-10 pt-6 text-center">
-          <p className="font-body text-xs text-background/50">
+        <div className="border-t border-primary-foreground/10 mt-10 pt-6 text-center">
+          <p className="font-body text-xs text-primary-foreground/50">
             © {year} RUMBO. Todos los derechos reservados.
           </p>
         </div>
