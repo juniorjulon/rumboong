@@ -44,11 +44,11 @@ const CardCarousel = ({ children, arrowColorClass = "text-foreground" }: CardCar
     <div className="relative">
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide pb-2"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-2"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}
       >
         {children.map((child, i) => (
-          <div key={i} data-carousel-card className="snap-start shrink-0 w-[85vw] sm:w-[70vw] md:w-auto md:shrink md:snap-align-none">
+          <div key={i} data-carousel-card className="snap-start shrink-0 w-[85vw] sm:w-[70vw]">
             {child}
           </div>
         ))}
