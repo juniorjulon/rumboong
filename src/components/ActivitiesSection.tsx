@@ -77,7 +77,7 @@ const ActivitiesSection = () => (
 
       {/* Mobile: carousel */}
       <div className="md:hidden">
-        <CardCarousel arrowColorClass="text-primary">
+        <CardCarousel arrowColorClass="text-primary-foreground">
           {activities.map((act, i) => (
             <ActivityCard key={i} act={act} />
           ))}
