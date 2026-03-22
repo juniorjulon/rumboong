@@ -11,7 +11,7 @@ const activity = {
   testimonial: "Me ayudó a entender que mi futuro depende de las decisiones que tomo hoy.",
 };
 
-const ActivityCard = ({ act }: { act: typeof activities[number] }) => (
+const ActivityCard = ({ act }: { act: typeof activity }) => (
   <div className="bg-white rounded-xl overflow-hidden shadow-md border border-border flex flex-col md:flex-row h-full">
     <div className="md:w-2/5 h-56 md:h-auto">
       <img src={act.image} alt={`Taller ${act.workshop} en ${act.school}`} className="w-full h-full object-cover" />
