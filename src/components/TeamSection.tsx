@@ -2,19 +2,82 @@ import { motion } from "framer-motion";
 import { Linkedin } from "lucide-react";
 import CardCarousel from "./CardCarousel";
 
+import sheylaCampos from "@/assets/team/sheyla-campos.jpg";
+import juniorJulon from "@/assets/team/junior-julon.jpg";
+import luceritoMalpartida from "@/assets/team/lucerito-malpartida.jpg";
+import marianaMartinez from "@/assets/team/mariana-martinez.jpg";
+import nicolContreras from "@/assets/team/nicol-contreras.jpg";
+import mariaArias from "@/assets/team/maria-arias.jpg";
+import breinnerRamos from "@/assets/team/breinner-ramos.jpg";
+import gabrielaContreras from "@/assets/team/gabriela-contreras.jpg";
+
 const team = [
-  { name: "Ana Rodríguez", role: "Directora General", line: "Educación y gestión social", linkedin: "#" },
-  { name: "Carlos Mendoza", role: "Coordinador Académico", line: "Psicología educativa", linkedin: "#" },
-  { name: "Lucía Flores", role: "Directora de Alianzas", line: "Relaciones institucionales", linkedin: "#" },
-  { name: "Jorge Quispe", role: "Líder de Voluntarios", line: "Liderazgo juvenil", linkedin: "#" },
+  {
+    name: "Sheyla Campos",
+    role: "Coordinadora General",
+    line: "Ingeniera Empresarial de la Universidad del Pacífico | Strategy Analyst en Rappi",
+    linkedin: "https://linkedin.com/in/sheyla-campos-gonzales",
+    photo: sheylaCampos,
+  },
+  {
+    name: "Junior Julón",
+    role: "Coordinador General & Líder de Finanzas",
+    line: "Financista de la Universidad del Pacífico | Analista de Estrategia de Inversiones en Rimac Seguros",
+    linkedin: "https://www.linkedin.com/in/juniorjulon/",
+    photo: juniorJulon,
+  },
+  {
+    name: "Mariana Martinez",
+    role: "Líder de Comunicaciones y Marketing",
+    line: "Ingeniera Empresarial de la Universidad del Pacífico | Business & Strategy Consultant en Minsait",
+    linkedin: "https://www.linkedin.com/in/marianamartinezd/",
+    photo: marianaMartinez,
+  },
+  {
+    name: "Lucerito Malpartida",
+    role: "Líder de Comunicaciones y Marketing",
+    line: "Ingeniera de la Información de la Universidad del Pacífico | B2B Process & Transformation Lead en Pepsico",
+    linkedin: "https://www.linkedin.com/in/luceritomj/",
+    photo: luceritoMalpartida,
+  },
+  {
+    name: "Breinner Ramos",
+    role: "Líder de Operaciones y Proyectos",
+    line: "Ingeniero Empresarial de la Universidad del Pacífico | Consultor & Account Executive en Tuxpas",
+    linkedin: "https://www.linkedin.com/in/breinner-ramos-rodriguez/",
+    photo: breinnerRamos,
+  },
+  {
+    name: "Maria Arias",
+    role: "Líder de Operaciones y Proyectos",
+    line: "Ingeniera de la Información de la Universidad del Pacífico | Consultora de Analítica en Pacífico Seguros",
+    linkedin: "https://www.linkedin.com/in/maria-emilia-arias-condori/",
+    photo: mariaArias,
+  },
+  {
+    name: "Nicol Contreras",
+    role: "Líder de Gestión del Aprendizaje",
+    line: "Ingeniera Empresarial de la Universidad del Pacífico | BSc Management & Digital Innovation de la Universidad de Londres",
+    linkedin: "https://www.linkedin.com/in/nicol-guadalupe-contreras-mendoza-20351921a",
+    photo: nicolContreras,
+  },
+  {
+    name: "Gabriela Contreras",
+    role: "Coordinadora de Comunicaciones y Marketing",
+    line: "Estudiante de Marketing de la Universidad de Lima",
+    linkedin: "https://www.linkedin.com/in/nicol-guadalupe-contreras-mendoza-20351921a",
+    photo: gabrielaContreras,
+  },
 ];
 
 const MemberCard = ({ member }: { member: typeof team[number] }) => (
   <div className="text-center group">
     <div className="w-32 h-32 mx-auto rounded-full bg-muted mb-4 overflow-hidden border-4 border-accent/30 group-hover:border-accent transition-colors">
-      <div className="w-full h-full flex items-center justify-center text-muted-foreground font-heading text-3xl font-bold">
-        {member.name.charAt(0)}
-      </div>
+      <img
+        src={member.photo}
+        alt={member.name}
+        className="w-full h-full object-cover"
+      />
     </div>
     <h3 className="font-heading text-base font-bold text-foreground">{member.name}</h3>
     <p className="font-heading text-sm font-semibold text-secondary">{member.role}</p>
