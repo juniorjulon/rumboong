@@ -1,29 +1,17 @@
 import { motion } from "framer-motion";
 import { CalendarDays, Users, Quote } from "lucide-react";
-import activity1 from "@/assets/activity-1.jpg";
 import activity2 from "@/assets/activity-2.jpg";
-import CardCarousel from "./CardCarousel";
 
-const activities = [
-  {
-    school: "I.E. San Martín de Porres",
-    date: "Marzo 2025",
-    students: 120,
-    workshop: "Descubre tu vocación",
-    image: activity1,
-    testimonial: "Nunca nadie nos había explicado las opciones que teníamos. Fue increíble.",
-  },
-  {
-    school: "Colegio Nacional Juana Alarco",
-    date: "Mayo 2025",
-    students: 85,
-    workshop: "Habilidades para el futuro",
-    image: activity2,
-    testimonial: "Me ayudó a entender que mi futuro depende de las decisiones que tomo hoy.",
-  },
-];
+const activity = {
+  school: "Colegio Nacional Juana Alarco",
+  date: "Mayo 2025",
+  students: 85,
+  workshop: "Habilidades para el futuro",
+  image: activity2,
+  testimonial: "Me ayudó a entender que mi futuro depende de las decisiones que tomo hoy.",
+};
 
-const ActivityCard = ({ act }: { act: typeof activities[number] }) => (
+const ActivityCard = ({ act }: { act: typeof activity }) => (
   <div className="bg-white rounded-xl overflow-hidden shadow-md border border-border flex flex-col md:flex-row h-full">
     <div className="md:w-2/5 h-56 md:h-auto">
       <img src={act.image} alt={`Taller ${act.workshop} en ${act.school}`} className="w-full h-full object-cover" />
@@ -60,28 +48,15 @@ const ActivitiesSection = () => (
         </h2>
       </motion.div>
 
-      {/* Desktop: stacked layout */}
-      <div className="hidden md:block space-y-12 max-w-4xl mx-auto">
-        {activities.map((act, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <ActivityCard act={act} />
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Mobile: carousel */}
-      <div className="md:hidden">
-        <CardCarousel arrowColorClass="text-primary-foreground">
-          {activities.map((act, i) => (
-            <ActivityCard key={i} act={act} />
-          ))}
-        </CardCarousel>
+      <div className="max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <ActivityCard act={activity} />
+        </motion.div>
       </div>
     </div>
   </section>
