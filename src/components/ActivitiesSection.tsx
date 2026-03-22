@@ -2,24 +2,14 @@ import { motion } from "framer-motion";
 import { CalendarDays, Users, Quote } from "lucide-react";
 import activity2 from "@/assets/activity-2.jpg";
 
-const activities = [
-  {
-    school: "I.E. San Martín de Porres",
-    date: "Marzo 2025",
-    students: 120,
-    workshop: "Descubre tu vocación",
-    image: activity1,
-    testimonial: "Nunca nadie nos había explicado las opciones que teníamos. Fue increíble.",
-  },
-  {
-    school: "Colegio Nacional Juana Alarco",
-    date: "Mayo 2025",
-    students: 85,
-    workshop: "Habilidades para el futuro",
-    image: activity2,
-    testimonial: "Me ayudó a entender que mi futuro depende de las decisiones que tomo hoy.",
-  },
-];
+const activity = {
+  school: "Colegio Nacional Juana Alarco",
+  date: "Mayo 2025",
+  students: 85,
+  workshop: "Habilidades para el futuro",
+  image: activity2,
+  testimonial: "Me ayudó a entender que mi futuro depende de las decisiones que tomo hoy.",
+};
 
 const ActivityCard = ({ act }: { act: typeof activities[number] }) => (
   <div className="bg-white rounded-xl overflow-hidden shadow-md border border-border flex flex-col md:flex-row h-full">
