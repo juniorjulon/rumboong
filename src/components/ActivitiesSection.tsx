@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { CalendarDays, Users, Quote } from "lucide-react";
-import activity1 from "@/assets/activity-1.jpg";
 import activity2 from "@/assets/activity-2.jpg";
-import CardCarousel from "./CardCarousel";
 
 const activities = [
   {
