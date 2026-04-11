@@ -45,6 +45,12 @@ function toggleFAQ(btn) {
   if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
 }
 
+/* --- Protección fotos de equipo (clic derecho y arrastre) --- */
+document.querySelectorAll('.team-avatar').forEach(function (el) {
+  el.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  el.addEventListener('dragstart',   function (e) { e.preventDefault(); });
+});
+
 /* --- Carruseles ---
    Los botones ‹ › están en .carousel-section-inner (fuera del overflow).
    updateButtons oculta el botón cuando no hay más slides en esa dirección.
