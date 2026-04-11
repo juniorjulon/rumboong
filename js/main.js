@@ -92,10 +92,12 @@ function updateButtons(name) {
 function slideCarousel(name, dir) {
   var c = carousels[name];
   if (!c || c.track.classList.contains('single')) return;
-  var slides   = c.track.children.length;
-  var maxIndex = Math.max(0, slides - getVisible(name));
+  var slides     = c.track.children.length;
+  var visible    = getVisible(name);
+  var maxIndex   = Math.max(0, slides - visible);
   c.index = Math.min(Math.max(c.index + dir, 0), maxIndex);
-  c.track.style.transform = 'translateX(-' + (100 / slides) * c.index + '%)';
+  var slideWidth = c.track.parentElement.offsetWidth / visible;
+  c.track.style.transform = 'translateX(-' + slideWidth * c.index + 'px)';
   updateButtons(name);
 }
 
