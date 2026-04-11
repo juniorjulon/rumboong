@@ -179,9 +179,8 @@
         <span class="section-tag">En acción</span>
         <h2 class="section-title">Nuestras actividades</h2>
       </div>
-      <div class="carousel-wrapper fade-up">
-        <button class="carousel-btn prev" onclick="slideCarousel('activities', -1)">‹</button>
-        <div class="carousel-track" id="activities-track">
+      <div class="carousel-outer fade-up" id="act-outer">
+        <div class="carousel-wrapper"><div class="carousel-track" id="activities-track">
 
           <div class="activity-slide">
             <div class="activity-card">
@@ -222,8 +221,10 @@
           -->
 
         </div>
-        <button class="carousel-btn next" onclick="slideCarousel('activities', 1)">›</button>
-      </div>
+        </div></div><!-- /track /wrapper -->
+        <button class="carousel-btn prev" onclick="slideCarousel('activities',-1)">‹</button>
+        <button class="carousel-btn next" onclick="slideCarousel('activities',1)">›</button>
+      </div><!-- /act-outer -->
     </div>
   </section>
 
@@ -233,19 +234,18 @@
   FOTOS: assets/team/[nombre-apellido].jpg (nombre exacto abajo)
   EDITAR: cargo u organización → busca el nombre en el HTML.
   ================================================================ -->
-  <section id="equipo" class="section">
+  <section id="equipo" class="section section-white">
     <div class="container">
       <div class="section-header fade-up">
         <span class="section-tag">Quiénes somos</span>
         <h2 class="section-title">Nuestro equipo</h2>
       </div>
-      <div class="carousel-wrapper fade-up">
-        <button class="carousel-btn prev" onclick="slideCarousel('team', -1)">‹</button>
-        <div class="carousel-track" id="team-track">
+      <div class="carousel-outer fade-up" id="team-outer">
+        <div class="carousel-wrapper"><div class="carousel-track" id="team-track">
 
           <!-- FOTO: assets/team/sheyla-campos.jpg -->
           <div class="team-slide"><div class="team-card">
-            <div class="team-avatar"><img src="assets/team/sheyla-campos.jpg" alt="Sheyla Campos"></div>
+            <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/sheyla-campos.jpg" alt="Sheyla Campos"></div>
             <h3>Sheyla Campos</h3>
             <p class="role">Coordinadora General</p>
             <p class="org">Strategy Analyst · Rappi</p>
@@ -254,7 +254,7 @@
 
           <!-- FOTO: assets/team/junior-julon.jpg -->
           <div class="team-slide"><div class="team-card">
-            <div class="team-avatar"><img src="assets/team/junior-julon.jpg" alt="Junior Julón"></div>
+            <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/junior-julon.jpg" alt="Junior Julón"></div>
             <h3>Junior Julón</h3>
             <p class="role">Coordinador General & Finanzas</p>
             <p class="org">Analista de Inversiones · Rímac</p>
@@ -263,7 +263,7 @@
 
           <!-- FOTO: assets/team/mariana-martinez.jpg -->
           <div class="team-slide"><div class="team-card">
-            <div class="team-avatar"><img src="assets/team/mariana-martinez.jpg" alt="Mariana Martínez"></div>
+            <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/mariana-martinez.jpg" alt="Mariana Martínez"></div>
             <h3>Mariana Martínez</h3>
             <p class="role">Líder de Comunicaciones</p>
             <p class="org">Business Consultant · Minsait</p>
@@ -272,7 +272,7 @@
 
           <!-- FOTO: assets/team/lucerito-malpartida.jpg -->
           <div class="team-slide"><div class="team-card">
-            <div class="team-avatar"><img src="assets/team/lucerito-malpartida.jpg" alt="Lucerito Malpartida"></div>
+            <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/lucerito-malpartida.jpg" alt="Lucerito Malpartida"></div>
             <h3>Lucerito Malpartida</h3>
             <p class="role">Líder de Comunicaciones</p>
             <p class="org">B2B Lead · PepsiCo</p>
@@ -281,7 +281,7 @@
 
           <!-- FOTO: assets/team/breinner-ramos.jpg -->
           <div class="team-slide"><div class="team-card">
-            <div class="team-avatar"><img src="assets/team/breinner-ramos.jpg" alt="Breinner Ramos"></div>
+            <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/breinner-ramos.jpg" alt="Breinner Ramos"></div>
             <h3>Breinner Ramos</h3>
             <p class="role">Líder de Operaciones</p>
             <p class="org">Account Executive · Tuxpas</p>
@@ -290,7 +290,7 @@
 
           <!-- FOTO: assets/team/maria-arias.jpg -->
           <div class="team-slide"><div class="team-card">
-            <div class="team-avatar"><img src="assets/team/maria-arias.jpg" alt="María Arias"></div>
+            <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/maria-arias.jpg" alt="María Arias"></div>
             <h3>María Arias</h3>
             <p class="role">Líder de Operaciones</p>
             <p class="org">Consultora de Analítica · Pacífico Seguros</p>
@@ -299,7 +299,7 @@
 
           <!-- FOTO: assets/team/nicol-contreras.jpg -->
           <div class="team-slide"><div class="team-card">
-            <div class="team-avatar"><img src="assets/team/nicol-contreras.jpg" alt="Nicol Contreras"></div>
+            <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/nicol-contreras.jpg" alt="Nicol Contreras"></div>
             <h3>Nicol Contreras</h3>
             <p class="role">Líder de Gestión del Aprendizaje</p>
             <p class="org">BSc Management · U. de Londres</p>
@@ -308,7 +308,7 @@
 
           <!-- FOTO: assets/team/gabriela-contreras.jpg -->
           <div class="team-slide"><div class="team-card">
-            <div class="team-avatar"><img src="assets/team/gabriela-contreras.jpg" alt="Gabriela Contreras"></div>
+            <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/gabriela-contreras.jpg" alt="Gabriela Contreras"></div>
             <h3>Gabriela Contreras</h3>
             <p class="role">Coordinadora de Marketing</p>
             <p class="org">Artes Escénicas · UPC</p>
@@ -316,8 +316,10 @@
           </div></div>
 
         </div>
-        <button class="carousel-btn next" onclick="slideCarousel('team', 1)">›</button>
-      </div>
+        </div></div><!-- /track /wrapper -->
+        <button class="carousel-btn prev" onclick="slideCarousel('team',-1)">‹</button>
+        <button class="carousel-btn next" onclick="slideCarousel('team',1)">›</button>
+      </div><!-- /team-outer -->
     </div>
   </section>
 
@@ -336,33 +338,37 @@
       <div class="join-grid">
 
         <div class="join-card fade-up">
-          <div class="emoji">💙</div>
-          <h3>Dona</h3>
-          <p>Tu aporte permite que más jóvenes accedan a orientación vocacional de calidad.</p>
-          <!-- FOTO: assets/qr-donacion.jpg -->
-          <div class="qr-img">
-            <img src="assets/qr-donacion.jpg" alt="QR para donar a RUMBO"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span style="display:none;">QR Yape / Plin<br>próximamente</span>
+          <div class="join-card-stripe dona"></div>
+          <div class="join-card-body">
+            <div class="emoji">💙</div>
+            <h3>Dona</h3>
+            <p>Tu aporte permite que más jóvenes accedan a orientación vocacional de calidad.</p>
+            <div class="qr-img">
+              <img src="assets/qr-donacion.jpg" alt="QR para donar a RUMBO"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span style="display:none;">QR Yape / Plin<br>próximamente</span>
+            </div>
           </div>
         </div>
 
         <div class="join-card fade-up">
-          <div class="emoji">🤝</div>
-          <h3>Alianzas estratégicas</h3>
-          <p>Empresas, universidades y ONGs que quieran sumarse a nuestra causa.</p>
-          <a href="https://forms.gle/E7XHsLKZHBvKnDrB9" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            Completar formulario
-          </a>
+          <div class="join-card-stripe alianza"></div>
+          <div class="join-card-body">
+            <div class="emoji">🤝</div>
+            <h3>Alianzas estratégicas</h3>
+            <p>Empresas, universidades y ONGs que quieran sumarse a nuestra causa.</p>
+            <a href="https://forms.gle/E7XHsLKZHBvKnDrB9" target="_blank" rel="noopener noreferrer" class="btn btn-alianza">Completar formulario</a>
+          </div>
         </div>
 
         <div class="join-card fade-up">
-          <div class="emoji">🏫</div>
-          <h3>Lleva Rumbo a tu colegio</h3>
-          <p>Organizamos talleres gratuitos de orientación vocacional en tu institución.</p>
-          <a href="https://forms.gle/E7XHsLKZHBvKnDrB9" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            Solicitar taller
-          </a>
+          <div class="join-card-stripe colegio"></div>
+          <div class="join-card-body">
+            <div class="emoji">🏫</div>
+            <h3>Lleva Rumbo a tu colegio</h3>
+            <p>Organizamos talleres gratuitos de orientación vocacional en tu institución.</p>
+            <a href="https://forms.gle/E7XHsLKZHBvKnDrB9" target="_blank" rel="noopener noreferrer" class="btn btn-colegio">Solicitar taller</a>
+          </div>
         </div>
 
       </div>
@@ -370,93 +376,56 @@
   </section>
 
   <!-- ================================================================
-  FAQ
-  EDITAR: agrega preguntas copiando un bloque <div class="faq-item">
-  PENDIENTE: diseñar pestañas por público (Colegios / Padres / Aliados / Estudiantes)
+  FAQ — 3 grupos por público
   ================================================================ -->
-  <section id="faq" class="section section-alt">
+  <section id="faq" class="section-faq">
     <div class="container">
       <div class="section-header fade-up">
         <span class="section-tag">Resolvemos tus dudas</span>
         <h2 class="section-title">Preguntas frecuentes</h2>
       </div>
-      <div class="faq-list">
+      <div class="faq-filters fade-up">
+        <button class="faq-filter f-colegios active" onclick="faqFilter('colegios',this)">🏫 Colegios y padres</button>
+        <button class="faq-filter f-aliados"         onclick="faqFilter('aliados',this)">🤝 Aliados y donantes</button>
+        <button class="faq-filter f-estudiantes"     onclick="faqFilter('estudiantes',this)">🎓 Estudiantes</button>
+      </div>
+      <div class="faq-list fade-up">
 
-        <div class="faq-item fade-up">
-          <button class="faq-btn" aria-expanded="false" onclick="toggleFAQ(this)">
-            <span>¿Tiene costo para el colegio?</span><span class="arrow">▾</span>
-          </button>
-          <div class="faq-answer"><p>No, nuestras intervenciones son completamente gratuitas para las instituciones educativas. Nos financiamos a través de donaciones y alianzas estratégicas.</p></div>
+        <!-- GRUPO: Colegios y padres -->
+        <div class="faq-group active" data-group="colegios">
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Tiene costo para el colegio?<span class="arrow">▾</span></button><div class="faq-answer"><p>No, nuestras intervenciones son completamente gratuitas. Nos financiamos a través de donaciones y alianzas estratégicas.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Cómo puedo solicitar una intervención para mi colegio?<span class="arrow">▾</span></button><div class="faq-answer"><p>Completa el formulario en "Únete" o escríbenos a <strong>rumbo.transformatufuturo@gmail.com</strong>. Coordinamos una reunión previa para entender las necesidades de tu institución.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Con cuánta anticipación debo coordinar?<span class="arrow">▾</span></button><div class="faq-answer"><p>Recomendamos coordinar con al menos 2 semanas de anticipación para organizar el equipo y materiales.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Qué necesita el colegio para recibirlos?<span class="arrow">▾</span></button><div class="faq-answer"><p>Solo un aula, idealmente con proyector. Nosotros llevamos todos los materiales. Si no hay proyector, también nos adaptamos.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Pueden adaptar el contenido a nuestra realidad?<span class="arrow">▾</span></button><div class="faq-answer"><p>Sí. Antes de cada intervención ajustamos el contenido según el contexto e intereses del grupo.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Cuánto dura una intervención?<span class="arrow">▾</span></button><div class="faq-answer"><p>Un taller individual dura entre 2 y 3 horas. Los programas completos pueden extenderse de 4 a 8 semanas.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Está dirigido solo a 5to de secundaria?<span class="arrow">▾</span></button><div class="faq-answer"><p>No. Trabajamos con estudiantes desde 3ro hasta 5to de secundaria, adaptando el contenido a cada nivel.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Es seguro para mi hijo participar?<span class="arrow">▾</span></button><div class="faq-answer"><p>Sí. Todas nuestras intervenciones se realizan dentro del colegio, con coordinación previa con la dirección.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Los padres pueden asistir a las sesiones?<span class="arrow">▾</span></button><div class="faq-answer"><p>Depende del formato. En algunos programas organizamos sesiones especiales para padres. Consúltanos al coordinar.</p></div></div>
         </div>
 
-        <div class="faq-item fade-up">
-          <button class="faq-btn" aria-expanded="false" onclick="toggleFAQ(this)">
-            <span>¿Cómo puedo solicitar una intervención para mi colegio?</span><span class="arrow">▾</span>
-          </button>
-          <div class="faq-answer"><p>Puedes completar el formulario en la sección "Únete" o escribirnos a <strong>rumbo.transformatufuturo@gmail.com</strong>. Coordinamos una reunión previa para entender las necesidades de tu institución.</p></div>
+        <!-- GRUPO: Aliados y donantes -->
+        <div class="faq-group" data-group="aliados">
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Cómo puedo apoyar a RUMBO?<span class="arrow">▾</span></button><div class="faq-answer"><p>Puedes donar, ser aliado institucional o llevar nuestros talleres a tu colegio. Escríbenos a <strong>rumbo.transformatufuturo@gmail.com</strong>.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Son una organización sin fines de lucro?<span class="arrow">▾</span></button><div class="faq-answer"><p>Sí, RUMBO es una organización sin fines de lucro orientada al impacto social en la educación peruana.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Emiten recibos por donaciones?<span class="arrow">▾</span></button><div class="faq-answer"><p>Estamos en proceso de formalización. Escríbenos para conocer el estado actual.</p></div></div>
         </div>
 
-        <div class="faq-item fade-up">
-          <button class="faq-btn" aria-expanded="false" onclick="toggleFAQ(this)">
-            <span>¿Con cuánta anticipación debo coordinar?</span><span class="arrow">▾</span>
-          </button>
-          <div class="faq-answer"><p>Recomendamos coordinar con al menos 2 semanas de anticipación para organizar el equipo, los materiales y adaptar el contenido a tu realidad institucional.</p></div>
-        </div>
-
-        <div class="faq-item fade-up">
-          <button class="faq-btn" aria-expanded="false" onclick="toggleFAQ(this)">
-            <span>¿Qué necesita el colegio para recibirlos?</span><span class="arrow">▾</span>
-          </button>
-          <div class="faq-answer"><p>Solo un aula disponible, idealmente con proyector. Nosotros llevamos todos los materiales. Si no hay proyector, también nos adaptamos.</p></div>
-        </div>
-
-        <div class="faq-item fade-up">
-          <button class="faq-btn" aria-expanded="false" onclick="toggleFAQ(this)">
-            <span>¿Pueden adaptar el contenido a nuestra realidad?</span><span class="arrow">▾</span>
-          </button>
-          <div class="faq-answer"><p>Sí. Antes de cada intervención conversamos con el docente o directivo para ajustar el contenido según el contexto y los intereses del grupo.</p></div>
-        </div>
-
-        <div class="faq-item fade-up">
-          <button class="faq-btn" aria-expanded="false" onclick="toggleFAQ(this)">
-            <span>¿Cuánto dura una intervención?</span><span class="arrow">▾</span>
-          </button>
-          <div class="faq-answer"><p>Un taller individual dura entre 2 y 3 horas. Los programas completos pueden extenderse de 4 a 8 semanas con sesiones semanales.</p></div>
-        </div>
-
-        <div class="faq-item fade-up">
-          <button class="faq-btn" aria-expanded="false" onclick="toggleFAQ(this)">
-            <span>¿Está dirigido solo a 5to de secundaria?</span><span class="arrow">▾</span>
-          </button>
-          <div class="faq-answer"><p>No. Trabajamos con estudiantes desde 3ro hasta 5to de secundaria, adaptando el contenido a cada nivel.</p></div>
-        </div>
-
-        <div class="faq-item fade-up">
-          <button class="faq-btn" aria-expanded="false" onclick="toggleFAQ(this)">
-            <span>¿Cómo puedo apoyar a RUMBO como empresa o donante?</span><span class="arrow">▾</span>
-          </button>
-          <div class="faq-answer"><p>Escríbenos a <strong>rumbo.transformatufuturo@gmail.com</strong> o llena el formulario de alianzas. Trabajamos con empresas, universidades y fundaciones comprometidas con la educación.</p></div>
-        </div>
-
-        <div class="faq-item fade-up">
-          <button class="faq-btn" aria-expanded="false" onclick="toggleFAQ(this)">
-            <span>¿Tienen redes sociales o comunidad para seguir aprendiendo?</span><span class="arrow">▾</span>
-          </button>
-          <div class="faq-answer"><p>Sí. Síguenos como <strong>@rumbo.ong</strong> en Instagram, TikTok, Facebook y LinkedIn. También tenemos una comunidad de WhatsApp donde compartimos becas, recursos y oportunidades. ¡Únete desde el botón de arriba!</p></div>
-        </div>
-
-        <div class="faq-item fade-up">
-          <button class="faq-btn" aria-expanded="false" onclick="toggleFAQ(this)">
-            <span>¿Entregan materiales a los estudiantes?</span><span class="arrow">▾</span>
-          </button>
-          <div class="faq-answer"><p>Sí. Cada estudiante recibe un kit con guías de reflexión, hojas de ruta vocacional y acceso a recursos digitales.</p></div>
+        <!-- GRUPO: Estudiantes -->
+        <div class="faq-group" data-group="estudiantes">
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Qué tipo de becas me pueden ayudar a conseguir?<span class="arrow">▾</span></button><div class="faq-answer"><p>Te informamos sobre Pronabec, Beca 18, universidades privadas y programas internacionales, adaptado a tu perfil.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Necesito tener buen promedio para participar?<span class="arrow">▾</span></button><div class="faq-answer"><p>No. Nuestros talleres son para todos los estudiantes, sin importar su rendimiento académico.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Atienden a alumnos de universidades públicas y privadas?<span class="arrow">▾</span></button><div class="faq-answer"><p>Sí. Nuestra orientación cubre públicas, privadas e institutos técnicos superiores.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Cómo contactarlos si mi colegio no tiene convenio con RUMBO?<span class="arrow">▾</span></button><div class="faq-answer"><p>Escríbenos a <strong>rumbo.transformatufuturo@gmail.com</strong> o únete a nuestra comunidad de WhatsApp.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Tienen redes sociales o comunidad donde pueda seguir aprendiendo?<span class="arrow">▾</span></button><div class="faq-answer"><p>Sí. Síguenos como <strong>@rumbo.ong</strong> en Instagram, TikTok, Facebook y LinkedIn. También tenemos comunidad de WhatsApp.</p></div></div>
+          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Brindan asesorías personalizadas?<span class="arrow">▾</span></button><div class="faq-answer"><p>Sí, como parte del Nivel 03 de acompañamiento. Consúltanos para saber cómo acceder.</p></div></div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ================================================================
+    <!-- ================================================================
   CONTACTO
   ----------------------------------------------------------------
   FORMULARIO: Para activar el envío al Gmail:
@@ -480,9 +449,7 @@
         <div class="contact-info">
           <h3>Estamos para ayudarte</h3>
           <p>Si representas una institución educativa, una empresa o simplemente quieres saber más, no dudes en escribirnos.</p>
-          <a href="mailto:rumbo.transformatufuturo@gmail.com" class="email-link">
-            ✉️ rumbo.transformatufuturo@gmail.com
-          </a>
+          <a href="mailto:rumbo.transformatufuturo@gmail.com" class="email-link">✉️ rumbo.transformatufuturo@gmail.com</a>
           <div class="contact-social">
             <a href="https://www.instagram.com/rumbo.ong/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
               <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -567,7 +534,7 @@
     <div class="footer-copy">© <span id="year"></span> RUMBO. Todos los derechos reservados.</div>
   </footer>
 
-  <!-- JS externo — no editar salvo que sepas lo que haces -->
+  <!-- JS externo -->
   <script src="js/main.js"></script>
 
 </body>
