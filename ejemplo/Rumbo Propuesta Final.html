@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>RUMBO · Nuestra Propuesta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --rumbo-navy: #004F8C;
+  --rumbo-navy-deep: #00345E;
+  --rumbo-blue: #004F8C;
+  --rumbo-sky: #6BC5D2;
+  --rumbo-sky-soft: #D6EEF3;
+  --rumbo-sky-mist: #EDF7F9;
+  --rumbo-coral: #1D7874;
+  --rumbo-amber: #F6C667;
+  --bg: #F9F9F4;
+  --bg-cream: #F1F1EB;
+  --surface: #FFFFFF;
+  --ink: #0F1A2B;
+  --ink-soft: #3A4658;
+  --ink-mute: #7A8494;
+  --line: #E4E7EC;
+  --line-soft: #EFF1F4;
+  --font-display: 'Montserrat', -apple-system, system-ui, sans-serif;
+  --font-body: 'Open Sans', -apple-system, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --shadow-md: 0 4px 12px rgba(15,26,43,.06), 0 12px 32px rgba(15,26,43,.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rumbo-blue);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow::before { content:''; width: 22px; height: 1px; background: currentColor; }
+
+/* ════════════════ SECCIÓN 1 · NIVELES (V3 Journey Cards) ════════════════ */
+
+.niv-section {
+  background: var(--bg);
+  padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px);
+  font-family: var(--font-body);
+  position: relative;
+}
+.niv-inner { max-width: 1320px; margin: 0 auto; }
+
+.niv-head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: clamp(40px, 5vw, 64px);
+  max-width: 760px;
+}
+.niv-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5.2vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 6px 0 0;
+  font-weight: 800;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.niv-title .accent { color: var(--rumbo-blue); }
+.niv-lede {
+  color: var(--ink-soft);
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+
+.niv-track {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  position: relative;
+}
+@media (min-width: 760px) {
+  .niv-track { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+}
+
+.niv-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: clamp(24px, 3vw, 36px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: transform .4s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .4s, opacity .6s ease;
+  opacity: 0;
+  transform: translateY(28px);
+  overflow: hidden;
+  min-height: 360px;
+}
+.niv-section.in .niv-card { opacity: 1; transform: none; }
+.niv-track > .niv-card:nth-child(1) { transition-delay: 0ms; }
+.niv-track > .niv-card:nth-child(2) { transition-delay: 120ms; }
+.niv-track > .niv-card:nth-child(3) { transition-delay: 240ms; }
+
+@media (hover: hover) {
+  .niv-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--rumbo-sky);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.niv-card::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rumbo-blue), var(--rumbo-sky));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+}
+@media (hover: hover) { .niv-card:hover::after { transform: scaleX(1); } }
+
+.niv-card.featured {
+  background: var(--rumbo-navy);
+  color: white;
+  border-color: var(--rumbo-navy);
+}
+.niv-card.featured .niv-num { color: rgba(255,255,255,0.9); }
+.niv-card.featured .niv-card-title { color: white; }
+.niv-card.featured .niv-sub { color: rgba(255,255,255,0.85); }
+.niv-card.featured .niv-desc { color: rgba(255,255,255,0.7); }
+.niv-card.featured .niv-tag {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+  color: white;
+}
+.niv-card.featured::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -30%;
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(232,130,91,.3) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.niv-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.niv-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--rumbo-blue);
+  font-weight: 500;
+}
+.niv-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--rumbo-sky-soft);
+  color: var(--rumbo-navy);
+  flex-shrink: 0;
+  transition: transform .3s, background .3s;
+}
+.niv-card.featured .niv-arrow { background: rgba(255,255,255,0.15); color: white; }
+@media (hover: hover) { .niv-card:hover .niv-arrow { transform: rotate(-45deg); } }
+
+.niv-glyph {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: var(--rumbo-sky-mist);
+  color: var(--rumbo-navy);
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.niv-card.featured .niv-glyph {
+  background: rgba(255,255,255,0.12);
+  color: white;
+}
+
+.niv-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.8vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--ink);
+}
+.niv-sub {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.4;
+  margin: 0;
+  font-weight: 500;
+}
+.niv-desc {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-mute);
+  margin: 0;
+  flex: 1;
+}
+.niv-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+.niv-tag {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--bg-cream);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+/* MOBILE: carrusel snap horizontal */
+@media (max-width: 759px) {
+  .niv-track {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    margin: 0 calc(-1 * clamp(20px, 5vw, 80px));
+    padding: 8px clamp(20px, 5vw, 80px) 16px;
+    gap: 14px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .niv-track::-webkit-scrollbar { display: none; }
+  .niv-card {
+    flex: 0 0 86%;
+    max-width: 340px;
+    scroll-snap-align: center;
+    min-height: 340px;
+  }
+}
+
+/* indicadores móviles */
+.niv-dots {
+  display: none;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+@media (max-width: 759px) {
+  .niv-dots { display: flex; }
+}
+.niv-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: background .25s, width .25s;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.niv-dot.on { background: var(--rumbo-blue); width: 22px; border-radius: 4px; }
+
+
+/* ════════════════ SECCIÓN 2 · PILARES (Grid oscuro) ════════════════ */
+
+.pil-section {
+  background: var(--rumbo-navy-deep);
+  color: white;
+  padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px);
+  font-family: var(--font-body);
+  position: relative;
+  overflow: hidden;
+}
+.pil-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 85% 10%, rgba(232,130,91,.12) 0%, transparent 40%),
+    radial-gradient(circle at 10% 90%, rgba(59,130,196,.18) 0%, transparent 45%);
+  pointer-events: none;
+}
+.pil-inner { max-width: 1240px; margin: 0 auto; position: relative; }
+
+.pil-head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  margin-bottom: clamp(48px, 6vw, 72px);
+  align-items: end;
+}
+@media (min-width: 880px) {
+  .pil-head { grid-template-columns: 1.2fr 1fr; gap: 60px; }
+}
+
+.pil-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rumbo-amber);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.pil-eyebrow::before { content:''; width: 22px; height: 1px; background: currentColor; }
+
+.pil-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5.2vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 14px 0 0;
+  font-weight: 800;
+  color: white;
+  text-wrap: balance;
+}
+.pil-title em {
+  font-style: normal;
+  color: var(--rumbo-sky);
+}
+.pil-lede {
+  color: rgba(255,255,255,0.7);
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 50ch;
+  text-wrap: pretty;
+}
+
+.pil-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+@media (min-width: 720px) {
+  .pil-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.pil-card {
+  background: var(--rumbo-navy-deep);
+  padding: clamp(26px, 3.5vw, 44px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .6s ease, transform .6s ease, background .35s ease;
+  min-height: 220px;
+}
+.pil-section.in .pil-card { opacity: 1; transform: none; }
+@media (hover: hover) {
+  .pil-card:hover { background: #0a1f3d; }
+}
+.pil-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--rumbo-sky), var(--rumbo-amber));
+  transition: width .5s cubic-bezier(.2,.8,.2,1);
+}
+@media (hover: hover) { .pil-card:hover::after { width: 100%; } }
+
+.pil-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.pil-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(59,130,196,.15);
+  color: var(--rumbo-sky);
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(59,130,196,.25);
+  transition: transform .35s, background .35s, color .35s, border-color .35s;
+  flex-shrink: 0;
+}
+@media (hover: hover) {
+  .pil-card:hover .pil-icon {
+    transform: rotate(-6deg) scale(1.05);
+    background: rgba(232,182,91,.15);
+    color: var(--rumbo-amber);
+    border-color: rgba(232,182,91,.3);
+  }
+}
+.pil-num {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.4);
+}
+.pil-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: white;
+  text-wrap: balance;
+}
+.pil-card p {
+  color: rgba(255,255,255,0.65);
+  font-size: 14.5px;
+  line-height: 1.55;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+@media (max-width: 480px) {
+  .pil-card { min-height: 180px; padding: 24px 22px; }
+  .pil-icon { width: 46px; height: 46px; border-radius: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════ SECCIÓN 1 — NIVELES ════════════════ -->
+<section class="niv-section" id="propuesta" data-screen-label="01 Niveles">
+  <div class="niv-inner">
+    <header class="niv-head">
+      <span class="eyebrow">Nuestra propuesta</span>
+      <h2 class="niv-title">Un trayecto en <span class="accent">tres movimientos</span>.</h2>
+      <p class="niv-lede">Informar, formar, acompañar. Cada nivel se construye sobre el anterior, asegurando que ningún joven dé un paso sin la base que necesita.</p>
+    </header>
+
+    <div class="niv-track" id="nivTrack" role="list">
+      <article class="niv-card" role="listitem">
+        <div class="niv-card-head">
+          <span class="niv-num">NIVEL 01</span>
+          <span class="niv-arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <div class="niv-glyph">01</div>
+        <h3 class="niv-card-title">Información</h3>
+        <p class="niv-sub">Empezamos por entender el terreno.</p>
+        <p class="niv-desc">Datos claros sobre becas, carreras y oportunidades reales en Perú.</p>
+        <div class="niv-tags">
+          <span class="niv-tag">Becas</span>
+          <span class="niv-tag">Carreras</span>
+          <span class="niv-tag">Mercado</span>
+        </div>
+      </article>
+
+      <article class="niv-card featured" role="listitem">
+        <div class="niv-card-head">
+          <span class="niv-num">NIVEL 02</span>
+          <span class="niv-arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <div class="niv-glyph">02</div>
+        <h3 class="niv-card-title">Formación</h3>
+        <p class="niv-sub">Construimos las herramientas.</p>
+        <p class="niv-desc">Talleres prácticos en habilidades blandas y técnicas del siglo XXI.</p>
+        <div class="niv-tags">
+          <span class="niv-tag">Soft skills</span>
+          <span class="niv-tag">Hard skills</span>
+          <span class="niv-tag">Vocación</span>
+        </div>
+      </article>
+
+      <article class="niv-card" role="listitem">
+        <div class="niv-card-head">
+          <span class="niv-num">NIVEL 03</span>
+          <span class="niv-arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </div>
+        <div class="niv-glyph">03</div>
+        <h3 class="niv-card-title">Acompañamiento</h3>
+        <p class="niv-sub">Caminamos junto a cada joven.</p>
+        <p class="niv-desc">Mentoría personalizada durante toda la transición universitaria.</p>
+        <div class="niv-tags">
+          <span class="niv-tag">Mentoría 1:1</span>
+          <span class="niv-tag">Comunidad</span>
+          <span class="niv-tag">Seguimiento</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="niv-dots" id="nivDots" aria-hidden="true">
+      <button class="niv-dot on" type="button" data-i="0" aria-label="Nivel 1"></button>
+      <button class="niv-dot" type="button" data-i="1" aria-label="Nivel 2"></button>
+      <button class="niv-dot" type="button" data-i="2" aria-label="Nivel 3"></button>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SECCIÓN 2 — PILARES ════════════════ -->
+<section class="pil-section" id="pilares" data-screen-label="02 Pilares">
+  <div class="pil-inner">
+    <header class="pil-head">
+      <div>
+        <span class="pil-eyebrow">Nuestros pilares</span>
+        <h2 class="pil-title">En qué <em>nos enfocamos</em>.</h2>
+      </div>
+      <p class="pil-lede">Cuatro principios que atraviesan todo lo que hacemos. No son temas sueltos: son las dimensiones del joven que queremos acompañar.</p>
+    </header>
+
+    <div class="pil-grid">
+      <article class="pil-card">
+        <div class="pil-card-head">
+          <div class="pil-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16.2 7.8L13.5 13.5L7.8 16.2L10.5 10.5L16.2 7.8Z"/></svg>
+          </div>
+          <span class="pil-num">01</span>
+        </div>
+        <h3>Identidad y Propósito</h3>
+        <p>Ayudamos a cada joven a conocerse y definir su camino con claridad, conectando intereses, talentos y vocación.</p>
+      </article>
+
+      <article class="pil-card">
+        <div class="pil-card-head">
+          <div class="pil-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </div>
+          <span class="pil-num">02</span>
+        </div>
+        <h3>Bienestar y Equilibrio</h3>
+        <p>Herramientas emocionales para una transición saludable y sostenible. La salud mental también es preparación.</p>
+      </article>
+
+      <article class="pil-card">
+        <div class="pil-card-head">
+          <div class="pil-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/></svg>
+          </div>
+          <span class="pil-num">03</span>
+        </div>
+        <h3>Habilidades para el Futuro</h3>
+        <p>Preparación en competencias críticas del mercado laboral actual: pensamiento crítico, comunicación y alfabetización digital.</p>
+      </article>
+
+      <article class="pil-card">
+        <div class="pil-card-head">
+          <div class="pil-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.85 12.15L19 4M18 5l2 2M15 8l2 2"/></svg>
+          </div>
+          <span class="pil-num">04</span>
+        </div>
+        <h3>Acceso a Oportunidades</h3>
+        <p>Conexión directa con becas, programas y redes de apoyo. La meritocracia solo funciona si la información llega a todos.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+// Reveal-on-scroll para ambas secciones
+(function () {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.niv-section, .pil-section').forEach((s) => io.observe(s));
+})();
+
+// Sync de dots con scroll del carrusel en móvil
+(function () {
+  const track = document.getElementById('nivTrack');
+  const dots = document.querySelectorAll('#nivDots .niv-dot');
+  if (!track || !dots.length) return;
+
+  let raf = 0;
+  const onScroll = () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const cards = track.querySelectorAll('.niv-card');
+      const trackRect = track.getBoundingClientRect();
+      const center = trackRect.left + trackRect.width / 2;
+      let best = 0, bestDist = Infinity;
+      cards.forEach((c, i) => {
+        const r = c.getBoundingClientRect();
+        const cardCenter = r.left + r.width / 2;
+        const d = Math.abs(cardCenter - center);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle('on', i === best));
+    });
+  };
+  track.addEventListener('scroll', onScroll, { passive: true });
+
+  dots.forEach((d) => {
+    d.addEventListener('click', () => {
+      const i = +d.dataset.i;
+      const card = track.querySelectorAll('.niv-card')[i];
+      if (card) {
+        const left = card.offsetLeft - (track.clientWidth - card.clientWidth) / 2;
+        track.scrollTo({ left, behavior: 'smooth' });
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

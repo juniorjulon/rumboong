@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RUMBO · Rediseño Nuestra Propuesta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+Pro:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="tokens.css" />
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<style>
+  html, body { height: 100%; }
+  body {
+    background: #f0eee9;
+    font-family: 'Manrope', system-ui, sans-serif;
+    overflow: hidden;
+  }
+  #app { width: 100vw; height: 100vh; }
+  /* Each artboard is its own browser-like canvas — give it a clean white background */
+  .artboard-frame {
+    background: var(--bg);
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .artboard-frame::-webkit-scrollbar { width: 6px; }
+  .artboard-frame::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 3px; }
+
+  /* Browser chrome at top of each artboard for context */
+  .browser-bar {
+    background: #f0f0ec;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #e0ddd5;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #888;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+  }
+  .browser-dots { display: flex; gap: 6px; }
+  .browser-dots span {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #d4d1c9;
+  }
+  .browser-url {
+    flex: 1;
+    background: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    color: #555;
+    border: 1px solid #e0ddd5;
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="variations/v1-niveles-timeline.jsx"></script>
+<script type="text/babel" src="variations/v2-niveles-tabs.jsx"></script>
+<script type="text/babel" src="variations/v3-niveles-journey.jsx"></script>
+<script type="text/babel" src="variations/pilares-grid-dark.jsx"></script>
+<script type="text/babel" src="variations/pilares-sticky.jsx"></script>
+
+<script type="text/babel" data-presets="env,react">
+const { DesignCanvas, DCSection, DCArtboard, DCPostIt } = window;
+
+const Frame = ({ url, children }) => (
+  <div className="artboard-frame">
+    <div className="browser-bar">
+      <div className="browser-dots"><span></span><span></span><span></span></div>
+      <div className="browser-url">rumbo.org.pe{url}</div>
+    </div>
+    {children}
+  </div>
+);
+
+const App = () => (
+  <DesignCanvas
+    title="RUMBO · Rediseño Nuestra Propuesta"
+    subtitle="3 propuestas para Niveles · 2 propuestas para Pilares · responsivo desktop + móvil"
+  >
+    <DCSection
+      id="niveles"
+      title="Sección 01 — Niveles de impacto"
+      subtitle="Cómo trabajamos. Tres direcciones distintas, todas dinámicas y responsivas. Cada artboard es un mockup independiente; arrastrar para reordenar, doble-click para enfocar."
+    >
+      <DCArtboard id="v1-d" label="V1 · Timeline editorial · Desktop" width={1200} height={760}>
+        <Frame url="/#propuesta"><V1NivelesTimeline /></Frame>
+      </DCArtboard>
+      <DCArtboard id="v1-m" label="V1 · Móvil" width={390} height={760}>
+        <Frame url="/#propuesta"><V1NivelesTimeline /></Frame>
+      </DCArtboard>
+
+      <DCArtboard id="v2-d" label="V2 · Tabs interactivos · Desktop" width={1200} height={760}>
+        <Frame url="/#propuesta"><V2NivelesTabs /></Frame>
+      </DCArtboard>
+      <DCArtboard id="v2-m" label="V2 · Móvil" width={390} height={760}>
+        <Frame url="/#propuesta"><V2NivelesTabs /></Frame>
+      </DCArtboard>
+
+      <DCArtboard id="v3-d" label="V3 · Journey cards · Desktop" width={1200} height={760}>
+        <Frame url="/#propuesta"><V3NivelesJourney /></Frame>
+      </DCArtboard>
+      <DCArtboard id="v3-m" label="V3 · Móvil" width={390} height={760}>
+        <Frame url="/#propuesta"><V3NivelesJourney /></Frame>
+      </DCArtboard>
+
+      <DCPostIt x={40} y={40}>
+        Sección clara, ligera. Mantiene continuidad con el hero del sitio actual. Los 3 niveles se sienten secuenciales, no repetidos.
+      </DCPostIt>
+    </DCSection>
+
+    <DCSection
+      id="pilares"
+      title="Sección 02 — Nuestros pilares"
+      subtitle="En qué nos enfocamos. Dos propuestas que contrastan visualmente con la sección de Niveles para generar ritmo en la página."
+    >
+      <DCArtboard id="pa-d" label="A · Grid oscuro institucional · Desktop" width={1200} height={760}>
+        <Frame url="/#propuesta"><PilaresGrid /></Frame>
+      </DCArtboard>
+      <DCArtboard id="pa-m" label="A · Móvil" width={390} height={760}>
+        <Frame url="/#propuesta"><PilaresGrid /></Frame>
+      </DCArtboard>
+
+      <DCArtboard id="pb-d" label="B · Sticky narrativo · Desktop" width={1200} height={900}>
+        <Frame url="/#propuesta"><PilaresSticky /></Frame>
+      </DCArtboard>
+      <DCArtboard id="pb-m" label="B · Móvil" width={390} height={900}>
+        <Frame url="/#propuesta"><PilaresSticky /></Frame>
+      </DCArtboard>
+
+      <DCPostIt x={40} y={40}>
+        Pilares en oscuro/cremoso para crear contraste con la sección de Niveles (clara). Esto genera ritmo visual a lo largo de la página.
+      </DCPostIt>
+    </DCSection>
+  </DesignCanvas>
+);
+
+ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+</script>
+</body>
+</html>

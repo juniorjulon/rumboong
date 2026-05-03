@@ -1,0 +1,1574 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>RUMBO · Transformando decisiones en oportunidades</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --rumbo-navy: #004F8C;
+  --rumbo-navy-deep: #00345E;
+  --rumbo-blue: #004F8C;
+  --rumbo-sky: #6BC5D2;
+  --rumbo-sky-soft: #D6EEF3;
+  --rumbo-sky-mist: #EDF7F9;
+  --rumbo-coral: #1D7874;
+  --rumbo-amber: #F6C667;
+  --bg: #F9F9F4;
+  --bg-cream: #F1F1EB;
+  --surface: #FFFFFF;
+  --ink: #0F1A2B;
+  --ink-soft: #3A4658;
+  --ink-mute: #7A8494;
+  --line: #E4E7EC;
+  --line-soft: #EFF1F4;
+  --font-display: 'Montserrat', -apple-system, system-ui, sans-serif;
+  --font-body: 'Open Sans', -apple-system, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --shadow-sm: 0 1px 2px rgba(15,26,43,.04), 0 2px 6px rgba(15,26,43,.04);
+  --shadow-md: 0 4px 12px rgba(15,26,43,.06), 0 12px 32px rgba(15,26,43,.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rumbo-blue);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow::before { content:''; width: 22px; height: 1px; background: currentColor; }
+
+a { color: inherit; }
+
+/* ════════════════ NAVBAR ════════════════ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(251, 251, 247, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.nav-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 14px clamp(20px, 5vw, 60px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: var(--rumbo-navy);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--rumbo-coral);
+}
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+@media (min-width: 880px) {
+  .nav-links { display: flex; }
+}
+.nav-links a {
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  font-weight: 500;
+  transition: background .2s, color .2s;
+}
+.nav-links a:hover { background: var(--rumbo-sky-mist); color: var(--rumbo-navy); }
+.nav-cta {
+  background: var(--rumbo-navy);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--rumbo-blue); transform: translateY(-1px); }
+.nav-burger {
+  display: grid;
+  place-items: center;
+  width: 40px; height: 40px;
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+@media (min-width: 880px) { .nav-burger { display: none; } }
+.nav-burger svg { width: 18px; height: 18px; color: var(--ink); }
+
+/* mobile menu */
+.nav-mobile {
+  display: none;
+  flex-direction: column;
+  padding: 12px clamp(20px, 5vw, 60px) 20px;
+  border-top: 1px solid var(--line-soft);
+  gap: 4px;
+}
+.nav-mobile.open { display: flex; }
+.nav-mobile a {
+  padding: 12px 14px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 500;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.nav-mobile a:hover { background: var(--rumbo-sky-mist); }
+
+/* ════════════════ HERO ════════════════ */
+.hero {
+  padding: clamp(60px, 9vw, 120px) clamp(20px, 5vw, 80px) clamp(60px, 8vw, 100px);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 80% 0%, rgba(232,130,91,.08) 0%, transparent 50%),
+    radial-gradient(circle at 0% 100%, rgba(59,130,196,.10) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+}
+.hero-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rumbo-blue);
+  background: var(--rumbo-sky-soft);
+  padding: 6px 14px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--rumbo-coral);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 7vw, 88px);
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin: 0 0 28px;
+  font-weight: 800;
+  color: var(--ink);
+  max-width: 16ch;
+  text-wrap: balance;
+}
+.hero-title em {
+  font-style: normal;
+  color: var(--rumbo-blue);
+}
+.hero-lede {
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 56ch;
+  margin: 0 0 12px;
+  text-wrap: pretty;
+}
+.hero-bridge {
+  font-family: var(--font-display);
+  font-size: clamp(15px, 1.4vw, 17px);
+  color: var(--rumbo-navy);
+  font-weight: 500;
+  margin: 0 0 36px;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.btn-primary {
+  background: var(--rumbo-navy);
+  color: white;
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-size: 14.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary:hover { background: var(--rumbo-blue); transform: translateY(-1px); }
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-size: 14.5px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  transition: border-color .2s, background .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-ghost:hover { border-color: var(--rumbo-navy); background: white; }
+
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  max-width: 720px;
+}
+@media (min-width: 600px) {
+  .hero-meta { grid-template-columns: repeat(3, 1fr); }
+}
+.hero-meta-v {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--rumbo-navy);
+  line-height: 1;
+}
+.hero-meta-l {
+  font-size: 13px;
+  color: var(--ink-mute);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* ════════════════ PROBLEMA ════════════════ */
+.problema-section {
+  background: var(--bg-cream);
+  padding: clamp(60px, 9vw, 120px) clamp(20px, 5vw, 80px);
+}
+.problema-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.problema-head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: clamp(40px, 5vw, 64px);
+  align-items: end;
+}
+@media (min-width: 880px) {
+  .problema-head { grid-template-columns: 1.2fr 1fr; gap: 60px; }
+}
+.problema-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5.2vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 14px 0 0;
+  font-weight: 800;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.problema-title em {
+  font-style: normal;
+  color: var(--rumbo-coral);
+}
+.problema-lede {
+  color: var(--ink-soft);
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.55;
+  margin: 0;
+  text-wrap: pretty;
+}
+.problema-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+@media (min-width: 720px) {
+  .problema-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1100px) {
+  .problema-list { grid-template-columns: repeat(5, 1fr); }
+}
+.problema-item {
+  background: var(--bg-cream);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 180px;
+  transition: background .25s;
+}
+.problema-item:hover { background: white; }
+.problema-num {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  color: var(--rumbo-coral);
+  font-weight: 500;
+}
+.problema-text {
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0;
+  font-weight: 500;
+  text-wrap: pretty;
+}
+
+/* ════════════════ SECCIÓN 1 · NIVELES ════════════════ */
+.niv-section {
+  background: var(--bg);
+  padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px);
+}
+.niv-inner { max-width: 1320px; margin: 0 auto; }
+.niv-head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: clamp(40px, 5vw, 64px);
+  max-width: 760px;
+}
+.niv-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5.2vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 6px 0 0;
+  font-weight: 800;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.niv-title .accent { color: var(--rumbo-blue); }
+.niv-lede {
+  color: var(--ink-soft);
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+.niv-track {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  position: relative;
+}
+@media (min-width: 760px) {
+  .niv-track { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+}
+.niv-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: clamp(24px, 3vw, 36px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: transform .4s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .4s, opacity .6s ease;
+  opacity: 0;
+  transform: translateY(28px);
+  overflow: hidden;
+  min-height: 360px;
+}
+.niv-section.in .niv-card { opacity: 1; transform: none; }
+.niv-track > .niv-card:nth-child(1) { transition-delay: 0ms; }
+.niv-track > .niv-card:nth-child(2) { transition-delay: 120ms; }
+.niv-track > .niv-card:nth-child(3) { transition-delay: 240ms; }
+@media (hover: hover) {
+  .niv-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--rumbo-sky);
+    box-shadow: var(--shadow-md);
+  }
+}
+.niv-card::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rumbo-blue), var(--rumbo-sky));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+}
+@media (hover: hover) { .niv-card:hover::after { transform: scaleX(1); } }
+.niv-card.featured {
+  background: var(--rumbo-navy);
+  color: white;
+  border-color: var(--rumbo-navy);
+}
+.niv-card.featured .niv-num { color: rgba(255,255,255,0.9); }
+.niv-card.featured .niv-card-title { color: white; }
+.niv-card.featured .niv-sub { color: rgba(255,255,255,0.85); }
+.niv-card.featured .niv-desc { color: rgba(255,255,255,0.7); }
+.niv-card.featured .niv-tag {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+  color: white;
+}
+.niv-card.featured::before {
+  content: '';
+  position: absolute;
+  top: -40%; right: -30%;
+  width: 80%; height: 80%;
+  background: radial-gradient(circle, rgba(232,130,91,.3) 0%, transparent 60%);
+  pointer-events: none;
+}
+.niv-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.niv-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--rumbo-blue);
+  font-weight: 500;
+}
+.niv-arrow {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--rumbo-sky-soft);
+  color: var(--rumbo-navy);
+  flex-shrink: 0;
+  transition: transform .3s, background .3s;
+}
+.niv-card.featured .niv-arrow { background: rgba(255,255,255,0.15); color: white; }
+@media (hover: hover) { .niv-card:hover .niv-arrow { transform: rotate(-45deg); } }
+.niv-glyph {
+  width: 60px; height: 60px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: var(--rumbo-sky-mist);
+  color: var(--rumbo-navy);
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.niv-card.featured .niv-glyph { background: rgba(255,255,255,0.12); color: white; }
+.niv-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.8vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--ink);
+}
+.niv-sub {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.4;
+  margin: 0;
+  font-weight: 500;
+}
+.niv-desc {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-mute);
+  margin: 0;
+  flex: 1;
+}
+.niv-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+.niv-tag {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--bg-cream);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+@media (max-width: 759px) {
+  .niv-track {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    margin: 0 calc(-1 * clamp(20px, 5vw, 80px));
+    padding: 8px clamp(20px, 5vw, 80px) 16px;
+    gap: 14px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .niv-track::-webkit-scrollbar { display: none; }
+  .niv-card {
+    flex: 0 0 86%;
+    max-width: 340px;
+    scroll-snap-align: center;
+    min-height: 340px;
+  }
+}
+.niv-dots {
+  display: none;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+@media (max-width: 759px) { .niv-dots { display: flex; } }
+.niv-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: background .25s, width .25s;
+  border: none; padding: 0;
+  cursor: pointer;
+}
+.niv-dot.on { background: var(--rumbo-blue); width: 22px; border-radius: 4px; }
+
+/* ════════════════ SECCIÓN 2 · PILARES ════════════════ */
+.pil-section {
+  background: var(--rumbo-navy-deep);
+  color: white;
+  padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px);
+  position: relative;
+  overflow: hidden;
+}
+.pil-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 85% 10%, rgba(232,130,91,.12) 0%, transparent 40%),
+    radial-gradient(circle at 10% 90%, rgba(59,130,196,.18) 0%, transparent 45%);
+  pointer-events: none;
+}
+.pil-inner { max-width: 1240px; margin: 0 auto; position: relative; }
+.pil-head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  margin-bottom: clamp(48px, 6vw, 72px);
+  align-items: end;
+}
+@media (min-width: 880px) {
+  .pil-head { grid-template-columns: 1.2fr 1fr; gap: 60px; }
+}
+.pil-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rumbo-amber);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.pil-eyebrow::before { content:''; width: 22px; height: 1px; background: currentColor; }
+.pil-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5.2vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 14px 0 0;
+  font-weight: 800;
+  color: white;
+  text-wrap: balance;
+}
+.pil-title em { font-style: normal; color: var(--rumbo-sky); }
+.pil-lede {
+  color: rgba(255,255,255,0.7);
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 50ch;
+  text-wrap: pretty;
+}
+.pil-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+@media (min-width: 720px) { .pil-grid { grid-template-columns: 1fr 1fr; } }
+.pil-card {
+  background: var(--rumbo-navy-deep);
+  padding: clamp(26px, 3.5vw, 44px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .6s ease, transform .6s ease, background .35s ease;
+  min-height: 220px;
+}
+.pil-section.in .pil-card { opacity: 1; transform: none; }
+.pil-section.in .pil-card:nth-child(1) { transition-delay: 0ms; }
+.pil-section.in .pil-card:nth-child(2) { transition-delay: 90ms; }
+.pil-section.in .pil-card:nth-child(3) { transition-delay: 180ms; }
+.pil-section.in .pil-card:nth-child(4) { transition-delay: 270ms; }
+@media (hover: hover) { .pil-card:hover { background: #0a1f3d; } }
+.pil-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--rumbo-sky), var(--rumbo-amber));
+  transition: width .5s cubic-bezier(.2,.8,.2,1);
+}
+@media (hover: hover) { .pil-card:hover::after { width: 100%; } }
+.pil-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.pil-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: rgba(59,130,196,.15);
+  color: var(--rumbo-sky);
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(59,130,196,.25);
+  transition: transform .35s, background .35s, color .35s, border-color .35s;
+  flex-shrink: 0;
+}
+@media (hover: hover) {
+  .pil-card:hover .pil-icon {
+    transform: rotate(-6deg) scale(1.05);
+    background: rgba(232,182,91,.15);
+    color: var(--rumbo-amber);
+    border-color: rgba(232,182,91,.3);
+  }
+}
+.pil-num {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.4);
+}
+.pil-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: white;
+  text-wrap: balance;
+}
+.pil-card p {
+  color: rgba(255,255,255,0.65);
+  font-size: 14.5px;
+  line-height: 1.55;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* ════════════════ ACTIVIDADES ════════════════ */
+.act-section {
+  background: var(--bg);
+  padding: clamp(60px, 9vw, 120px) clamp(20px, 5vw, 80px);
+}
+.act-inner { max-width: 1320px; margin: 0 auto; }
+.act-head {
+  margin-bottom: clamp(40px, 5vw, 64px);
+  max-width: 760px;
+}
+.act-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 14px 0 0;
+  font-weight: 800;
+  color: var(--ink);
+}
+.act-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 800px) {
+  .act-grid { grid-template-columns: 1fr 1fr; }
+}
+.act-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+@media (hover: hover) {
+  .act-card:hover { transform: translateY(-4px); border-color: var(--rumbo-sky); box-shadow: var(--shadow-md); }
+}
+.act-img {
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(135deg, var(--rumbo-sky-mist), var(--rumbo-sky-soft));
+  position: relative;
+  overflow: hidden;
+}
+.act-img::before {
+  content: attr(data-label);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--rumbo-navy);
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.act-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(45deg, transparent 0px, transparent 18px, rgba(30,91,168,0.04) 18px, rgba(30,91,168,0.04) 19px);
+}
+.act-body {
+  padding: 24px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.act-tag {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  color: var(--rumbo-blue);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.act-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.act-meta {
+  display: flex;
+  gap: 18px;
+  font-size: 13px;
+  color: var(--ink-mute);
+  font-family: var(--font-mono);
+}
+.act-quote {
+  border-left: 3px solid var(--rumbo-coral);
+  padding: 8px 0 8px 16px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin: 8px 0 0;
+  text-wrap: pretty;
+}
+
+/* ════════════════ EQUIPO ════════════════ */
+.team-section {
+  background: var(--bg-cream);
+  padding: clamp(60px, 9vw, 120px) clamp(20px, 5vw, 80px);
+}
+.team-inner { max-width: 1320px; margin: 0 auto; }
+.team-head { margin-bottom: clamp(40px, 5vw, 64px); max-width: 760px; }
+.team-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 14px 0 0;
+  font-weight: 800;
+  color: var(--ink);
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (min-width: 720px) { .team-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+@media (min-width: 1080px) { .team-grid { grid-template-columns: repeat(4, 1fr); } }
+.team-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform .3s, border-color .3s;
+}
+@media (hover: hover) { .team-card:hover { transform: translateY(-4px); border-color: var(--rumbo-sky); } }
+.team-avatar {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--rumbo-sky-mist), var(--rumbo-sky-soft));
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 28px;
+  color: var(--rumbo-navy);
+  letter-spacing: 0.02em;
+}
+.team-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.team-role {
+  font-size: 12px;
+  color: var(--rumbo-blue);
+  margin: -8px 0 0;
+  font-weight: 500;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+.team-bio {
+  font-size: 12.5px;
+  color: var(--ink-mute);
+  line-height: 1.45;
+  margin: 0;
+  flex: 1;
+}
+.team-link {
+  font-size: 12px;
+  color: var(--rumbo-navy);
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.team-link:hover { text-decoration: underline; }
+
+/* ════════════════ ÚNETE ════════════════ */
+.unete-section {
+  background: var(--bg);
+  padding: clamp(60px, 9vw, 120px) clamp(20px, 5vw, 80px);
+}
+.unete-inner { max-width: 1240px; margin: 0 auto; }
+.unete-head { margin-bottom: clamp(40px, 5vw, 64px); max-width: 760px; }
+.unete-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 14px 0 0;
+  font-weight: 800;
+}
+.unete-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 800px) { .unete-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+.unete-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: clamp(24px, 3vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color .3s, box-shadow .3s;
+}
+.unete-card:hover { border-color: var(--rumbo-sky); box-shadow: var(--shadow-sm); }
+.unete-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: var(--rumbo-sky-mist);
+  color: var(--rumbo-navy);
+  display: grid;
+  place-items: center;
+}
+.unete-card h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.unete-card p {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+  flex: 1;
+  text-wrap: pretty;
+}
+.unete-card a {
+  margin-top: 4px;
+  align-self: flex-start;
+}
+
+/* ════════════════ FAQ ════════════════ */
+.faq-section {
+  background: var(--bg-cream);
+  padding: clamp(60px, 9vw, 120px) clamp(20px, 5vw, 80px);
+}
+.faq-inner { max-width: 920px; margin: 0 auto; }
+.faq-head { margin-bottom: clamp(40px, 5vw, 64px); }
+.faq-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 14px 0 0;
+  font-weight: 800;
+}
+.faq-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+.faq-tabs::-webkit-scrollbar { display: none; }
+.faq-tab {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 10px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  font-weight: 500;
+  transition: all .25s ease;
+}
+.faq-tab svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--rumbo-blue);
+  transition: color .25s;
+}
+.faq-tab:hover { border-color: var(--rumbo-sky); color: var(--rumbo-navy); }
+.faq-tab:hover svg { color: var(--rumbo-navy); }
+.faq-tab.active {
+  background: var(--rumbo-navy);
+  color: white;
+  border-color: var(--rumbo-navy);
+}
+.faq-tab.active svg { color: var(--rumbo-amber); }
+.faq-list { display: flex; flex-direction: column; gap: 8px; }
+.faq-item {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  transition: border-color .25s;
+}
+.faq-item[open] { border-color: var(--rumbo-sky); }
+.faq-item summary {
+  cursor: pointer;
+  padding: 18px 20px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-display);
+  font-size: 15.5px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--rumbo-blue);
+  transition: transform .25s;
+  font-weight: 300;
+  line-height: 1;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item-body {
+  padding: 0 20px 20px;
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* ════════════════ FOOTER / CONTACTO ════════════════ */
+.cta-section {
+  background: var(--rumbo-navy);
+  color: white;
+  padding: clamp(60px, 9vw, 120px) clamp(20px, 5vw, 80px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(232,130,91,.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+.cta-inner { max-width: 760px; margin: 0 auto; position: relative; }
+.cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5.5vw, 64px);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin: 14px 0 16px;
+  font-weight: 800;
+  color: white;
+  text-wrap: balance;
+}
+.cta-lede {
+  color: rgba(255,255,255,0.75);
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.55;
+  margin: 0 auto 32px;
+  max-width: 52ch;
+}
+.cta-btn {
+  background: white;
+  color: var(--rumbo-navy);
+  padding: 16px 28px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform .2s, background .2s;
+}
+.cta-btn:hover { transform: translateY(-2px); background: var(--rumbo-amber); }
+.cta-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rumbo-amber);
+  font-weight: 500;
+}
+
+footer {
+  background: var(--rumbo-navy-deep);
+  color: rgba(255,255,255,0.6);
+  padding: 40px clamp(20px, 5vw, 80px);
+  text-align: center;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+footer .brand {
+  font-family: var(--font-display);
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: 6px;
+}
+</style>
+</head>
+<body>
+
+<!-- ════ NAV ════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo"><span class="dot"></span>RUMBO</a>
+    <div class="nav-links">
+      <a href="#problema">Problema</a>
+      <a href="#propuesta">Propuesta</a>
+      <a href="#pilares">Pilares</a>
+      <a href="#actividades">Actividades</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#unete" class="nav-cta">Únete a la comunidad</a>
+    <button class="nav-burger" id="navBurger" aria-label="Menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#problema">Problema</a>
+    <a href="#propuesta">Propuesta</a>
+    <a href="#pilares">Pilares</a>
+    <a href="#actividades">Actividades</a>
+    <a href="#equipo">Equipo</a>
+    <a href="#faq">FAQ</a>
+    <a href="#unete">Únete</a>
+  </div>
+</nav>
+
+<!-- ════ HERO ════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">Organización Social · Perú</span>
+    <h1 class="hero-title">El talento no debería perderse por falta de <em>información</em>.</h1>
+    <p class="hero-lede">Acompañamos a jóvenes en su transición del colegio a la universidad para que tomen decisiones informadas y construyan un proyecto de vida sólido.</p>
+    <p class="hero-bridge">Somos el puente entre el colegio y el futuro profesional.</p>
+    <div class="hero-actions">
+      <a href="#propuesta" class="btn-primary">Conoce cómo ayudamos
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="#unete" class="btn-ghost">Lleva Rumbo a tu colegio</a>
+    </div>
+    <div class="hero-meta">
+      <div>
+        <div class="hero-meta-v">+47</div>
+        <div class="hero-meta-l">Estudiantes orientados</div>
+      </div>
+      <div>
+        <div class="hero-meta-v">2</div>
+        <div class="hero-meta-l">Talleres realizados</div>
+      </div>
+      <div>
+        <div class="hero-meta-v">100%</div>
+        <div class="hero-meta-l">Gratuito para colegios</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PROBLEMA ════ -->
+<section class="problema-section" id="problema" data-screen-label="01 Problema">
+  <div class="problema-inner">
+    <header class="problema-head">
+      <div>
+        <span class="eyebrow" style="color: var(--rumbo-coral);">La realidad</span>
+        <h2 class="problema-title">Muchos jóvenes toman decisiones <em>a ciegas</em>.</h2>
+      </div>
+      <p class="problema-lede">En Perú, miles de estudiantes eligen su carrera sin información, sin orientación y sin conocer las oportunidades que existen. El costo de esa desinformación puede cambiarles la vida.</p>
+    </header>
+    <div class="problema-list">
+      <div class="problema-item"><span class="problema-num">01</span><p class="problema-text">No conocen opciones de becas ni financiamiento.</p></div>
+      <div class="problema-item"><span class="problema-num">02</span><p class="problema-text">Eligen carreras por presión social, no por vocación.</p></div>
+      <div class="problema-item"><span class="problema-num">03</span><p class="problema-text">No entienden cómo funciona el mercado laboral.</p></div>
+      <div class="problema-item"><span class="problema-num">04</span><p class="problema-text">No desarrollan habilidades prácticas tempranas.</p></div>
+      <div class="problema-item"><span class="problema-num">05</span><p class="problema-text">La transición universitaria llega sin preparación.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ NIVELES ════ -->
+<section class="niv-section" id="propuesta" data-screen-label="02 Niveles">
+  <div class="niv-inner">
+    <header class="niv-head">
+      <span class="eyebrow">Nuestra propuesta</span>
+      <h2 class="niv-title">Un trayecto en <span class="accent">tres movimientos</span>.</h2>
+      <p class="niv-lede">Informar, formar, acompañar. Cada nivel se construye sobre el anterior, asegurando que ningún joven dé un paso sin la base que necesita.</p>
+    </header>
+    <div class="niv-track" id="nivTrack" role="list">
+      <article class="niv-card" role="listitem">
+        <div class="niv-card-head">
+          <span class="niv-num">NIVEL 01</span>
+          <span class="niv-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </div>
+        <div class="niv-glyph">01</div>
+        <h3 class="niv-card-title">Información</h3>
+        <p class="niv-sub">Empezamos por entender el terreno.</p>
+        <p class="niv-desc">Datos claros sobre becas, carreras y oportunidades reales en Perú.</p>
+        <div class="niv-tags"><span class="niv-tag">Becas</span><span class="niv-tag">Carreras</span><span class="niv-tag">Mercado</span></div>
+      </article>
+      <article class="niv-card featured" role="listitem">
+        <div class="niv-card-head">
+          <span class="niv-num">NIVEL 02</span>
+          <span class="niv-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </div>
+        <div class="niv-glyph">02</div>
+        <h3 class="niv-card-title">Formación</h3>
+        <p class="niv-sub">Construimos las herramientas.</p>
+        <p class="niv-desc">Talleres prácticos en habilidades blandas y técnicas del siglo XXI.</p>
+        <div class="niv-tags"><span class="niv-tag">Soft skills</span><span class="niv-tag">Hard skills</span><span class="niv-tag">Vocación</span></div>
+      </article>
+      <article class="niv-card" role="listitem">
+        <div class="niv-card-head">
+          <span class="niv-num">NIVEL 03</span>
+          <span class="niv-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </div>
+        <div class="niv-glyph">03</div>
+        <h3 class="niv-card-title">Acompañamiento</h3>
+        <p class="niv-sub">Caminamos junto a cada joven.</p>
+        <p class="niv-desc">Mentoría personalizada durante toda la transición universitaria.</p>
+        <div class="niv-tags"><span class="niv-tag">Mentoría 1:1</span><span class="niv-tag">Comunidad</span><span class="niv-tag">Seguimiento</span></div>
+      </article>
+    </div>
+    <div class="niv-dots" id="nivDots" aria-hidden="true">
+      <button class="niv-dot on" type="button" data-i="0" aria-label="Nivel 1"></button>
+      <button class="niv-dot" type="button" data-i="1" aria-label="Nivel 2"></button>
+      <button class="niv-dot" type="button" data-i="2" aria-label="Nivel 3"></button>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PILARES ════ -->
+<section class="pil-section" id="pilares" data-screen-label="03 Pilares">
+  <div class="pil-inner">
+    <header class="pil-head">
+      <div>
+        <span class="pil-eyebrow">Nuestros pilares</span>
+        <h2 class="pil-title">En qué <em>nos enfocamos</em>.</h2>
+      </div>
+      <p class="pil-lede">Cuatro principios que atraviesan todo lo que hacemos. No son temas sueltos: son las dimensiones del joven que queremos acompañar.</p>
+    </header>
+    <div class="pil-grid">
+      <article class="pil-card">
+        <div class="pil-card-head">
+          <div class="pil-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16.2 7.8L13.5 13.5L7.8 16.2L10.5 10.5L16.2 7.8Z"/></svg></div>
+          <span class="pil-num">01</span>
+        </div>
+        <h3>Identidad y Propósito</h3>
+        <p>Ayudamos a cada joven a conocerse y definir su camino con claridad, conectando intereses, talentos y vocación.</p>
+      </article>
+      <article class="pil-card">
+        <div class="pil-card-head">
+          <div class="pil-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+          <span class="pil-num">02</span>
+        </div>
+        <h3>Bienestar y Equilibrio</h3>
+        <p>Herramientas emocionales para una transición saludable y sostenible. La salud mental también es preparación.</p>
+      </article>
+      <article class="pil-card">
+        <div class="pil-card-head">
+          <div class="pil-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/></svg></div>
+          <span class="pil-num">03</span>
+        </div>
+        <h3>Habilidades para el Futuro</h3>
+        <p>Preparación en competencias críticas del mercado laboral actual: pensamiento crítico, comunicación y alfabetización digital.</p>
+      </article>
+      <article class="pil-card">
+        <div class="pil-card-head">
+          <div class="pil-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.85 12.15L19 4M18 5l2 2M15 8l2 2"/></svg></div>
+          <span class="pil-num">04</span>
+        </div>
+        <h3>Acceso a Oportunidades</h3>
+        <p>Conexión directa con becas, programas y redes de apoyo. La meritocracia solo funciona si la información llega a todos.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ACTIVIDADES ════ -->
+<section class="act-section" id="actividades" data-screen-label="04 Actividades">
+  <div class="act-inner">
+    <header class="act-head">
+      <span class="eyebrow">En acción</span>
+      <h2 class="act-title">Nuestras actividades</h2>
+    </header>
+    <div class="act-grid">
+      <article class="act-card">
+        <div class="act-img" data-label="Foto · IEE Edelmira del Pando"></div>
+        <div class="act-body">
+          <span class="act-tag">Orientación vocacional</span>
+          <h3>IEE Edelmira del Pando</h3>
+          <div class="act-meta"><span>📅 28/11/2025</span><span>👥 33 estudiantes</span></div>
+          <p class="act-quote">"Sé que en el futuro habrá mucho por descubrir y aprender, tengo miedo pero quiero ser valiente por quienes amo y por mi futuro."</p>
+        </div>
+      </article>
+      <article class="act-card">
+        <div class="act-img" data-label="Foto · Charla Construye tu Rumbo"></div>
+        <div class="act-body">
+          <span class="act-tag">Habilidades para el futuro</span>
+          <h3>Charla Construye tu Rumbo</h3>
+          <div class="act-meta"><span>📅 18/04/2026</span><span>👥 14 estudiantes</span></div>
+          <p class="act-quote">"Me gustó que compartieran experiencias reales y que dijeran que es importante empezar desde hoy. No es algo que siempre te dicen, pero hace mucha diferencia."</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ════ EQUIPO ════ -->
+<section class="team-section" id="equipo" data-screen-label="05 Equipo">
+  <div class="team-inner">
+    <header class="team-head">
+      <span class="eyebrow">Quiénes somos</span>
+      <h2 class="team-title">Nuestro equipo</h2>
+    </header>
+    <div class="team-grid" id="teamGrid"></div>
+  </div>
+</section>
+
+<!-- ════ ÚNETE ════ -->
+<section class="unete-section" id="unete" data-screen-label="06 Únete">
+  <div class="unete-inner">
+    <header class="unete-head">
+      <span class="eyebrow">Sé parte del cambio</span>
+      <h2 class="unete-title">Únete a la causa</h2>
+    </header>
+    <div class="unete-grid">
+      <div class="unete-card">
+        <div class="unete-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+        <h3>Dona</h3>
+        <p>Tu aporte permite que más jóvenes accedan a orientación vocacional de calidad.</p>
+        <a href="#" class="btn-ghost" style="font-size: 13px; padding: 10px 18px;">QR Yape / Plin · próximamente</a>
+      </div>
+      <div class="unete-card">
+        <div class="unete-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><circle cx="17" cy="11" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2M21 21v-1a3 3 0 00-3-3h-2"/></svg></div>
+        <h3>Alianzas estratégicas</h3>
+        <p>Empresas, universidades y ONGs que quieran sumarse a nuestra causa.</p>
+        <a href="https://forms.gle/E7XHsLKZHBvKnDrB9" class="btn-primary" style="font-size: 13px; padding: 10px 18px;">Completar formulario</a>
+      </div>
+      <div class="unete-card">
+        <div class="unete-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></div>
+        <h3>Lleva Rumbo a tu colegio</h3>
+        <p>Organizamos talleres gratuitos de orientación vocacional en tu institución.</p>
+        <a href="https://forms.gle/E7XHsLKZHBvKnDrB9" class="btn-primary" style="font-size: 13px; padding: 10px 18px;">Solicitar taller</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FAQ ════ -->
+<section class="faq-section" id="faq" data-screen-label="07 FAQ">
+  <div class="faq-inner">
+    <header class="faq-head">
+      <span class="eyebrow">Resolvemos tus dudas</span>
+      <h2 class="faq-title">Preguntas frecuentes</h2>
+    </header>
+    <div class="faq-tabs" id="faqTabs">
+      <button class="faq-tab active" data-cat="colegios">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>
+        Colegios y padres
+      </button>
+      <button class="faq-tab" data-cat="aliados">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><circle cx="17" cy="10" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2M21 21v-1a3 3 0 00-3-3h-1.5"/></svg>
+        Aliados y donantes
+      </button>
+      <button class="faq-tab" data-cat="estudiantes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5L2 9z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/><path d="M22 9v5"/></svg>
+        Estudiantes
+      </button>
+    </div>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ════ CTA ════ -->
+<section class="cta-section" id="contacto" data-screen-label="08 Contacto">
+  <div class="cta-inner">
+    <span class="cta-eyebrow">Hablemos</span>
+    <h2 class="cta-title">¿Listos para transformar el futuro de más jóvenes?</h2>
+    <p class="cta-lede">Si representas una institución educativa, una empresa o simplemente quieres saber más, escríbenos. Estamos para ayudarte.</p>
+    <a href="mailto:rumbo.transformatufuturo@gmail.com" class="cta-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      rumbo.transformatufuturo@gmail.com
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span class="brand">RUMBO</span>
+  Transformando decisiones en oportunidades · © RUMBO. Todos los derechos reservados.
+</footer>
+
+<script>
+// Reveal-on-scroll
+(function () {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.niv-section, .pil-section').forEach((s) => io.observe(s));
+})();
+
+// Mobile nav toggle
+(function () {
+  const burger = document.getElementById('navBurger');
+  const mobile = document.getElementById('navMobile');
+  if (!burger || !mobile) return;
+  burger.addEventListener('click', () => mobile.classList.toggle('open'));
+  mobile.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => mobile.classList.remove('open')));
+})();
+
+// Niveles dots sync
+(function () {
+  const track = document.getElementById('nivTrack');
+  const dots = document.querySelectorAll('#nivDots .niv-dot');
+  if (!track || !dots.length) return;
+  let raf = 0;
+  const onScroll = () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const cards = track.querySelectorAll('.niv-card');
+      const trackRect = track.getBoundingClientRect();
+      const center = trackRect.left + trackRect.width / 2;
+      let best = 0, bestDist = Infinity;
+      cards.forEach((c, i) => {
+        const r = c.getBoundingClientRect();
+        const cardCenter = r.left + r.width / 2;
+        const d = Math.abs(cardCenter - center);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle('on', i === best));
+    });
+  };
+  track.addEventListener('scroll', onScroll, { passive: true });
+  dots.forEach((d) => {
+    d.addEventListener('click', () => {
+      const i = +d.dataset.i;
+      const card = track.querySelectorAll('.niv-card')[i];
+      if (card) {
+        const left = card.offsetLeft - (track.clientWidth - card.clientWidth) / 2;
+        track.scrollTo({ left, behavior: 'smooth' });
+      }
+    });
+  });
+})();
+
+// Equipo data
+(function () {
+  const team = [
+    { name: 'Sheyla Campos', role: 'Coordinadora General', bio: 'Ingeniera Empresarial (UP) · Strategy Analyst en Rappi' },
+    { name: 'Junior Julón', role: 'Coordinador & Finanzas', bio: 'Financista (UP) · Analista de Estrategia de Inversiones en Rimac' },
+    { name: 'Mariana Martínez', role: 'Comunicaciones y Marketing', bio: 'Ingeniera Empresarial (UP) · Business & Strategy Consultant en Minsait' },
+    { name: 'Lucerito Malpartida', role: 'Comunicaciones y Marketing', bio: 'Ingeniera de la Información (UP) · B2B Process Lead en Pepsico' },
+    { name: 'Breinner Ramos', role: 'Operaciones y Proyectos', bio: 'Ingeniero Empresarial (UP) · Account Executive en Tuxpas' },
+    { name: 'María Arias', role: 'Operaciones y Proyectos', bio: 'Ingeniera de la Información (UP) · Consultora en Pacífico Seguros' },
+    { name: 'Nicol Contreras', role: 'Gestión del Aprendizaje', bio: 'Ingeniera Empresarial (UP) · BSc Management & Digital Innovation (UoL)' },
+  ];
+  const grid = document.getElementById('teamGrid');
+  if (!grid) return;
+  grid.innerHTML = team.map((p) => {
+    const initials = p.name.split(' ').map((w) => w[0]).slice(0, 2).join('');
+    return `
+      <article class="team-card">
+        <div class="team-avatar">${initials}</div>
+        <h3 class="team-name">${p.name}</h3>
+        <p class="team-role">${p.role}</p>
+        <p class="team-bio">${p.bio}</p>
+        <a href="#" class="team-link">LinkedIn ↗</a>
+      </article>
+    `;
+  }).join('');
+})();
+
+// FAQ data + tabs
+(function () {
+  const faqs = {
+    colegios: [
+      { q: '¿Tiene costo para el colegio?', a: 'No, nuestras intervenciones son completamente gratuitas. Nos financiamos a través de donaciones y alianzas estratégicas.' },
+      { q: '¿Cómo puedo solicitar una intervención para mi colegio?', a: 'Completa el formulario en "Únete" o escríbenos a rumbo.transformatufuturo@gmail.com.' },
+      { q: '¿Con cuánta anticipación debo coordinar?', a: 'Recomendamos coordinar con al menos 2 semanas de anticipación.' },
+      { q: '¿Qué necesita el colegio para recibirlos?', a: 'Solo un aula, idealmente con proyector. Nosotros llevamos todos los materiales.' },
+      { q: '¿Pueden adaptar el contenido a nuestra realidad?', a: 'Sí. Antes de cada intervención ajustamos el contenido según el contexto e intereses del grupo.' },
+      { q: '¿Cuánto dura una intervención?', a: 'Un taller individual dura entre 1 y 2 horas.' },
+      { q: '¿Está dirigido solo a 5to de secundaria?', a: 'No. Trabajamos con estudiantes desde 3ro hasta 5to de secundaria.' },
+    ],
+    aliados: [
+      { q: '¿Cómo puedo apoyar a RUMBO?', a: 'Puedes donar, ser aliado institucional o llevar nuestros talleres a tu colegio.' },
+      { q: '¿Son una organización sin fines de lucro?', a: 'Sí, RUMBO es una organización sin fines de lucro orientada al impacto social en la educación peruana.' },
+      { q: '¿Emiten recibos por donaciones?', a: 'Estamos en proceso de formalización. Escríbenos para conocer el estado actual.' },
+    ],
+    estudiantes: [
+      { q: '¿Qué tipo de becas me pueden ayudar a conseguir?', a: 'Te informamos sobre Pronabec, Beca 18, universidades privadas y programas internacionales, adaptado a tu perfil.' },
+      { q: '¿Necesito tener buen promedio para participar?', a: 'No. Nuestros talleres son para todos los estudiantes, sin importar su rendimiento académico.' },
+      { q: '¿Atienden a alumnos de universidades públicas y privadas?', a: 'Sí. Nuestra orientación cubre públicas, privadas e institutos técnicos superiores.' },
+      { q: '¿Brindan asesorías personalizadas?', a: 'Sí, como parte del Nivel 03 de acompañamiento.' },
+    ],
+  };
+  const list = document.getElementById('faqList');
+  const tabs = document.querySelectorAll('#faqTabs .faq-tab');
+  const render = (cat) => {
+    list.innerHTML = faqs[cat].map((f) => `
+      <details class="faq-item"><summary>${f.q}</summary><div class="faq-item-body">${f.a}</div></details>
+    `).join('');
+  };
+  render('colegios');
+  tabs.forEach((t) => {
+    t.addEventListener('click', () => {
+      tabs.forEach((x) => x.classList.remove('active'));
+      t.classList.add('active');
+      render(t.dataset.cat);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

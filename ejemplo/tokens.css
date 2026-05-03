@@ -1,0 +1,63 @@
+/* RUMBO design tokens — derived from rumbo.org.pe institutional palette */
+:root {
+  /* Brand */
+  --rumbo-navy: #0E3B6C;
+  --rumbo-navy-deep: #082445;
+  --rumbo-blue: #1E5BA8;
+  --rumbo-sky: #3B82C4;
+  --rumbo-sky-soft: #DCEBF7;
+  --rumbo-sky-mist: #F0F6FB;
+
+  /* Warm accent — used sparingly, for emphasis */
+  --rumbo-coral: #E8825B;
+  --rumbo-amber: #E8B65B;
+
+  /* Neutrals */
+  --bg: #FBFBF7;
+  --bg-cream: #F4F1EA;
+  --surface: #FFFFFF;
+  --ink: #0F1A2B;
+  --ink-soft: #3A4658;
+  --ink-mute: #7A8494;
+  --line: #E4E7EC;
+  --line-soft: #EFF1F4;
+
+  /* Type */
+  --font-display: 'Sora', 'Plus Jakarta Sans', -apple-system, system-ui, sans-serif;
+  --font-body: 'Manrope', -apple-system, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+
+  /* Radii */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(15, 26, 43, 0.04), 0 2px 6px rgba(15, 26, 43, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 26, 43, 0.06), 0 12px 32px rgba(15, 26, 43, 0.06);
+  --shadow-lg: 0 12px 28px rgba(15, 26, 43, 0.10), 0 32px 64px rgba(15, 26, 43, 0.10);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--font-body); color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; }
+
+/* Reusable section labels */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rumbo-blue);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+}

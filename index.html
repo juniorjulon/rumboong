@@ -12,7 +12,7 @@
   <link rel="icon" href="assets/logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -56,13 +56,28 @@
   ================================================================ -->
   <section class="hero">
     <div class="container">
-      <div class="hero-content fade-up">
-        <span class="hero-tag">Organización Social · Perú</span>
-        <h1>El talento no debería perderse por falta de información.</h1>
-        <p>Acompañamos a jóvenes en su transición del colegio a la universidad para que tomen decisiones informadas y construyan un proyecto de vida sólido.</p>
-        <p class="bridge">Somos el puente entre el colegio y el futuro profesional.</p>
-        <div class="hero-buttons">
-          <a href="#propuesta" class="btn btn-accent">Conoce cómo ayudamos</a>
+      <div class="hero-content">
+        <span class="hero-tag"><span class="hero-dot"></span>Organización Social · Perú</span>
+        <h1>El talento no debería perderse por falta de <em>información</em>.</h1>
+        <p class="hero-lede">Acompañamos a jóvenes en su transición del colegio a la universidad para que tomen decisiones informadas y construyan un proyecto de vida sólido.</p>
+        <p class="hero-bridge">Somos el puente entre el colegio y el futuro profesional.</p>
+        <div class="hero-actions">
+          <a href="#propuesta" class="btn-primary">Conoce cómo ayudamos</a>
+          <a href="#unete" class="btn-ghost">Lleva Rumbo a tu colegio</a>
+        </div>
+        <div class="hero-meta">
+          <div>
+            <div class="hero-meta-v">+47</div>
+            <div class="hero-meta-l">Estudiantes orientados</div>
+          </div>
+          <div>
+            <div class="hero-meta-v">2</div>
+            <div class="hero-meta-l">Talleres realizados</div>
+          </div>
+          <div>
+            <div class="hero-meta-v">100%</div>
+            <div class="hero-meta-l">Gratuito para colegios</div>
+          </div>
         </div>
       </div>
     </div>
@@ -110,54 +125,105 @@
   </section>
 
   <!-- ================================================================
-  PROPUESTA DE VALOR
+  NIVELES (PROPUESTA)
+  EDITAR: títulos, subtítulos, descripciones y tags de cada nivel.
   ================================================================ -->
-  <section id="propuesta" class="value-section">
-    <div class="container">
-      <div class="value-header fade-up">
-        <span class="section-tag">Nuestra propuesta</span>
-        <h2>Tres niveles de impacto</h2>
-        <p>Así transformamos el camino de cada joven</p>
+  <section class="niv-section" id="propuesta">
+    <div class="niv-inner">
+      <header class="niv-head">
+        <span class="eyebrow">Nuestra propuesta</span>
+        <h2 class="niv-title">Un trayecto en <span class="accent">tres movimientos</span>.</h2>
+        <p class="niv-lede">Informar, formar, acompañar. Cada nivel se construye sobre el anterior, asegurando que ningún joven dé un paso sin la base que necesita.</p>
+      </header>
+      <div class="niv-track" id="nivTrack" role="list">
+        <article class="niv-card" role="listitem">
+          <div class="niv-card-head">
+            <span class="niv-num">NIVEL 01</span>
+            <span class="niv-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+          </div>
+          <div class="niv-glyph">01</div>
+          <h3 class="niv-card-title">Información</h3>
+          <p class="niv-sub">Empezamos por entender el terreno.</p>
+          <p class="niv-desc">Datos claros sobre becas, carreras y oportunidades reales en Perú.</p>
+          <div class="niv-tags"><span class="niv-tag">Becas</span><span class="niv-tag">Carreras</span><span class="niv-tag">Mercado</span></div>
+        </article>
+        <article class="niv-card featured" role="listitem">
+          <div class="niv-card-head">
+            <span class="niv-num">NIVEL 02</span>
+            <span class="niv-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+          </div>
+          <div class="niv-glyph">02</div>
+          <h3 class="niv-card-title">Formación</h3>
+          <p class="niv-sub">Construimos las herramientas.</p>
+          <p class="niv-desc">Talleres prácticos en habilidades blandas y técnicas del siglo XXI.</p>
+          <div class="niv-tags"><span class="niv-tag">Soft skills</span><span class="niv-tag">Hard skills</span><span class="niv-tag">Vocación</span></div>
+        </article>
+        <article class="niv-card" role="listitem">
+          <div class="niv-card-head">
+            <span class="niv-num">NIVEL 03</span>
+            <span class="niv-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+          </div>
+          <div class="niv-glyph">03</div>
+          <h3 class="niv-card-title">Acompañamiento</h3>
+          <p class="niv-sub">Caminamos junto a cada joven.</p>
+          <p class="niv-desc">Mentoría personalizada durante toda la transición universitaria.</p>
+          <div class="niv-tags"><span class="niv-tag">Mentoría 1:1</span><span class="niv-tag">Comunidad</span><span class="niv-tag">Seguimiento</span></div>
+        </article>
       </div>
-      <div class="roadmap fade-up">
-        <div class="roadmap-connector"></div>
-        <div class="roadmap-step">
-          <div class="roadmap-icon-wrap">📚</div>
-          <p class="roadmap-num">Nivel 01</p>
-          <h3>Información</h3>
-          <p>Brindamos datos clave sobre becas, carreras y oportunidades reales.</p>
-        </div>
-        <div class="roadmap-step">
-          <div class="roadmap-icon-wrap">👥</div>
-          <p class="roadmap-num">Nivel 02</p>
-          <h3>Formación</h3>
-          <p>Talleres prácticos en habilidades blandas y técnicas del siglo XXI.</p>
-        </div>
-        <div class="roadmap-step">
-          <div class="roadmap-icon-wrap">🧭</div>
-          <p class="roadmap-num">Nivel 03</p>
-          <h3>Acompañamiento</h3>
-          <p>Mentoría personalizada durante toda la transición universitaria.</p>
-        </div>
+      <div class="niv-dots" id="nivDots" aria-hidden="true">
+        <button class="niv-dot on" type="button" data-i="0" aria-label="Nivel 1"></button>
+        <button class="niv-dot" type="button" data-i="1" aria-label="Nivel 2"></button>
+        <button class="niv-dot" type="button" data-i="2" aria-label="Nivel 3"></button>
       </div>
-      <p class="pillars-title fade-up">Nuestros pilares</p>
-      <div class="pillars-grid-new fade-up">
-        <div class="pillar-card-new">
-          <span class="pillar-icon-new">❤️</span>
-          <div><h4>Identidad y Propósito</h4><p>Ayudamos a cada joven a conocerse y definir su camino con claridad.</p></div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+  PILARES
+  EDITAR: título, descripción y texto de cada pilar.
+  ================================================================ -->
+  <section class="pil-section" id="pilares">
+    <div class="pil-inner">
+      <header class="pil-head">
+        <div>
+          <span class="pil-eyebrow">Nuestros pilares</span>
+          <h2 class="pil-title">En qué <em>nos enfocamos</em>.</h2>
         </div>
-        <div class="pillar-card-new">
-          <span class="pillar-icon-new">🧭</span>
-          <div><h4>Bienestar y Equilibrio</h4><p>Herramientas emocionales para una transición saludable y sostenible.</p></div>
-        </div>
-        <div class="pillar-card-new">
-          <span class="pillar-icon-new">🚀</span>
-          <div><h4>Habilidades para el Futuro</h4><p>Preparación en competencias críticas del mercado laboral actual.</p></div>
-        </div>
-        <div class="pillar-card-new">
-          <span class="pillar-icon-new">🔑</span>
-          <div><h4>Acceso a Oportunidades</h4><p>Conexión directa con becas, programas y redes de apoyo.</p></div>
-        </div>
+        <p class="pil-lede">Cuatro principios que atraviesan todo lo que hacemos. No son temas sueltos: son las dimensiones del joven que queremos acompañar.</p>
+      </header>
+      <div class="pil-grid">
+        <article class="pil-card">
+          <div class="pil-card-head">
+            <div class="pil-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16.2 7.8L13.5 13.5L7.8 16.2L10.5 10.5L16.2 7.8Z"/></svg></div>
+            <span class="pil-num">01</span>
+          </div>
+          <h3>Identidad y Propósito</h3>
+          <p>Ayudamos a cada joven a conocerse y definir su camino con claridad, conectando intereses, talentos y vocación.</p>
+        </article>
+        <article class="pil-card">
+          <div class="pil-card-head">
+            <div class="pil-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+            <span class="pil-num">02</span>
+          </div>
+          <h3>Bienestar y Equilibrio</h3>
+          <p>Herramientas emocionales para una transición saludable y sostenible. La salud mental también es preparación.</p>
+        </article>
+        <article class="pil-card">
+          <div class="pil-card-head">
+            <div class="pil-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/></svg></div>
+            <span class="pil-num">03</span>
+          </div>
+          <h3>Habilidades para el Futuro</h3>
+          <p>Desarrollamos las competencias que los jóvenes necesitan para la vida universitaria: comunicación, trabajo en equipo, productividad y toma de decisiones informadas.</p>
+        </article>
+        <article class="pil-card">
+          <div class="pil-card-head">
+            <div class="pil-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.85 12.15L19 4M18 5l2 2M15 8l2 2"/></svg></div>
+            <span class="pil-num">04</span>
+          </div>
+          <h3>Acceso a Oportunidades</h3>
+          <p>Conexión directa con becas, programas y redes de apoyo. La meritocracia solo funciona si la información llega a todos.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -172,19 +238,19 @@
     · Para ACTIVAR:   cambia data-autoplay="false"  →  data-autoplay="true"
     · Velocidad:      cambia data-autoplay-ms="3000" (milisegundos; 3000 = 3 seg)
   ================================================================ -->
-  <section id="actividades" class="section section-alt"
+  <section id="actividades" class="act-section"
            data-autoplay="true" data-autoplay-ms="3000">
     <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-tag">En acción</span>
-        <h2 class="section-title">Nuestras actividades</h2>
-      </div>
+      <header class="act-head fade-up">
+        <span class="eyebrow">En acción</span>
+        <h2 class="act-title">Nuestras actividades</h2>
+      </header>
 
       <div class="carousel-outer fade-up" id="act-outer">
         <div class="carousel-wrapper"><div class="carousel-track" id="activities-track">
 
           <div class="activity-slide">
-            <div class="activity-card">
+            <div class="act-card">
               <div class="mini-photos">
                 <!-- FOTOS: agrega cuantos <img> necesites, el carrusel se arma solo -->
                 <img src="assets/actividades/actividad1-edelmira-del-pando-1.jpg"
@@ -192,23 +258,20 @@
                 <img src="assets/actividades/actividad1-edelmira-del-pando-2.jpg"
                      alt="Taller en IEE Edelmira del Pando - Equipo">
               </div>
-              <div class="activity-body">
+              <div class="act-body">
+                <span class="act-tag">Orientación vocacional</span>
                 <h3>IEE Edelmira del Pando</h3>
-                <!-- EDITAR: nombre del taller -->
-                <p class="workshop">Orientación vocacional</p>
-                <div class="activity-meta">
-                  <!-- EDITAR: mes/año y número de estudiantes -->
+                <div class="act-meta">
                   <span>📅 28/11/2025</span>
                   <span>👥 33 estudiantes</span>
                 </div>
-                <!-- EDITAR: cita real de un estudiante o docente -->
-                <div class="activity-quote">"Se que en el futuro habra mucho por descubrir y aprender, tengo miedo pero quiero ser valiente por quienes amo y por mi futuro."</div>
+                <p class="act-quote">"Se que en el futuro habra mucho por descubrir y aprender, tengo miedo pero quiero ser valiente por quienes amo y por mi futuro."</p>
               </div>
             </div>
           </div>
 
           <div class="activity-slide">
-            <div class="activity-card">
+            <div class="act-card">
               <div class="mini-photos">
                 <!-- FOTOS: agrega cuantos <img> necesites, el carrusel se arma solo -->
                 <img src="assets/actividades/actividad2-charla-universitarios-1.jpeg"
@@ -218,17 +281,14 @@
                 <img src="assets/actividades/actividad2-charla-universitarios-3.jpg"
                      alt="Charla Construyendo tu Rumbo">
               </div>
-              <div class="activity-body">
+              <div class="act-body">
+                <span class="act-tag">Habilidades para el futuro</span>
                 <h3>Charla Construye tu Rumbo</h3>
-                <!-- EDITAR: nombre del taller -->
-                <p class="workshop">Habilidades para el futuro</p>
-                <div class="activity-meta">
-                  <!-- EDITAR: mes/año y número de estudiantes -->
+                <div class="act-meta">
                   <span>📅 18/04/2026</span>
                   <span>👥 14 estudiantes</span>
                 </div>
-                <!-- EDITAR: cita real de un estudiante o docente -->
-                <div class="activity-quote">"Me gustó que compartieran experiencias reales y que dijeran que es importante empezar desde hoy. No es algo que siempre te dicen, pero hace mucha diferencia."</div>
+                <p class="act-quote">"Me gustó que compartieran experiencias reales y que dijeran que es importante empezar desde hoy. No es algo que siempre te dicen, pero hace mucha diferencia."</p>
               </div>
             </div>
           </div>
@@ -237,22 +297,21 @@
           PLANTILLA para más actividades — copia, pega y descomenta:
 
           <div class="activity-slide">
-            <div class="activity-card">
+            <div class="act-card">
               <div class="mini-photos">
                 FOTO 1 (obligatoria):
-                <img src="assets/actividades/nombre-colegio-1.jpg" alt="Taller en Nombre del Colegio">
-                FOTO 2, 3, 4... (opcionales — agrega las que quieras):
-                <img src="assets/actividades/nombre-colegio-2.jpg" alt="Taller en Nombre del Colegio">
-                <img src="assets/actividades/nombre-colegio-3.jpg" alt="Taller en Nombre del Colegio">
+                <img src="assets/actividades/actividad3-nombre-1.jpg" alt="Taller en Nombre del Colegio">
+                FOTO 2, 3... (opcionales):
+                <img src="assets/actividades/actividad3-nombre-2.jpg" alt="Taller en Nombre del Colegio">
               </div>
-              <div class="activity-body">
-                <h3>Nombre del colegio</h3>
-                <p class="workshop">Nombre del taller</p>
-                <div class="activity-meta">
+              <div class="act-body">
+                <span class="act-tag">Nombre del taller</span>
+                <h3>Nombre del colegio o evento</h3>
+                <div class="act-meta">
                   <span>📅 Mes 2025</span>
                   <span>👥 XX estudiantes</span>
                 </div>
-                <div class="activity-quote">"Testimonio."</div>
+                <p class="act-quote">"Testimonio."</p>
               </div>
             </div>
           </div>
@@ -272,12 +331,12 @@
   FOTOS: assets/team/[nombre-apellido].jpg (nombre exacto abajo)
   EDITAR: cargo u organización → busca el nombre en el HTML.
   ================================================================ -->
-  <section id="equipo" class="section section-white">
+  <section id="equipo" class="section section-cream">
     <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-tag">Quiénes somos</span>
-        <h2 class="section-title">Nuestro equipo</h2>
-      </div>
+      <header class="team-head fade-up">
+        <span class="eyebrow">Quiénes somos</span>
+        <h2 class="team-title">Nuestro equipo</h2>
+      </header>
       <div class="carousel-outer fade-up" id="team-outer">
         <div class="carousel-wrapper"><div class="carousel-track" id="team-track">
 
@@ -358,46 +417,43 @@
   QR: assets/qr-donacion.jpg
   Botones de Alianzas y Colegios → Google Form
   ================================================================ -->
-  <section id="unete" class="section join-section">
+  <section id="unete" class="unete-section">
     <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-tag">Sé parte del cambio</span>
-        <h2 class="section-title">Únete a la causa</h2>
-      </div>
-      <div class="join-grid">
+      <header class="unete-head fade-up">
+        <span class="eyebrow">Sé parte del cambio</span>
+        <h2 class="unete-title">Únete a la causa</h2>
+      </header>
+      <div class="unete-grid">
 
-        <div class="join-card fade-up">
-          <div class="join-card-stripe dona"></div>
-          <div class="join-card-body">
-            <div class="emoji">💙</div>
-            <h3>Dona</h3>
-            <p>Tu aporte permite que más jóvenes accedan a orientación vocacional de calidad.</p>
-            <div class="qr-img">
-              <img src="assets/qr-donacion.jpg" alt="QR para donar a RUMBO"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <span style="display:none;">QR Yape / Plin<br>próximamente</span>
-            </div>
+        <div class="unete-card fade-up">
+          <div class="unete-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </div>
+          <h3>Dona</h3>
+          <p>Tu aporte permite que más jóvenes accedan a orientación vocacional de calidad.</p>
+          <div class="unete-qr">
+            <img src="assets/qr-donacion.jpg" alt="QR para donar a RUMBO"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="unete-qr-fallback">QR Yape / Plin<br>próximamente</span>
           </div>
         </div>
 
-        <div class="join-card fade-up">
-          <div class="join-card-stripe alianza"></div>
-          <div class="join-card-body">
-            <div class="emoji">🤝</div>
-            <h3>Alianzas estratégicas</h3>
-            <p>Empresas, universidades y ONGs que quieran sumarse a nuestra causa.</p>
-            <a href="https://forms.gle/E7XHsLKZHBvKnDrB9" target="_blank" rel="noopener noreferrer" class="btn btn-alianza">Completar formulario</a>
+        <div class="unete-card fade-up">
+          <div class="unete-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><circle cx="17" cy="11" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2M21 21v-1a3 3 0 00-3-3h-2"/></svg>
           </div>
+          <h3>Alianzas estratégicas</h3>
+          <p>Empresas, universidades y ONGs que quieran sumarse a nuestra causa.</p>
+          <a href="https://forms.gle/E7XHsLKZHBvKnDrB9" target="_blank" rel="noopener noreferrer" class="btn-primary">Completar formulario</a>
         </div>
 
-        <div class="join-card fade-up">
-          <div class="join-card-stripe colegio"></div>
-          <div class="join-card-body">
-            <div class="emoji">🏫</div>
-            <h3>Lleva Rumbo a tu colegio</h3>
-            <p>Organizamos talleres gratuitos de orientación vocacional en tu institución.</p>
-            <a href="https://forms.gle/E7XHsLKZHBvKnDrB9" target="_blank" rel="noopener noreferrer" class="btn btn-colegio">Solicitar taller</a>
+        <div class="unete-card fade-up">
+          <div class="unete-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>
           </div>
+          <h3>Lleva Rumbo a tu colegio</h3>
+          <p>Organizamos talleres gratuitos de orientación vocacional en tu institución.</p>
+          <a href="https://forms.gle/E7XHsLKZHBvKnDrB9" target="_blank" rel="noopener noreferrer" class="btn-primary">Solicitar taller</a>
         </div>
 
       </div>
@@ -406,51 +462,60 @@
 
   <!-- ================================================================
   FAQ — 3 grupos por público
+  AGREGAR PREGUNTA: dentro del .faq-group correspondiente, copia un bloque
+  <details class="faq-item"> y edita el texto del <summary> y del <div class="faq-item-body">.
   ================================================================ -->
-  <section id="faq" class="section-faq">
-    <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-tag">Resolvemos tus dudas</span>
-        <h2 class="section-title">Preguntas frecuentes</h2>
+  <section id="faq" class="faq-section">
+    <div class="faq-inner">
+      <header class="faq-head fade-up">
+        <span class="eyebrow">Resolvemos tus dudas</span>
+        <h2 class="faq-title">Preguntas frecuentes</h2>
+      </header>
+      <div class="faq-tabs fade-up" id="faqTabs">
+        <button class="faq-tab active" data-group="colegios">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>
+          Colegios y padres
+        </button>
+        <button class="faq-tab" data-group="aliados">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><circle cx="17" cy="10" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2M21 21v-1a3 3 0 00-3-3h-1.5"/></svg>
+          Aliados y donantes
+        </button>
+        <button class="faq-tab" data-group="estudiantes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5L2 9z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/><path d="M22 9v5"/></svg>
+          Estudiantes
+        </button>
       </div>
-      <div class="faq-filters fade-up">
-        <button class="faq-filter f-colegios active" onclick="faqFilter('colegios',this)">🏫 Colegios y padres</button>
-        <button class="faq-filter f-aliados"         onclick="faqFilter('aliados',this)">🤝 Aliados y donantes</button>
-        <button class="faq-filter f-estudiantes"     onclick="faqFilter('estudiantes',this)">🎓 Estudiantes</button>
+
+      <!-- GRUPO: Colegios y padres -->
+      <div class="faq-group active fade-up" data-group="colegios">
+        <details class="faq-item"><summary>¿Tiene costo para el colegio?</summary><div class="faq-item-body"><p>No, nuestras intervenciones son completamente gratuitas. Nos financiamos a través de donaciones y alianzas estratégicas.</p></div></details>
+        <details class="faq-item"><summary>¿Cómo puedo solicitar una intervención para mi colegio?</summary><div class="faq-item-body"><p>Completa el formulario en "Únete" o escríbenos a <strong>rumbo.transformatufuturo@gmail.com</strong>. Coordinamos una reunión previa para entender las necesidades de tu institución.</p></div></details>
+        <details class="faq-item"><summary>¿Con cuánta anticipación debo coordinar?</summary><div class="faq-item-body"><p>Recomendamos coordinar con al menos 2 semanas de anticipación para organizar el equipo y materiales.</p></div></details>
+        <details class="faq-item"><summary>¿Qué necesita el colegio para recibirlos?</summary><div class="faq-item-body"><p>Solo un aula, idealmente con proyector. Nosotros llevamos todos los materiales. Si no hay proyector, también nos adaptamos.</p></div></details>
+        <details class="faq-item"><summary>¿Pueden adaptar el contenido a nuestra realidad?</summary><div class="faq-item-body"><p>Sí. Antes de cada intervención ajustamos el contenido según el contexto e intereses del grupo.</p></div></details>
+        <details class="faq-item"><summary>¿Cuánto dura una intervención?</summary><div class="faq-item-body"><p>Un taller individual dura entre 1 y 2 horas.</p></div></details>
+        <details class="faq-item"><summary>¿Está dirigido solo a 5to de secundaria?</summary><div class="faq-item-body"><p>No. Trabajamos con estudiantes desde 3ro hasta 5to de secundaria, adaptando el contenido a cada nivel.</p></div></details>
+        <details class="faq-item"><summary>¿Es seguro para mi hijo participar?</summary><div class="faq-item-body"><p>Sí. Todas nuestras intervenciones se realizan dentro del colegio, con coordinación previa de las autoridades del colegio.</p></div></details>
+        <details class="faq-item"><summary>¿Los padres pueden asistir a las sesiones?</summary><div class="faq-item-body"><p>Depende del formato. En algunos programas organizamos sesiones especiales para padres. Consúltanos al coordinar.</p></div></details>
       </div>
-      <div class="faq-list fade-up">
 
-        <!-- GRUPO: Colegios y padres -->
-        <div class="faq-group active" data-group="colegios">
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Tiene costo para el colegio?<span class="arrow">▾</span></button><div class="faq-answer"><p>No, nuestras intervenciones son completamente gratuitas. Nos financiamos a través de donaciones y alianzas estratégicas.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Cómo puedo solicitar una intervención para mi colegio?<span class="arrow">▾</span></button><div class="faq-answer"><p>Completa el formulario en "Únete" o escríbenos a <strong>rumbo.transformatufuturo@gmail.com</strong>. Coordinamos una reunión previa para entender las necesidades de tu institución.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Con cuánta anticipación debo coordinar?<span class="arrow">▾</span></button><div class="faq-answer"><p>Recomendamos coordinar con al menos 2 semanas de anticipación para organizar el equipo y materiales.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Qué necesita el colegio para recibirlos?<span class="arrow">▾</span></button><div class="faq-answer"><p>Solo un aula, idealmente con proyector. Nosotros llevamos todos los materiales. Si no hay proyector, también nos adaptamos.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Pueden adaptar el contenido a nuestra realidad?<span class="arrow">▾</span></button><div class="faq-answer"><p>Sí. Antes de cada intervención ajustamos el contenido según el contexto e intereses del grupo.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Cuánto dura una intervención?<span class="arrow">▾</span></button><div class="faq-answer"><p>Un taller individual dura entre 1 y 2 horas.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Está dirigido solo a 5to de secundaria?<span class="arrow">▾</span></button><div class="faq-answer"><p>No. Trabajamos con estudiantes desde 3ro hasta 5to de secundaria, adaptando el contenido a cada nivel.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Es seguro para mi hijo participar?<span class="arrow">▾</span></button><div class="faq-answer"><p>Sí. Todas nuestras intervenciones se realizan dentro del colegio, con coordinación previa de las autoridades del colegio.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Los padres pueden asistir a las sesiones?<span class="arrow">▾</span></button><div class="faq-answer"><p>Depende del formato. En algunos programas organizamos sesiones especiales para padres. Consúltanos al coordinar.</p></div></div>
-        </div>
-
-        <!-- GRUPO: Aliados y donantes -->
-        <div class="faq-group" data-group="aliados">
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Cómo puedo apoyar a RUMBO?<span class="arrow">▾</span></button><div class="faq-answer"><p>Puedes donar, ser aliado institucional o llevar nuestros talleres a tu colegio. Escríbenos a <strong>rumbo.transformatufuturo@gmail.com</strong>.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Son una organización sin fines de lucro?<span class="arrow">▾</span></button><div class="faq-answer"><p>Sí, RUMBO es una organización sin fines de lucro orientada al impacto social en la educación peruana.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Emiten recibos por donaciones?<span class="arrow">▾</span></button><div class="faq-answer"><p>Estamos en proceso de formalización. Escríbenos para conocer el estado actual.</p></div></div>
-        </div>
-
-        <!-- GRUPO: Estudiantes -->
-        <div class="faq-group" data-group="estudiantes">
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Qué tipo de becas me pueden ayudar a conseguir?<span class="arrow">▾</span></button><div class="faq-answer"><p>Te informamos sobre Pronabec, Beca 18, universidades privadas y programas internacionales, adaptado a tu perfil.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Necesito tener buen promedio para participar?<span class="arrow">▾</span></button><div class="faq-answer"><p>No. Nuestros talleres son para todos los estudiantes, sin importar su rendimiento académico.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Atienden a alumnos de universidades públicas y privadas?<span class="arrow">▾</span></button><div class="faq-answer"><p>Sí. Nuestra orientación cubre públicas, privadas e institutos técnicos superiores.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Cómo contactarlos si mi colegio no tiene convenio con RUMBO?<span class="arrow">▾</span></button><div class="faq-answer"><p>Escríbenos a <strong>rumbo.transformatufuturo@gmail.com</strong> o únete a nuestra comunidad de WhatsApp.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Tienen redes sociales o comunidad donde pueda seguir aprendiendo?<span class="arrow">▾</span></button><div class="faq-answer"><p>Sí. Síguenos como <strong>@rumbo.ong</strong> en Instagram, TikTok, Facebook y LinkedIn. También tenemos comunidad de WhatsApp.</p></div></div>
-          <div class="faq-item"><button class="faq-btn" onclick="toggleFAQ(this)">¿Brindan asesorías personalizadas?<span class="arrow">▾</span></button><div class="faq-answer"><p>Sí, como parte del Nivel 03 de acompañamiento. Consúltanos para saber cómo acceder.</p></div></div>
-        </div>
-
+      <!-- GRUPO: Aliados y donantes -->
+      <div class="faq-group" data-group="aliados">
+        <details class="faq-item"><summary>¿Cómo puedo apoyar a RUMBO?</summary><div class="faq-item-body"><p>Puedes donar, ser aliado institucional o llevar nuestros talleres a tu colegio. Escríbenos a <strong>rumbo.transformatufuturo@gmail.com</strong>.</p></div></details>
+        <details class="faq-item"><summary>¿Son una organización sin fines de lucro?</summary><div class="faq-item-body"><p>Sí, RUMBO es una organización sin fines de lucro orientada al impacto social en la educación peruana.</p></div></details>
+        <details class="faq-item"><summary>¿Emiten recibos por donaciones?</summary><div class="faq-item-body"><p>Estamos en proceso de formalización. Escríbenos para conocer el estado actual.</p></div></details>
       </div>
+
+      <!-- GRUPO: Estudiantes -->
+      <div class="faq-group" data-group="estudiantes">
+        <details class="faq-item"><summary>¿Qué tipo de becas me pueden ayudar a conseguir?</summary><div class="faq-item-body"><p>Te informamos sobre Pronabec, Beca 18, universidades privadas y programas internacionales, adaptado a tu perfil.</p></div></details>
+        <details class="faq-item"><summary>¿Necesito tener buen promedio para participar?</summary><div class="faq-item-body"><p>No. Nuestros talleres son para todos los estudiantes, sin importar su rendimiento académico.</p></div></details>
+        <details class="faq-item"><summary>¿Atienden a alumnos de universidades públicas y privadas?</summary><div class="faq-item-body"><p>Sí. Nuestra orientación cubre públicas, privadas e institutos técnicos superiores.</p></div></details>
+        <details class="faq-item"><summary>¿Cómo contactarlos si mi colegio no tiene convenio con RUMBO?</summary><div class="faq-item-body"><p>Escríbenos a <strong>rumbo.transformatufuturo@gmail.com</strong> o únete a nuestra comunidad de WhatsApp.</p></div></details>
+        <details class="faq-item"><summary>¿Tienen redes sociales o comunidad donde pueda seguir aprendiendo?</summary><div class="faq-item-body"><p>Sí. Síguenos como <strong>@rumbo.ong</strong> en Instagram, TikTok, Facebook y LinkedIn. También tenemos comunidad de WhatsApp.</p></div></details>
+        <details class="faq-item"><summary>¿Brindan asesorías personalizadas?</summary><div class="faq-item-body"><p>Sí, como parte del Nivel 03 de acompañamiento. Consúltanos para saber cómo acceder.</p></div></details>
+      </div>
+
     </div>
   </section>
 
@@ -464,15 +529,13 @@
     4. Reemplaza XXXXXXXX en action= con ese ID
   Sin eso, el botón abre el cliente de correo del visitante.
   ================================================================ -->
-  <section id="contacto" class="section">
+  <section id="contacto" class="contact-section">
     <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-tag">Hablemos</span>
-        <h2 class="section-title">Contáctanos</h2>
-        <p style="color:var(--text-muted); font-size:0.95rem; margin-top:0.5rem;">
-          ¿Tienes alguna pregunta o quieres llevar Rumbo a tu colegio?
-        </p>
-      </div>
+      <header class="contact-head fade-up">
+        <span class="eyebrow">Hablemos</span>
+        <h2 class="contact-title">Contáctanos</h2>
+        <p class="contact-lede">¿Tienes alguna pregunta o quieres llevar Rumbo a tu colegio?</p>
+      </header>
       <div class="contact-grid fade-up">
 
         <div class="contact-info">

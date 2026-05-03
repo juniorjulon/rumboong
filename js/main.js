@@ -25,25 +25,62 @@ mobileMenu.querySelectorAll('a').forEach(function (a) {
   });
 });
 
-/* --- FAQ: cambio de grupo --- */
-function faqFilter(group, btn) {
-  document.querySelectorAll('.faq-filter').forEach(function (b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-  document.querySelectorAll('.faq-group').forEach(function (g) { g.classList.remove('active'); });
-  document.querySelector('.faq-group[data-group="' + group + '"]').classList.add('active');
-  document.querySelectorAll('.faq-answer').forEach(function (a) { a.classList.remove('open'); });
-  document.querySelectorAll('.faq-btn').forEach(function (b) { b.classList.remove('open'); });
-}
+/* --- FAQ: tabs con nuevo diseño --- */
+(function () {
+  var tabs = document.querySelectorAll('#faqTabs .faq-tab');
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      var group = tab.dataset.group;
+      document.querySelectorAll('.faq-group').forEach(function (g) {
+        g.classList.toggle('active', g.dataset.group === group);
+      });
+    });
+  });
+})();
 
-/* --- FAQ: acordeón --- */
-function toggleFAQ(btn) {
-  var answer = btn.nextElementSibling;
-  var isOpen = answer.classList.contains('open');
-  var group  = btn.closest('.faq-group');
-  group.querySelectorAll('.faq-answer').forEach(function (a) { a.classList.remove('open'); });
-  group.querySelectorAll('.faq-btn').forEach(function (b) { b.classList.remove('open'); });
-  if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
-}
+/* --- Niveles: reveal-on-scroll y dots --- */
+(function () {
+  /* Reveal .in en niv-section y pil-section */
+  if ('IntersectionObserver' in window) {
+    var revealIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.niv-section, .pil-section').forEach(function (s) { revealIO.observe(s); });
+  } else {
+    document.querySelectorAll('.niv-section, .pil-section').forEach(function (s) { s.classList.add('in'); });
+  }
+
+  /* Dots scroll-sync del carrusel móvil de niveles */
+  var track = document.getElementById('nivTrack');
+  var dots  = document.querySelectorAll('#nivDots .niv-dot');
+  if (!track || !dots.length) return;
+  var raf = 0;
+  track.addEventListener('scroll', function () {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(function () {
+      var cards = track.querySelectorAll('.niv-card');
+      var center = track.getBoundingClientRect().left + track.getBoundingClientRect().width / 2;
+      var best = 0, bestDist = Infinity;
+      cards.forEach(function (c, i) {
+        var r = c.getBoundingClientRect();
+        var d = Math.abs(r.left + r.width / 2 - center);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      dots.forEach(function (d, i) { d.classList.toggle('on', i === best); });
+    });
+  }, { passive: true });
+  dots.forEach(function (d) {
+    d.addEventListener('click', function () {
+      var i = +d.dataset.i;
+      var card = track.querySelectorAll('.niv-card')[i];
+      if (card) { track.scrollTo({ left: card.offsetLeft - (track.clientWidth - card.clientWidth) / 2, behavior: 'smooth' }); }
+    });
+  });
+})();
 
 /* --- Protección fotos de equipo (clic derecho y arrastre) --- */
 document.querySelectorAll('.team-avatar').forEach(function (el) {
@@ -147,7 +184,7 @@ function applyCentering(name) {
 
 function getVisible(name) {
   var w = window.innerWidth;
-  if (name === 'activities') return w <= 600 ? 1 : w <= 992 ? 2 : 3;
+  if (name === 'activities') return w <= 600 ? 1 : 2;
   return w <= 600 ? 1 : w <= 992 ? 2 : 4;
 }
 
