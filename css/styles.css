@@ -101,7 +101,7 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
   padding: clamp(120px, 13vw, 180px) 0 clamp(80px, 10vw, 120px);
 }
-.hero-content { position: relative; z-index: 2; max-width: 940px; }
+.hero-content { position: relative; z-index: 2; }
 .hero-tag {
   display: inline-flex;
   align-items: center;
@@ -123,16 +123,17 @@ img { max-width: 100%; display: block; }
   50% { opacity: 0.5; transform: scale(1.3); }
 }
 .hero h1 {
-  font-size: clamp(38px, 5.5vw, 68px);
-  line-height: 1.05;
+  font-size: clamp(40px, 7vw, 88px);
+  line-height: 1.0;
   letter-spacing: -0.03em;
   color: #fff;
   font-weight: 800;
+  max-width: 16ch;
   margin-bottom: 28px;
 }
 .hero h1 em { font-style: normal; color: var(--rumbo-amber); }
-.hero-lede { color: rgba(255,255,255,0.9); font-size: clamp(15px, 1.5vw, 18px); line-height: 1.6; margin-bottom: 8px; }
-.hero-bridge { font-family: var(--font-display); font-size: clamp(14px, 1.3vw, 16px); color: var(--rumbo-amber); font-weight: 500; margin-bottom: 36px; }
+.hero-lede { color: rgba(255,255,255,0.9); font-size: clamp(16px, 1.5vw, 19px); line-height: 1.5; max-width: 56ch; margin-bottom: 12px; }
+.hero-bridge { font-family: var(--font-display); font-size: clamp(15px, 1.4vw, 17px); color: var(--rumbo-amber); font-weight: 500; margin-bottom: 36px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .hero-meta {
   display: grid;
@@ -146,6 +147,7 @@ img { max-width: 100%; display: block; }
 @media (min-width: 600px) { .hero-meta { grid-template-columns: repeat(3, 1fr); } }
 .hero-meta-v { font-family: var(--font-display); font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; letter-spacing: -0.02em; color: #fff; line-height: 1; }
 .hero-meta-l { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 6px; line-height: 1.4; }
+.hero-meta { max-width: 720px; }
 
 /* ========== Buttons ========== */
 /* En el hero el btn-primary usa fondo ámbar para contrastar con el gradiente oscuro */
