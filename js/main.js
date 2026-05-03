@@ -51,6 +51,66 @@ document.querySelectorAll('.team-avatar').forEach(function (el) {
   el.addEventListener('dragstart',   function (e) { e.preventDefault(); });
 });
 
+/* --- Mini-carruseles de fotos dentro de cada tarjeta de actividad ---
+   Detecta automáticamente cuántas fotos hay en cada .mini-photos.
+   Si hay solo 1 foto, no hace nada. Si hay 2 o más, crea los dots.
+*/
+var miniCarousels = [];
+var autoplayTimer  = null;
+var AUTOPLAY_MS    = 3000;
+
+function initMiniCarousels() {
+  document.querySelectorAll('.mini-photos').forEach(function (container) {
+    var imgs = Array.prototype.slice.call(container.querySelectorAll('img'));
+    if (imgs.length < 2) return;
+
+    var track = document.createElement('div');
+    track.className = 'mini-track';
+    imgs.forEach(function (img) { track.appendChild(img); });
+    container.appendChild(track);
+
+    var dotsWrap = document.createElement('div');
+    dotsWrap.className = 'mini-dots';
+
+    var mc = { track: track, dots: dotsWrap, index: 0, total: imgs.length };
+    miniCarousels.push(mc);
+
+    imgs.forEach(function (_, i) {
+      var dot = document.createElement('button');
+      dot.className = 'mini-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Foto ' + (i + 1));
+      dot.addEventListener('click', (function (idx) {
+        return function () { goMiniSlide(mc, idx); };
+      })(i));
+      dotsWrap.appendChild(dot);
+    });
+    container.appendChild(dotsWrap);
+  });
+}
+
+function goMiniSlide(mc, index) {
+  mc.index = index;
+  mc.track.style.transform = 'translateX(-' + (100 * index) + '%)';
+  Array.prototype.forEach.call(mc.dots.children, function (d, i) {
+    d.classList.toggle('active', i === index);
+  });
+}
+
+function tickAutoplay() {
+  miniCarousels.forEach(function (mc) {
+    goMiniSlide(mc, (mc.index + 1) % mc.total);
+  });
+}
+
+initMiniCarousels();
+
+/* Leer configuración de auto-avance desde el atributo data-autoplay de la sección */
+var actSection = document.getElementById('actividades');
+if (actSection && actSection.dataset.autoplay === 'true') {
+  AUTOPLAY_MS   = parseInt(actSection.dataset.autoplayMs, 10) || 3000;
+  autoplayTimer = setInterval(tickAutoplay, AUTOPLAY_MS);
+}
+
 /* --- Carruseles ---
    Los botones ‹ › están en .carousel-section-inner (fuera del overflow).
    updateButtons oculta el botón cuando no hay más slides en esa dirección.
@@ -72,7 +132,17 @@ function initCarousel(name, trackId, outerId) {
   }
 
   carousels[name] = { track: track, btnPrev: btnPrev, btnNext: btnNext, index: 0 };
+  applyCentering(name);
   updateButtons(name);
+}
+
+function applyCentering(name) {
+  var c = carousels[name];
+  if (!c || c.track.classList.contains('single')) return;
+  var few = c.track.children.length <= getVisible(name);
+  c.track.classList.toggle('carousel-centered', few);
+  if (c.btnPrev) c.btnPrev.style.display = few ? 'none' : '';
+  if (c.btnNext) c.btnNext.style.display = few ? 'none' : '';
 }
 
 function getVisible(name) {
@@ -110,6 +180,7 @@ window.addEventListener('resize', function () {
     if (!c || c.track.classList.contains('single')) return;
     c.index = 0;
     c.track.style.transform = '';
+    applyCentering(name);
     updateButtons(name);
   });
 });

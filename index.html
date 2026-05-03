@@ -169,34 +169,70 @@
   <!-- ================================================================
   ACTIVIDADES — Carrusel
   ----------------------------------------------------------------
-  FOTO: assets/actividades/edelmira-del-pando.jpg
   EDITAR: taller, fecha, nº estudiantes, cita.
   AGREGAR MÁS: copia el bloque <div class="activity-slide"> completo.
+  ----------------------------------------------------------------
+  AUTO-AVANCE DE FOTOS:
+    · Para ACTIVAR:   cambia data-autoplay="false"  →  data-autoplay="true"
+    · Velocidad:      cambia data-autoplay-ms="3000" (milisegundos; 3000 = 3 seg)
   ================================================================ -->
-  <section id="actividades" class="section section-alt">
+  <section id="actividades" class="section section-alt"
+           data-autoplay="false" data-autoplay-ms="3000">
     <div class="container">
       <div class="section-header fade-up">
         <span class="section-tag">En acción</span>
         <h2 class="section-title">Nuestras actividades</h2>
       </div>
+
       <div class="carousel-outer fade-up" id="act-outer">
         <div class="carousel-wrapper"><div class="carousel-track" id="activities-track">
 
           <div class="activity-slide">
             <div class="activity-card">
-              <img src="assets/actividades/edelmira-del-pando.jpg"
-                   alt="Taller en IEE Edelmira del Pando">
+              <div class="mini-photos">
+                <!-- FOTOS: agrega cuantos <img> necesites, el carrusel se arma solo -->
+                <img src="assets/actividades/actividad1-edelmira-del-pando-1.jpg"
+                     alt="Taller en IEE Edelmira del Pando">
+                <img src="assets/actividades/actividad1-edelmira-del-pando-2.jpg"
+                     alt="Taller en IEE Edelmira del Pando - Equipo">
+              </div>
               <div class="activity-body">
                 <h3>IEE Edelmira del Pando</h3>
                 <!-- EDITAR: nombre del taller -->
                 <p class="workshop">Orientación vocacional</p>
                 <div class="activity-meta">
                   <!-- EDITAR: mes/año y número de estudiantes -->
-                  <span>📅 2025</span>
+                  <span>📅 28/11/2025</span>
                   <span>👥 33 estudiantes</span>
                 </div>
                 <!-- EDITAR: cita real de un estudiante o docente -->
                 <div class="activity-quote">"Se que en el futuro habra mucho por descubrir y aprender, tengo miedo pero quiero ser valiente por quienes amo y por mi futuro."</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="activity-slide">
+            <div class="activity-card">
+              <div class="mini-photos">
+                <!-- FOTOS: agrega cuantos <img> necesites, el carrusel se arma solo -->
+                <img src="assets/actividades/actividad2-charla-universitarios-1.jpeg"
+                     alt="Charla Construyendo tu Rumbo">
+                <img src="assets/actividades/actividad2-charla-universitarios-2.jpeg"
+                     alt="Charla Construyendo tu Rumbo">
+                <img src="assets/actividades/actividad2-charla-universitarios-3.jpg"
+                     alt="Charla Construyendo tu Rumbo">
+              </div>
+              <div class="activity-body">
+                <h3>Charla Construye tu Rumbo</h3>
+                <!-- EDITAR: nombre del taller -->
+                <p class="workshop">Habilidades para el futuro</p>
+                <div class="activity-meta">
+                  <!-- EDITAR: mes/año y número de estudiantes -->
+                  <span>📅 18/04/2026</span>
+                  <span>👥 14 estudiantes</span>
+                </div>
+                <!-- EDITAR: cita real de un estudiante o docente -->
+                <div class="activity-quote">"Me gustó que compartieran experiencias reales y que dijeran que es importante empezar desde hoy. No es algo que siempre te dicen, pero hace mucha diferencia."</div>
               </div>
             </div>
           </div>
@@ -206,7 +242,13 @@
 
           <div class="activity-slide">
             <div class="activity-card">
-              <img src="assets/actividades/nombre-colegio.jpg" alt="Taller en Nombre del Colegio">
+              <div class="mini-photos">
+                FOTO 1 (obligatoria):
+                <img src="assets/actividades/nombre-colegio-1.jpg" alt="Taller en Nombre del Colegio">
+                FOTO 2, 3, 4... (opcionales — agrega las que quieras):
+                <img src="assets/actividades/nombre-colegio-2.jpg" alt="Taller en Nombre del Colegio">
+                <img src="assets/actividades/nombre-colegio-3.jpg" alt="Taller en Nombre del Colegio">
+              </div>
               <div class="activity-body">
                 <h3>Nombre del colegio</h3>
                 <p class="workshop">Nombre del taller</p>
