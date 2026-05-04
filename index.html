@@ -17,10 +17,6 @@
 </head>
 <body>
 
-  <!-- ================================================================
-  NAVBAR
-  EDITAR: href del botón CTA → link de WhatsApp de la comunidad
-  ================================================================ -->
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="#" class="logo">RUMBO</a>
@@ -50,10 +46,6 @@
     </div>
   </nav>
 
-  <!-- ================================================================
-  HERO
-  EDITAR: título, subtítulo, botón
-  ================================================================ -->
   <section class="hero">
     <div class="container">
       <div class="hero-content">
@@ -82,10 +74,6 @@
     </div>
   </section>
 
-  <!-- ================================================================
-  EL PROBLEMA
-  EDITAR: texto de cada <span class="problem-text">
-  ================================================================ -->
   <section id="problema" class="problem-section">
     <div class="container">
       <div class="problem-inner">
@@ -123,10 +111,6 @@
     </div>
   </section>
 
-  <!-- ================================================================
-  NIVELES (PROPUESTA)
-  EDITAR: títulos, subtítulos, descripciones y tags de cada nivel.
-  ================================================================ -->
   <section class="niv-section" id="propuesta">
     <div class="niv-inner">
       <header class="niv-head">
@@ -177,10 +161,6 @@
     </div>
   </section>
 
-  <!-- ================================================================
-  PILARES
-  EDITAR: título, descripción y texto de cada pilar.
-  ================================================================ -->
   <section class="pil-section" id="pilares">
     <div class="pil-inner">
       <header class="pil-head">
@@ -227,16 +207,6 @@
     </div>
   </section>
 
-  <!-- ================================================================
-  ACTIVIDADES — Carrusel
-  ----------------------------------------------------------------
-  EDITAR: taller, fecha, nº estudiantes, cita.
-  AGREGAR MÁS: copia el bloque <div class="activity-slide"> completo.
-  ----------------------------------------------------------------
-  AUTO-AVANCE DE FOTOS:
-    · Para ACTIVAR:   cambia data-autoplay="false"  →  data-autoplay="true"
-    · Velocidad:      cambia data-autoplay-ms="3000" (milisegundos; 3000 = 3 seg)
-  ================================================================ -->
   <section id="actividades" class="act-section"
            data-autoplay="true" data-autoplay-ms="3000">
     <div class="container">
@@ -251,7 +221,6 @@
           <div class="activity-slide">
             <div class="act-card">
               <div class="mini-photos">
-                <!-- FOTOS: agrega cuantos <img> necesites, el carrusel se arma solo -->
                 <img src="assets/actividades/actividad1-edelmira-del-pando-1.jpg"
                      alt="Taller en IEE Edelmira del Pando">
                 <img src="assets/actividades/actividad1-edelmira-del-pando-2.jpg"
@@ -272,7 +241,6 @@
           <div class="activity-slide">
             <div class="act-card">
               <div class="mini-photos">
-                <!-- FOTOS: agrega cuantos <img> necesites, el carrusel se arma solo -->
                 <img src="assets/actividades/actividad2-charla-universitarios-1.jpeg"
                      alt="Charla Construyendo tu Rumbo">
                 <img src="assets/actividades/actividad2-charla-universitarios-2.jpeg"
@@ -292,44 +260,14 @@
             </div>
           </div>
 
-          <!--
-          PLANTILLA para más actividades — copia, pega y descomenta:
-
-          <div class="activity-slide">
-            <div class="act-card">
-              <div class="mini-photos">
-                FOTO 1 (obligatoria):
-                <img src="assets/actividades/actividad3-nombre-1.jpg" alt="Taller en Nombre del Colegio">
-                FOTO 2, 3... (opcionales):
-                <img src="assets/actividades/actividad3-nombre-2.jpg" alt="Taller en Nombre del Colegio">
-              </div>
-              <div class="act-body">
-                <span class="act-tag">Nombre del taller</span>
-                <h3>Nombre del colegio o evento</h3>
-                <div class="act-meta">
-                  <span>📅 Mes 2025</span>
-                  <span>👥 XX estudiantes</span>
-                </div>
-                <p class="act-quote">"Testimonio."</p>
-              </div>
-            </div>
-          </div>
-          -->
-
         </div>
-        </div><!-- /wrapper -->
+        </div>
         <button class="carousel-btn prev" onclick="slideCarousel('activities',-1)">‹</button>
         <button class="carousel-btn next" onclick="slideCarousel('activities',1)">›</button>
-      </div><!-- /act-outer -->
+      </div>
     </div>
   </section>
 
-  <!-- ================================================================
-  EQUIPO — Carrusel
-  ----------------------------------------------------------------
-  FOTOS: assets/team/[nombre-apellido].jpg (nombre exacto abajo)
-  EDITAR: cargo u organización → busca el nombre en el HTML.
-  ================================================================ -->
   <section id="equipo" class="section section-cream">
     <div class="container">
       <header class="team-head fade-up">
@@ -339,7 +277,6 @@
       <div class="carousel-outer fade-up" id="team-outer">
         <div class="carousel-wrapper"><div class="carousel-track" id="team-track">
 
-          <!-- FOTO: assets/team/sheyla-campos.jpg -->
           <div class="team-slide"><div class="team-card">
             <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/sheyla-campos.jpg" alt="Sheyla Campos"></div>
             <h3>Sheyla Campos</h3>
@@ -348,7 +285,6 @@
             <a href="https://www.linkedin.com/in/sheyla-campos-gonzales" class="linkedin-link" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
           </div></div>
 
-          <!-- FOTO: assets/team/junior-julon.jpg -->
           <div class="team-slide"><div class="team-card">
             <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/junior-julon.jpg" alt="Junior Julón"></div>
             <h3>Junior Julón</h3>
@@ -357,7 +293,6 @@
             <a href="https://www.linkedin.com/in/juniorjulon/" class="linkedin-link" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
           </div></div>
 
-          <!-- FOTO: assets/team/mariana-martinez.jpg -->
           <div class="team-slide"><div class="team-card">
             <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/mariana-martinez.jpg" alt="Mariana Martínez"></div>
             <h3>Mariana Martínez</h3>
@@ -366,7 +301,6 @@
             <a href="https://www.linkedin.com/in/marianamartinezd/" class="linkedin-link" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
           </div></div>
 
-          <!-- FOTO: assets/team/lucerito-malpartida.jpg -->
           <div class="team-slide"><div class="team-card">
             <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/lucerito-malpartida.jpg" alt="Lucerito Malpartida"></div>
             <h3>Lucerito Malpartida</h3>
@@ -375,7 +309,6 @@
             <a href="https://www.linkedin.com/in/luceritomj/" class="linkedin-link" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
           </div></div>
 
-          <!-- FOTO: assets/team/breinner-ramos.jpg -->
           <div class="team-slide"><div class="team-card">
             <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/breinner-ramos.jpg" alt="Breinner Ramos"></div>
             <h3>Breinner Ramos</h3>
@@ -384,7 +317,6 @@
             <a href="https://www.linkedin.com/in/breinner-ramos-rodriguez/" class="linkedin-link" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
           </div></div>
 
-          <!-- FOTO: assets/team/maria-arias.jpg -->
           <div class="team-slide"><div class="team-card">
             <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/maria-arias.jpg" alt="María Arias"></div>
             <h3>María Arias</h3>
@@ -393,7 +325,6 @@
             <a href="https://www.linkedin.com/in/maria-emilia-arias-condori/" class="linkedin-link" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
           </div></div>
 
-          <!-- FOTO: assets/team/nicol-contreras.jpg -->
           <div class="team-slide"><div class="team-card">
             <div class="team-avatar"><img draggable="false" oncontextmenu="return false" src="assets/team/nicol-contreras.jpg" alt="Nicol Contreras"></div>
             <h3>Nicol Contreras</h3>
@@ -403,19 +334,13 @@
           </div></div>
 
         </div>
-        </div><!-- /wrapper -->
+        </div>
         <button class="carousel-btn prev" onclick="slideCarousel('team',-1)">‹</button>
         <button class="carousel-btn next" onclick="slideCarousel('team',1)">›</button>
-      </div><!-- /team-outer -->
+      </div>
     </div>
   </section>
 
-  <!-- ================================================================
-  ÚNETE A LA CAUSA
-  ----------------------------------------------------------------
-  QR: assets/qr-donacion.jpg
-  Botones de Alianzas y Colegios → Google Form
-  ================================================================ -->
   <section id="unete" class="unete-section">
     <div class="container">
       <header class="unete-head fade-up">
@@ -461,11 +386,6 @@
     </div>
   </section>
 
-  <!-- ================================================================
-  FAQ — 3 grupos por público
-  AGREGAR PREGUNTA: dentro del .faq-group correspondiente, copia un bloque
-  <details class="faq-item"> y edita el texto del <summary> y del <div class="faq-item-body">.
-  ================================================================ -->
   <section id="faq" class="faq-section">
     <div class="faq-inner">
       <header class="faq-head fade-up">
@@ -487,7 +407,6 @@
         </button>
       </div>
 
-      <!-- GRUPO: Colegios y padres -->
       <div class="faq-group active fade-up" data-group="colegios">
         <details class="faq-item"><summary>¿Tiene costo para el colegio?</summary><div class="faq-item-body"><p>No, nuestras intervenciones son completamente gratuitas. Nos financiamos a través de donaciones y alianzas estratégicas.</p></div></details>
         <details class="faq-item"><summary>¿Cómo puedo solicitar una intervención para mi colegio?</summary><div class="faq-item-body"><p>Completa el formulario en "Únete" o escríbenos a <strong>rumbo.transformatufuturo@gmail.com</strong>. Coordinamos una reunión previa para entender las necesidades de tu institución.</p></div></details>
@@ -500,14 +419,12 @@
         <details class="faq-item"><summary>¿Los padres pueden asistir a las sesiones?</summary><div class="faq-item-body"><p>Depende del formato. En algunos programas organizamos sesiones especiales para padres. Consúltanos al coordinar.</p></div></details>
       </div>
 
-      <!-- GRUPO: Aliados y donantes -->
       <div class="faq-group" data-group="aliados">
         <details class="faq-item"><summary>¿Cómo puedo apoyar a RUMBO?</summary><div class="faq-item-body"><p>Puedes donar, ser aliado institucional o llevar nuestros talleres a tu colegio. Escríbenos a <strong>rumbo.transformatufuturo@gmail.com</strong>.</p></div></details>
         <details class="faq-item"><summary>¿Son una organización sin fines de lucro?</summary><div class="faq-item-body"><p>Sí, RUMBO es una organización sin fines de lucro orientada al impacto social en la educación peruana.</p></div></details>
         <details class="faq-item"><summary>¿Emiten recibos por donaciones?</summary><div class="faq-item-body"><p>Estamos en proceso de formalización. Escríbenos para conocer el estado actual.</p></div></details>
       </div>
 
-      <!-- GRUPO: Estudiantes -->
       <div class="faq-group" data-group="estudiantes">
         <details class="faq-item"><summary>¿Qué tipo de becas me pueden ayudar a conseguir?</summary><div class="faq-item-body"><p>Te informamos sobre Pronabec, Beca 18, universidades privadas y programas internacionales, adaptado a tu perfil.</p></div></details>
         <details class="faq-item"><summary>¿Necesito tener buen promedio para participar?</summary><div class="faq-item-body"><p>No. Nuestros talleres son para todos los estudiantes, sin importar su rendimiento académico.</p></div></details>
@@ -520,16 +437,6 @@
     </div>
   </section>
 
-    <!-- ================================================================
-  CONTACTO
-  ----------------------------------------------------------------
-  FORMULARIO: Para activar el envío al Gmail:
-    1. Ve a https://formspree.io → crea cuenta gratis
-    2. Nuevo formulario → pon: rumbo.transformatufuturo@gmail.com
-    3. Copia el ID (ej: xpzgkwrj)
-    4. Reemplaza XXXXXXXX en action= con ese ID
-  Sin eso, el botón abre el cliente de correo del visitante.
-  ================================================================ -->
   <section id="contacto" class="contact-section">
     <div class="container">
       <header class="contact-head fade-up">
@@ -572,7 +479,6 @@
           </div>
         </div>
 
-        <!-- EDITAR action= con tu ID de Formspree cuando lo tengas -->
         <form class="contact-form"
               action="https://formspree.io/f/xaqlrnae"
               method="POST"
@@ -592,9 +498,6 @@
     </div>
   </section>
 
-  <!-- ================================================================
-  FOOTER
-  ================================================================ -->
   <footer class="footer">
     <div class="footer-main">
       <div class="footer-left">
@@ -627,7 +530,6 @@
     <div class="footer-copy">© <span id="year"></span> RUMBO. Todos los derechos reservados.</div>
   </footer>
 
-  <!-- JS externo -->
   <script src="js/main.js?v=2"></script>
 
 </body>

@@ -197,3 +197,51 @@ Ver sección Tipografía.
 | 11 | Footer | `--rumbo-navy` #004F8C | OSCURO |
 
 **Patrón**: oscuro → claro → oscuro → blanco → crema → oscuro → crema → crema → oscuro
+
+---
+
+## Despliegue y caché (GitHub Pages)
+
+### El problema del caché
+
+El sitio vive en **GitHub Pages** con dominio personalizado `rumbo.org.pe`. Cuando se hacen cambios en `css/styles.css` o `js/main.js`, el CDN y los navegadores pueden seguir sirviendo versiones antiguas de esos archivos durante horas o días, haciendo que los cambios no se vean en producción aunque sí se vean localmente.
+
+**Síntomas:**
+- El sitio local funciona correctamente
+- El sitio en `rumbo.org.pe` muestra el comportamiento antiguo
+- `git status` está limpio (los cambios ya están pusheados)
+
+### La solución: versionado de archivos
+
+En `index.html`, los links a CSS y JS llevan un parámetro de versión `?v=N`:
+
+```html
+<link rel="stylesheet" href="css/styles.css?v=2">
+<script src="js/main.js?v=2"></script>
+```
+
+El parámetro `?v=N` no afecta el archivo real — es ignorado por el servidor. Pero para el navegador y el CDN es una URL **distinta**, por lo que descargan el archivo fresco.
+
+### Cuándo incrementar la versión
+
+Cada vez que hagas cambios importantes en `styles.css` o `main.js` y notes que el sitio desplegado no los refleja:
+
+1. Abre `index.html`
+2. Busca `?v=` en las dos líneas del `<head>`
+3. Incrementa el número: `?v=2` → `?v=3`
+4. Haz commit y push
+
+```bash
+git add index.html
+git commit -m "Bump CSS/JS version to force cache refresh"
+git push
+```
+
+5. Espera **2-3 minutos** para que GitHub Pages redespliegue
+6. Abre el sitio y haz **Ctrl + Shift + R** (recarga forzada)
+
+### Versión actual
+
+`css/styles.css?v=2` · `js/main.js?v=2`
+
+Actualiza este número cada vez que lo incrementes para tener registro.
