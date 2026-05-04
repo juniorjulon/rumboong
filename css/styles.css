@@ -387,9 +387,18 @@ img { max-width: 100%; display: block; }
 .unete-card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; margin: 0; letter-spacing: -0.01em; color: var(--ink); }
 .unete-card p { font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); margin: 0; flex: 1; text-wrap: pretty; }
 .unete-card a { margin-top: 4px; align-self: center; }
-.unete-qr { width: 140px; height: 140px; border-radius: var(--r-sm); overflow: hidden; background: var(--rumbo-sky-mist); align-self: center; }
-.unete-qr img { width: 100%; height: 100%; object-fit: cover; }
-.unete-qr-fallback { font-size: 0.72rem; color: var(--ink-mute); text-align: center; padding: 0.5rem; display: none; }
+.btn-yape {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--ink);
+  padding: 11px 20px; border-radius: 999px;
+  font-family: var(--font-display); font-size: 14px; font-weight: 600;
+  border: 1.5px solid var(--line); cursor: pointer;
+  transition: border-color .2s, background .2s, transform .2s;
+}
+.btn-yape:hover { border-color: var(--rumbo-navy); background: var(--bg); transform: translateY(-1px); }
+.unete-qr-panel { margin-top: 4px; animation: qr-appear .3s ease; }
+.unete-qr-panel img { width: 160px; height: 160px; border-radius: var(--r-sm); object-fit: cover; display: block; margin: 0 auto; }
+@keyframes qr-appear { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 /* Botones de las cards de únete con fondo claro */
 .unete-card .btn-primary { background: var(--rumbo-navy); color: white; }
 .unete-card .btn-ghost-dark { background: transparent; color: var(--ink); border: 1px solid var(--line); }

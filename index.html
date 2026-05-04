@@ -430,10 +430,12 @@
           </div>
           <h3>Dona</h3>
           <p>Tu aporte permite que más jóvenes accedan a orientación de calidad.</p>
-          <div class="unete-qr">
-            <img src="assets/qr-donacion.jpg" alt="QR para donar a RUMBO"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <span class="unete-qr-fallback">QR Yape / Plin<br>próximamente</span>
+          <button class="btn-yape" onclick="toggleQR(this)" aria-expanded="false">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M17 14h3M14 17v3"/></svg>
+            Yape / Plin
+          </button>
+          <div class="unete-qr-panel" hidden>
+            <img src="assets/qr-donacion.jpg" alt="QR para donar a RUMBO">
           </div>
         </div>
 
