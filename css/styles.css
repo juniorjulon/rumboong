@@ -396,9 +396,10 @@ img { max-width: 100%; display: block; }
   transition: border-color .2s, background .2s, transform .2s;
 }
 .btn-yape:hover { border-color: var(--rumbo-navy); background: var(--bg); transform: translateY(-1px); }
-.unete-qr-panel { margin-top: 4px; animation: qr-appear .3s ease; }
+.unete-qr-panel { display: none; margin-top: 8px; }
+.unete-qr-panel.open { display: block; animation: qr-appear .3s ease; }
 .unete-qr-panel img { width: 160px; height: 160px; border-radius: var(--r-sm); object-fit: cover; display: block; margin: 0 auto; }
-@keyframes qr-appear { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes qr-appear { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
 /* Botones de las cards de únete con fondo claro */
 .unete-card .btn-primary { background: var(--rumbo-navy); color: white; }
 .unete-card .btn-ghost-dark { background: transparent; color: var(--ink); border: 1px solid var(--line); }

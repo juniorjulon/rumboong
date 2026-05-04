@@ -5,16 +5,10 @@
 /* --- Toggle QR donación --- */
 function toggleQR(btn) {
   var panel = btn.nextElementSibling;
-  var open  = btn.getAttribute('aria-expanded') === 'true';
-  if (open) {
-    panel.hidden = true;
-    btn.setAttribute('aria-expanded', 'false');
-    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M17 14h3M14 17v3"/></svg> Yape / Plin';
-  } else {
-    panel.hidden = false;
-    btn.setAttribute('aria-expanded', 'true');
-    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Cerrar';
-  }
+  var label = btn.querySelector('.btn-yape-label');
+  var isOpen = panel.classList.contains('open');
+  panel.classList.toggle('open', !isOpen);
+  if (label) label.textContent = isOpen ? 'Yape / Plin' : 'Cerrar';
 }
 
 /* --- Año automático --- */
