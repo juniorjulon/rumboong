@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universidades y admisión Perú 2026 — Comunidad Rumbo</title>
+<link rel="icon" href="assets/logo.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --celeste:   #6BC5D2;
+    --azul:      #004F8C;
+    --teal:      #1D7874;
+    --amarillo:  #F6C667;
+    --bg:        #F9F9F4;
+    --white:     #ffffff;
+    --text:      #1a2a3a;
+    --muted:     #6b7a8d;
+    --border:    #dce5ed;
+    --active-bg: #e6f5f4;
+    --ref-bg:    #fff8e8;
+    --shadow-sm: 0 2px 10px rgba(0,79,140,0.07);
+    --shadow-md: 0 8px 28px rgba(0,79,140,0.13);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+  }
+
+  /* MINI-HEADER */
+  .mini-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 1px 6px rgba(0,79,140,0.04);
+  }
+  .mini-header-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .mini-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.5px;
+    color: var(--azul);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.2s;
+  }
+  .mini-logo:hover { opacity: 0.75; }
+  .mini-back {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.2s;
+  }
+  .mini-back:hover { color: var(--azul); }
+  @media (max-width: 600px) {
+    .mini-header { padding: 12px 16px; }
+    .mini-back span { display: none; }
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--azul) 0%, #0066aa 55%, var(--celeste) 100%);
+    padding: 50px 24px 52px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(107,197,210,0.15);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -32px; left: 50%;
+    transform: translateX(-50%);
+    width: 115%; height: 64px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 30px;
+    padding: 5px 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 20px;
+  }
+  .hero-eyebrow .dot-w {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--amarillo);
+  }
+  .hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 7vw, 52px);
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    background: var(--amarillo);
+    color: var(--azul);
+    padding: 2px 10px;
+    border-radius: 5px;
+  }
+  .hero p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.82);
+    max-width: 540px;
+    margin: 0 auto 12px;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+  .hero-date {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 30px 24px 4px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    color: var(--muted);
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .pip { width: 11px; height: 11px; border-radius: 50%; }
+  .pip-public  { background: var(--azul); box-shadow: 0 0 0 3px rgba(0,79,140,0.18); }
+  .pip-private { background: var(--teal); box-shadow: 0 0 0 3px rgba(29,120,116,0.18); }
+
+  /* MAIN */
+  main { max-width: 880px; margin: 0 auto; padding: 16px 20px 80px; }
+
+  /* SECTION HEAD */
+  .sec-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 44px 0 16px;
+  }
+  .sec-head:first-of-type { margin-top: 0; }
+  .sec-icon {
+    width: 34px; height: 34px;
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .si-gov  { background: rgba(0,79,140,0.1); }
+  .si-uni  { background: rgba(29,120,116,0.12); }
+  .sec-head h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 13.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--azul);
+  }
+  .sec-line { flex: 1; height: 2px; background: linear-gradient(to right, var(--border), transparent); border-radius: 2px; }
+
+  /* CARD */
+  .card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .22s, transform .22s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 5px;
+    border-radius: 16px 0 0 16px;
+    background: var(--border);
+  }
+  .card.public  { border-color: rgba(0,79,140,0.22); }
+  .card.public::before  { background: var(--azul); }
+  .card.private { border-color: rgba(29,120,116,0.24); }
+  .card.private::before { background: var(--teal); }
+  .card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+  .card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .card-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--azul);
+    line-height: 1.3;
+  }
+
+  /* BADGE */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 11px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .b-public  { background: rgba(0,79,140,0.08);  color: var(--azul); border: 1.5px solid var(--azul); }
+  .b-private { background: rgba(29,120,116,0.08); color: var(--teal); border: 1.5px solid var(--teal); }
+  .b-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+  /* CARD DESC */
+  .card-desc {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 14px;
+  }
+  .card-desc strong { color: var(--text); }
+
+  /* BUTTONS */
+  .btns { display: flex; flex-wrap: wrap; gap: 8px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 15px;
+    border-radius: 9px;
+    border: 1.5px solid;
+    transition: background .2s, color .2s, border-color .2s;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+  }
+  .btn-primary { background: var(--azul); border-color: var(--azul); color: #fff; }
+  .btn-primary:hover { background: #005fa5; border-color: #005fa5; }
+  .btn-outline { background: rgba(107,197,210,0.09); border-color: var(--celeste); color: var(--azul); }
+  .btn-outline:hover { background: var(--celeste); color: #fff; border-color: var(--celeste); }
+
+  /* DIVIDER */
+  .div { height: 1px; background: var(--border); margin: 10px 0 14px; }
+
+  /* SUB-CARDS */
+  .sub-lbl {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .sub-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    transition: background .2s, box-shadow .2s;
+  }
+  .sub-card:hover { background: #eef4fb; box-shadow: var(--shadow-sm); }
+  .sub-card-info { flex: 1; min-width: 200px; }
+  .sub-card-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .sub-card-modality {
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--muted);
+    font-size: 12px;
+    border-top: 2px solid var(--border);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+  footer .brand { font-family:'Montserrat',sans-serif; font-weight:800; color:var(--azul); letter-spacing:1px; }
+
+  svg { display:inline-block; vertical-align:middle; flex-shrink:0; }
+
+  @media(max-width:600px){
+    .card { padding: 16px 14px; }
+    .hero { padding: 42px 16px 52px; }
+    .sub-card { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="mini-header">
+  <div class="mini-header-inner">
+    <a href="index.html" class="mini-logo" aria-label="Volver a inicio RUMBO">RUMBO</a>
+    <a href="index.html" class="mini-back" aria-label="Volver a inicio">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      <span>Volver a inicio</span>
+    </a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow"><span class="dot-w"></span>Comunidad Rumbo</div>
+  <h1>UNIVERSIDADES <em>PERÚ 2026</em></h1>
+  <p>Mapa de admisión universitaria. Modalidades de ingreso, requisitos y portales oficiales de las principales universidades públicas y privadas del país.</p>
+  <div class="hero-date">Actualizado: Mayo 2026</div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="pip pip-public"></div>Universidad pública</div>
+  <div class="legend-item"><div class="pip pip-private"></div>Universidad privada</div>
+</div>
+
+<main>
+
+  <!-- ═══ PÚBLICAS ═══ -->
+  <div class="sec-head">
+    <div class="sec-icon si-gov">🏛️</div>
+    <h2>Universidades Públicas</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <!-- UNMSM -->
+  <div class="card public">
+    <div class="card-head">
+      <div class="card-name">Universidad Nacional Mayor de San Marcos — UNMSM</div>
+      <span class="badge b-public"><span class="b-dot"></span>Pública</span>
+    </div>
+    <p class="card-desc">
+      La <strong>Decana de América</strong>. Su proceso 2026 se organiza en dos etapas (2026-I y 2026-II), con exámenes distribuidos por áreas académicas (Ciencias de la Salud, Medicina, Ciencias Básicas, Ingeniería, Sociales y Económicas). Costo del examen general: <strong>S/450</strong> para colegios públicos y <strong>S/850</strong> para privados.
+    </p>
+    <div class="btns" style="margin-bottom:12px">
+      <a href="https://admision.unmsm.edu.pe" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Portal de admisión UNMSM
+      </a>
+    </div>
+    <div class="div"></div>
+    <span class="sub-lbl">📋 Modalidades de ingreso</span>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Examen de Admisión General (Ordinario)</div>
+        <span class="sub-card-modality">Para egresados de educación secundaria — examen por áreas académicas</span>
+      </div>
+      <a href="https://admision.unmsm.edu.pe" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">⭐ Evaluación del Talento / Primeros Puestos</div>
+        <span class="sub-card-modality">Reconocimiento a alto rendimiento escolar y primeros puestos de promoción</span>
+      </div>
+      <a href="https://admision.unmsm.edu.pe" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🎯 Modalidades extraordinarias</div>
+        <span class="sub-card-modality">Titulados, graduados, traslados, deportistas calificados y otras categorías especiales</span>
+      </div>
+      <a href="https://www.gob.pe/institucion/unmsm/informes-publicaciones/1889987-reglamento-de-admision" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Reglamento</a>
+    </div>
+  </div>
+
+  <!-- UNI -->
+  <div class="card public">
+    <div class="card-head">
+      <div class="card-name">Universidad Nacional de Ingeniería — UNI</div>
+      <span class="badge b-public"><span class="b-dot"></span>Pública</span>
+    </div>
+    <p class="card-desc">
+      Especializada en ingeniería, arquitectura y ciencias. El examen ordinario 2026-I se estructura en <strong>tres jornadas</strong>: razonamiento matemático/verbal/humanidades, aritmética/álgebra/geometría/trigonometría, y física/química. La nota final es la suma de las tres fechas (no es eliminatorio). Arquitectura tiene además una prueba vocacional.
+    </p>
+    <div class="btns" style="margin-bottom:12px">
+      <a href="https://admision.uni.edu.pe" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Portal de admisión UNI
+      </a>
+    </div>
+    <div class="div"></div>
+    <span class="sub-lbl">📋 Modalidades de ingreso</span>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Examen Ordinario (3 jornadas)</div>
+        <span class="sub-card-modality">Egresados de secundaria — pago diferenciado: ~S/410 colegios nacionales, ~S/780 privados</span>
+      </div>
+      <a href="https://admision.uni.edu.pe/modalidades/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🏫 Ingreso Escolar Nacional (IEN)</div>
+        <span class="sub-card-modality">Examen regional para estudiantes de 5° de secundaria con sedes en provincias</span>
+      </div>
+      <a href="https://admision.uni.edu.pe/modalidades/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">⭐ Talento Beca 18 y Primeros Puestos</div>
+        <span class="sub-card-modality">Modalidad vinculada a PRONABEC y a estudiantes de alto rendimiento escolar</span>
+      </div>
+      <a href="https://admision.uni.edu.pe/modalidades/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🏅 Deportistas calificados y otras</div>
+        <span class="sub-card-modality">Trayectoria deportiva, traslados, titulados y vías especiales</span>
+      </div>
+      <a href="https://admision.uni.edu.pe/modalidades/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📊 Consulta de puntajes</div>
+        <span class="sub-card-modality">Portal oficial de resultados por postulante</span>
+      </div>
+      <a href="https://puntajes.admision.uni.edu.pe/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver puntajes</a>
+    </div>
+  </div>
+
+  <!-- UNT -->
+  <div class="card public">
+    <div class="card-head">
+      <div class="card-name">Universidad Nacional de Trujillo — UNT</div>
+      <span class="badge b-public"><span class="b-dot"></span>Pública</span>
+    </div>
+    <p class="card-desc">
+      Referente regional en La Libertad. Convoca <strong>una o dos veces al año</strong> con áreas académicas A, B, C y D. Su sistema combina examen ordinario, modalidades extraordinarias (premios de excelencia, discapacidad, deportistas, víctimas de violencia, traslados, segunda profesión) y procesos asociados a su centro preuniversitario CEPUNT.
+    </p>
+    <div class="btns" style="margin-bottom:12px">
+      <a href="https://www.admisionunt.info" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Dirección de Admisión UNT
+      </a>
+    </div>
+    <div class="div"></div>
+    <span class="sub-lbl">📋 Modalidades de ingreso</span>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Examen Ordinario</div>
+        <span class="sub-card-modality">Egresados de secundaria — áreas A, B, C y D</span>
+      </div>
+      <a href="https://www.unitru.edu.pe/admision.aspx" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🎯 Modalidades extraordinarias</div>
+        <span class="sub-card-modality">Premios de excelencia, discapacidad, deportistas, beneficiarios de programas, traslados internos/externos, segunda profesión</span>
+      </div>
+      <a href="https://www.unitru.edu.pe/admision.aspx" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🏫 CEPUNT (centro preuniversitario)</div>
+        <span class="sub-card-modality">Vía de ingreso por puntaje obtenido en el centro preuniversitario UNT</span>
+      </div>
+      <a href="https://www.admisionunt.info" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Preinscripción y acreditación</div>
+        <span class="sub-card-modality">Solicitud vía web, comprobantes de pago, certificados originales y DNI</span>
+      </div>
+      <a href="https://www.admisionunt.info/preinscripcionunt" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Preinscripción</a>
+    </div>
+  </div>
+
+  <!-- UNSA -->
+  <div class="card public">
+    <div class="card-head">
+      <div class="card-name">Universidad Nacional de San Agustín de Arequipa — UNSA</div>
+      <span class="badge b-public"><span class="b-dot"></span>Pública</span>
+    </div>
+    <p class="card-desc">
+      Principal universidad pública del sur. El examen Ordinario I Fase 2026 ofrece <strong>1,129 vacantes</strong> (áreas Biomédicas, Ingenierías y Sociales) con 80 preguntas en ~2.5 horas. Tarifas referenciales según colegio: <strong>S/126</strong> (público), <strong>S/176</strong> (parroquial) y <strong>S/276</strong> (privado). Las inscripciones se hacen en SISADMISIÓN.
+    </p>
+    <div class="btns" style="margin-bottom:12px">
+      <a href="https://admision.unsa.edu.pe" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Portal de admisión UNSA
+      </a>
+    </div>
+    <div class="div"></div>
+    <span class="sub-lbl">📋 Modalidades de ingreso</span>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Examen Ordinario I / II Fase</div>
+        <span class="sub-card-modality">Inscripción virtual en SISADMISIÓN para estudiantes de 5° y egresados</span>
+      </div>
+      <a href="https://sisadmision.unsa.edu.pe/pregrado" target="_blank" rel="noopener noreferrer" class="btn btn-outline">SISADMISIÓN</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🏫 CEPRUNSA (centro preuniversitario)</div>
+        <span class="sub-card-modality">Vía de ingreso por desempeño en el centro preuniversitario de la UNSA</span>
+      </div>
+      <a href="https://admision.unsa.edu.pe" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🎨 Aptitud vocacional (Arquitectura y Artes)</div>
+        <span class="sub-card-modality">Evaluaciones de dibujo, pintura y entrevistas personales previas al examen</span>
+      </div>
+      <a href="https://admision.unsa.edu.pe" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+  </div>
+
+  <!-- UNALM -->
+  <div class="card public">
+    <div class="card-head">
+      <div class="card-name">Universidad Nacional Agraria La Molina — UNALM</div>
+      <span class="badge b-public"><span class="b-dot"></span>Pública</span>
+    </div>
+    <p class="card-desc">
+      Especializada en ciencias agrarias, biológicas, ambientales y de la alimentación. Integra diversas modalidades con <strong>costos diferenciados</strong> según gestión del colegio o universidad de procedencia. Para traslado externo exige al menos <strong>72 créditos aprobados</strong> en situación académica normal.
+    </p>
+    <div class="btns" style="margin-bottom:12px">
+      <a href="https://admision.lamolina.edu.pe" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Portal de admisión UNALM
+      </a>
+    </div>
+    <div class="div"></div>
+    <span class="sub-lbl">📋 Modalidades de ingreso</span>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Concurso Ordinario</div>
+        <span class="sub-card-modality">Egresados de secundaria en Perú o equivalente en el extranjero</span>
+      </div>
+      <a href="https://admision.lamolina.edu.pe/modalidades-ingreso" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🔄 Traslado externo</div>
+        <span class="sub-card-modality">Postulantes con al menos 72 créditos aprobados en otra universidad</span>
+      </div>
+      <a href="https://admision.lamolina.edu.pe/modalidades-ingreso" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">⭐ Primeros puestos</div>
+        <span class="sub-card-modality">Primer o segundo puesto del orden de mérito de la promoción de secundaria</span>
+      </div>
+      <a href="https://admision.lamolina.edu.pe/modalidades-ingreso" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🎯 Beca 18, deportistas y otras</div>
+        <span class="sub-card-modality">Beneficiarios de Beca 18, deportistas, víctimas de terrorismo, personas con discapacidad</span>
+      </div>
+      <a href="https://admision.lamolina.edu.pe/costo-de-inscripcion" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Costos</a>
+    </div>
+  </div>
+
+  <!-- UNP -->
+  <div class="card public">
+    <div class="card-head">
+      <div class="card-name">Universidad Nacional de Piura — UNP</div>
+      <span class="badge b-public"><span class="b-dot"></span>Pública</span>
+    </div>
+    <p class="card-desc">
+      Principal universidad pública de la región Piura. Combina modalidades ordinarias y extraordinarias con <strong>preinscripción virtual</strong> y entrega presencial de documentos en la Dirección de Admisión. Submodalidades para primeros puestos, COAR, personas con discapacidad, deportistas, traslados y titulados.
+    </p>
+    <div class="btns" style="margin-bottom:12px">
+      <a href="https://www.unp.edu.pe/web/admision/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Portal de admisión UNP
+      </a>
+    </div>
+    <div class="div"></div>
+    <span class="sub-lbl">📋 Modalidades de ingreso</span>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Examen Ordinario</div>
+        <span class="sub-card-modality">Alumnos de 5° de secundaria y egresados</span>
+      </div>
+      <a href="https://www.unp.edu.pe/web/admision/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">⭐ Primeros puestos y COAR</div>
+        <span class="sub-card-modality">Egresados de alto rendimiento y de Colegios de Alto Rendimiento</span>
+      </div>
+      <a href="https://www.unp.edu.pe/web/admision/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🎯 Modalidades especiales</div>
+        <span class="sub-card-modality">Personas con discapacidad, víctimas del terrorismo, deportistas, traslados y titulados</span>
+      </div>
+      <a href="https://www.unp.edu.pe/web/admision/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Registro de postulantes</div>
+        <span class="sub-card-modality">Preinscripción en línea con datos personales, académicos y boleta de pago del BN</span>
+      </div>
+      <a href="https://admision.unp.edu.pe/inscripcion" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Inscripción</a>
+    </div>
+  </div>
+
+  <!-- OTRAS PÚBLICAS -->
+  <div class="card public">
+    <div class="card-head">
+      <div class="card-name">Otras universidades públicas licenciadas</div>
+      <span class="badge b-public"><span class="b-dot"></span>Pública</span>
+    </div>
+    <p class="card-desc">
+      Además de las anteriores, hay otras universidades públicas licenciadas por SUNEDU con procesos similares en estructura: <strong>Universidad Nacional Federico Villarreal</strong>, <strong>UNE Enrique Guzmán y Valle</strong> (La Cantuta), <strong>UNSCH</strong> (San Cristóbal de Huamanga), <strong>UNA-Puno</strong> (Altiplano), entre otras regionales. Puedes filtrar por gestión pública en la plataforma oficial de licenciamiento de SUNEDU.
+    </p>
+    <div class="btns">
+      <a href="https://www.sunedu.gob.pe/universidades-licenciadas/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Universidades licenciadas SUNEDU
+      </a>
+      <a href="https://www.gob.pe/11262-consultar-si-una-universidad-esta-licenciada-por-la-sunedu" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Consulta de licenciamiento
+      </a>
+    </div>
+  </div>
+
+  <!-- ═══ PRIVADAS ═══ -->
+  <div class="sec-head">
+    <div class="sec-icon si-uni">🎓</div>
+    <h2>Universidades Privadas</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <!-- PUCP -->
+  <div class="card private">
+    <div class="card-head">
+      <div class="card-name">Pontificia Universidad Católica del Perú — PUCP</div>
+      <span class="badge b-private"><span class="b-dot"></span>Privada</span>
+    </div>
+    <p class="card-desc">
+      Referente académico nacional. Sus procesos son gestionados por la <strong>Dirección de Admisión (DIAD)</strong>. Las inscripciones para el ciclo 2026-I se abrieron desde mediados de septiembre para exámenes en noviembre. Después de la admisión se aplica una evaluación socioeconómica para la asignación de escalas de pensiones.
+    </p>
+    <div class="btns" style="margin-bottom:12px">
+      <a href="https://www.pucp.edu.pe/admision/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Portal de admisión PUCP
+      </a>
+    </div>
+    <div class="div"></div>
+    <span class="sub-lbl">📋 Modalidades de ingreso</span>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Examen de Admisión Ordinario</div>
+        <span class="sub-card-modality">Examen general para egresados de secundaria</span>
+      </div>
+      <a href="https://www.pucp.edu.pe/admision/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">⭐ Evaluación del Talento / Primeros Puestos</div>
+        <span class="sub-card-modality">Reconocimiento al desempeño escolar sobresaliente</span>
+      </div>
+      <a href="https://www.pucp.edu.pe/admision/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🌍 Diploma de Bachillerato Internacional (IB)</div>
+        <span class="sub-card-modality">Admisión por IB, bachillerato alemán, británico, francés o italiano</span>
+      </div>
+      <a href="https://www.pucp.edu.pe/admision/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🥇 Primera Opción (alto rendimiento)</div>
+        <span class="sub-card-modality">Décimo superior de la promoción en colegios seleccionados</span>
+      </div>
+      <a href="https://www.pucp.edu.pe/admision/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🏫 CEPREPUCP (centro preuniversitario)</div>
+        <span class="sub-card-modality">Vía de ingreso por desempeño en la "Pre de la Católica"</span>
+      </div>
+      <a href="https://ceprepucp.pucp.edu.pe" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+  </div>
+
+  <!-- UPC -->
+  <div class="card private">
+    <div class="card-head">
+      <div class="card-name">Universidad Peruana de Ciencias Aplicadas — UPC</div>
+      <span class="badge b-private"><span class="b-dot"></span>Privada</span>
+    </div>
+    <p class="card-desc">
+      Universidad privada con <strong>ingresos en marzo y agosto</strong>. Cada periodo define un concurso público con fechas de cierre, exámenes y comienzo de clases. Carreras como Arquitectura, Medicina, Música, Artes Escénicas, Traducción y Biología requieren <strong>pruebas vocacionales o entrevistas</strong> adicionales.
+    </p>
+    <div class="btns" style="margin-bottom:12px">
+      <a href="https://www.upc.edu.pe/admision/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Portal de admisión UPC
+      </a>
+    </div>
+    <div class="div"></div>
+    <span class="sub-lbl">📋 Modalidades de ingreso</span>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Admisión General</div>
+        <span class="sub-card-modality">Para quienes cursan 5° de secundaria o ya han culminado el colegio</span>
+      </div>
+      <a href="https://www.upc.edu.pe/admision/modalidades-de-ingreso-upc/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">⭐ Selección Preferente</div>
+        <span class="sub-card-modality">Para alumnos con determinados promedios o de colegios conveniados</span>
+      </div>
+      <a href="https://www.upc.edu.pe/admision/modalidades-de-ingreso-upc/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🎨 Carreras con evaluación adicional</div>
+        <span class="sub-card-modality">Arquitectura, Medicina, Música, Artes Escénicas, Traducción, Biología</span>
+      </div>
+      <a href="https://www.upc.edu.pe/admision/modalidades-de-ingreso-upc/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📅 Cronograma de admisión</div>
+        <span class="sub-card-modality">Fechas de cierre, exámenes e inicio de clases por periodo</span>
+      </div>
+      <a href="https://www.upc.edu.pe/admision/cronograma-de-admision/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Cronograma</a>
+    </div>
+  </div>
+
+  <!-- UP -->
+  <div class="card private">
+    <div class="card-head">
+      <div class="card-name">Universidad del Pacífico — UP</div>
+      <span class="badge b-private"><span class="b-dot"></span>Privada</span>
+    </div>
+    <p class="card-desc">
+      Reconocida por sus programas en <strong>economía y gestión</strong>. Combina modalidades selectivas, excelencia académica, bachillerato y escuela preuniversitaria. La admisión selectiva está dirigida a egresados de la lista de colegios de alto rendimiento (CAR).
+    </p>
+    <div class="btns" style="margin-bottom:12px">
+      <a href="https://admision.up.edu.pe" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Portal de admisión UP
+      </a>
+    </div>
+    <div class="div"></div>
+    <span class="sub-lbl">📋 Modalidades de ingreso</span>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">⭐ Admisión Selectiva</div>
+        <span class="sub-card-modality">Estudiantes de 5° o egresados recientes de colegios CAR</span>
+      </div>
+      <a href="https://admision.up.edu.pe/modalidades/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🥇 Excelencia Académica</div>
+        <span class="sub-card-modality">Estudiantes de colegios CAR con desempeño destacado</span>
+      </div>
+      <a href="https://admision.up.edu.pe/modalidades/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🌍 Bachillerato Internacional (IB)</div>
+        <span class="sub-card-modality">Admisión por IB y otros bachilleratos internacionales</span>
+      </div>
+      <a href="https://admision.up.edu.pe/modalidades/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🏫 Escuela Preuniversitaria UP</div>
+        <span class="sub-card-modality">Ingreso directo mediante desempeño en la escuela preuniversitaria de la UP</span>
+      </div>
+      <a href="https://admision.up.edu.pe/modalidades/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Admisión Regular y traslados</div>
+        <span class="sub-card-modality">Egresados de secundaria (Perú o extranjero) y estudiantes con créditos en otra universidad</span>
+      </div>
+      <a href="https://admision.up.edu.pe/modalidades/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+  </div>
+
+  <!-- U LIMA -->
+  <div class="card private">
+    <div class="card-head">
+      <div class="card-name">Universidad de Lima — ULima</div>
+      <span class="badge b-private"><span class="b-dot"></span>Privada</span>
+    </div>
+    <p class="card-desc">
+      Universidad privada de Lima con múltiples vías de ingreso. Su <strong>Examen de Escolares</strong> está dirigido a estudiantes de 5° de secundaria, mientras que el <strong>Examen de Admisión Ordinario</strong> es para egresados. Costo referencial del examen: <strong>S/450</strong>. Resultados el mismo día de la evaluación.
+    </p>
+    <div class="btns" style="margin-bottom:12px">
+      <a href="https://www.ulima.edu.pe/admision" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Portal de admisión ULima
+      </a>
+    </div>
+    <div class="div"></div>
+    <span class="sub-lbl">📋 Modalidades de ingreso</span>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Examen de Escolares</div>
+        <span class="sub-card-modality">Estudiantes de 5° de secundaria — inscripción en línea</span>
+      </div>
+      <a href="https://www.ulima.edu.pe/escolares" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Examen de Admisión Ordinario</div>
+        <span class="sub-card-modality">Egresados de secundaria — costo referencial S/450</span>
+      </div>
+      <a href="https://www.ulima.edu.pe/examen-de-admision" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">⭐ Tercio y Medio Superior</div>
+        <span class="sub-card-modality">Reconocimiento al desempeño escolar destacado</span>
+      </div>
+      <a href="https://www.ulima.edu.pe/admision" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🌍 Bachillerato Internacional</div>
+        <span class="sub-card-modality">Admisión vía diploma IB y bachilleratos reconocidos</span>
+      </div>
+      <a href="https://www.ulima.edu.pe/admision" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+  </div>
+
+  <!-- UPCH -->
+  <div class="card private">
+    <div class="card-head">
+      <div class="card-name">Universidad Peruana Cayetano Heredia — UPCH</div>
+      <span class="badge b-private"><span class="b-dot"></span>Privada</span>
+    </div>
+    <p class="card-desc">
+      Especializada en <strong>ciencias de la salud</strong> y otras disciplinas. Su proceso es 100% guiado: preinscripción, asesoría personalizada, carga de documentos, pago vía enlace y rendición de evaluaciones. La UPCH publica cronogramas con exámenes en distintas fechas del año.
+    </p>
+    <div class="btns" style="margin-bottom:12px">
+      <a href="https://postula.upch.edu.pe" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Portal de admisión UPCH
+      </a>
+    </div>
+    <div class="div"></div>
+    <span class="sub-lbl">📋 Modalidades de ingreso</span>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Cronograma y modalidades</div>
+        <span class="sub-card-modality">Exámenes en distintas fechas del año (primer y segundo examen anual)</span>
+      </div>
+      <a href="https://cayetano.edu.pe/admision/cronograma-y-modalidades/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Cronograma</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📋 Proceso paso a paso</div>
+        <span class="sub-card-modality">Preinscripción, asesoría, carga de documentos, pago vía enlace y rendición de evaluaciones</span>
+      </div>
+      <a href="https://cayetano.edu.pe/admision/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📑 Instructivos oficiales</div>
+        <span class="sub-card-modality">Instructivo de inscripción y de examen por convocatoria</span>
+      </div>
+      <a href="https://postula.upch.edu.pe/instructivos" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Instructivos</a>
+    </div>
+  </div>
+
+  <!-- USIL -->
+  <div class="card private">
+    <div class="card-head">
+      <div class="card-name">Universidad San Ignacio de Loyola — USIL</div>
+      <span class="badge b-private"><span class="b-dot"></span>Privada</span>
+    </div>
+    <p class="card-desc">
+      Universidad privada con modalidades variadas y <strong>beneficios económicos</strong> en la pensión según la modalidad de ingreso (admisión destacada y deportistas). El procedimiento de la modalidad regular incluye envío de documentos al correo institucional, verificación y asignación de fecha de evaluación.
+    </p>
+    <div class="btns" style="margin-bottom:12px">
+      <a href="https://usil.edu.pe/pregrado/admision/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Portal de admisión USIL
+      </a>
+    </div>
+    <div class="div"></div>
+    <span class="sub-lbl">📋 Modalidades de ingreso</span>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">📝 Modalidad Regular</div>
+        <span class="sub-card-modality">Alumnos de 5° de secundaria o egresados — evaluación de conocimientos</span>
+      </div>
+      <a href="https://usil.edu.pe/pregrado/admision/modalidades-admision/regular/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">⭐ Admisión Destacada</div>
+        <span class="sub-card-modality">Primeros puestos, tercio y quinto superior — con beneficios en la pensión</span>
+      </div>
+      <a href="https://usil.edu.pe/pregrado/admision/modalidades-admision/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🌍 Bachillerato Internacional</div>
+        <span class="sub-card-modality">Exoneración del examen para diplomados IB y otros bachilleratos reconocidos</span>
+      </div>
+      <a href="https://usil.edu.pe/pregrado/admision/modalidades-admision/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🔄 Traslado externo</div>
+        <span class="sub-card-modality">Estudiantes de institutos o universidades — con entrevistas personales</span>
+      </div>
+      <a href="https://usil.edu.pe/pregrado/admision/modalidades-admision/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-info">
+        <div class="sub-card-name">🏅 Deportista destacado</div>
+        <span class="sub-card-modality">Trayectoria deportiva o alta competencia — con beneficios en pensiones</span>
+      </div>
+      <a href="https://usil.edu.pe/pregrado/admision/modalidades-admision/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver link</a>
+    </div>
+  </div>
+
+  <!-- OTRAS PRIVADAS -->
+  <div class="card private">
+    <div class="card-head">
+      <div class="card-name">Otras universidades privadas licenciadas</div>
+      <span class="badge b-private"><span class="b-dot"></span>Privada</span>
+    </div>
+    <p class="card-desc">
+      Otras universidades privadas licenciadas por SUNEDU con procesos similares: <strong>UPN</strong> (Universidad Privada del Norte), <strong>UTP</strong> (Tecnológica del Perú), <strong>Universidad Científica del Sur</strong>, <strong>ESAN</strong>, <strong>UPAO</strong> (Antenor Orrego), <strong>San Juan Bautista</strong>, entre otras. Suelen ofrecer múltiples calendarios de ingreso al año, modalidades por rendimiento escolar, convenios y bachillerato internacional.
+    </p>
+    <div class="btns">
+      <a href="https://www.sunedu.gob.pe/universidades-licenciadas/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Universidades licenciadas SUNEDU
+      </a>
+      <a href="https://www.upn.edu.pe" target="_blank" rel="noopener noreferrer" class="btn btn-outline">UPN</a>
+      <a href="https://upao.edu.pe" target="_blank" rel="noopener noreferrer" class="btn btn-outline">UPAO</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Armado con 💙 para la <span class="brand">COMUNIDAD RUMBO</span> · Actualizado mayo 2026<br>
+  <span style="font-size:11px">Verifica siempre los portales oficiales antes de postular. Modalidades, fechas y costos cambian anualmente según cada institución.</span>
+</footer>
+
+</body>
+</html>

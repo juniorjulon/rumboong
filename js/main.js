@@ -255,6 +255,57 @@ if ('IntersectionObserver' in window) {
   });
 }
 
+/* --- Dropdown "Recursos" (desktop + mobile acordeón) --- */
+(function () {
+  /* === Desktop === */
+  var navDropdown = document.getElementById('navDropdown');
+  var navDropdownTrigger = document.getElementById('navDropdownTrigger');
+
+  if (navDropdown && navDropdownTrigger) {
+    navDropdownTrigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = navDropdown.classList.toggle('open');
+      navDropdownTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!navDropdown.contains(e.target) && navDropdown.classList.contains('open')) {
+        navDropdown.classList.remove('open');
+        navDropdownTrigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && navDropdown.classList.contains('open')) {
+        navDropdown.classList.remove('open');
+        navDropdownTrigger.setAttribute('aria-expanded', 'false');
+        navDropdownTrigger.focus();
+      }
+    });
+
+    var scrollTimer = null;
+    window.addEventListener('scroll', function () {
+      if (!navDropdown.classList.contains('open')) return;
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(function () {
+        navDropdown.classList.remove('open');
+        navDropdownTrigger.setAttribute('aria-expanded', 'false');
+      }, 80);
+    }, { passive: true });
+  }
+
+  /* === Mobile (acordeón) === */
+  var mobileDropdown = document.getElementById('mobileDropdown');
+  var mobileDropdownTrigger = document.getElementById('mobileDropdownTrigger');
+
+  if (mobileDropdown && mobileDropdownTrigger) {
+    mobileDropdownTrigger.addEventListener('click', function () {
+      var isOpen = mobileDropdown.classList.toggle('open');
+      mobileDropdownTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+})();
+
 /* --- Formulario de contacto --- */
 function handleContactForm(event) {
   event.preventDefault();
