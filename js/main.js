@@ -265,20 +265,28 @@ function addSwipe(name) {
   var c = carousels[name];
   if (!c) return;
   var wrapper = c.track.parentElement;
-  var startX = 0;
+  var startX = 0, startY = 0;
   var isDragging = false;
 
   wrapper.addEventListener('touchstart', function (e) {
     startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
     isDragging = true;
   }, { passive: true });
 
   wrapper.addEventListener('touchend', function (e) {
     if (!isDragging) return;
     isDragging = false;
-    var diff = startX - e.changedTouches[0].clientX;
-    if (diff > 50)       slideCarousel(name,  1);
-    else if (diff < -50) slideCarousel(name, -1);
+    var diffX = startX - e.changedTouches[0].clientX;
+    var diffY = startY - e.changedTouches[0].clientY;
+    /* ignorar si el movimiento es principalmente vertical (scroll de página) */
+    if (Math.abs(diffX) < Math.abs(diffY)) return;
+    if (diffX > 40)       slideCarousel(name,  1);
+    else if (diffX < -40) slideCarousel(name, -1);
+  }, { passive: true });
+
+  wrapper.addEventListener('touchcancel', function () {
+    isDragging = false;
   }, { passive: true });
 }
 
