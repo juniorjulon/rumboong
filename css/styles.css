@@ -452,6 +452,10 @@ img { max-width: 100%; display: block; }
 .carousel-outer .carousel-btn.prev { left: 0; }
 .carousel-outer .carousel-btn.next { right: 0; }
 .carousel-btn.btn-hidden { opacity: 0; pointer-events: none; }
+@media (max-width: 600px) {
+  .carousel-outer { padding: 0; }
+  .carousel-outer .carousel-btn { display: none; }
+}
 
 /* ========== Activities ========== */
 .act-section { padding: clamp(24px, 3vw, 44px) 0; background: var(--surface); }

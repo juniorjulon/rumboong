@@ -237,8 +237,16 @@ function updateButtons(name) {
   var c = carousels[name];
   if (!c) return;
   var maxIndex = Math.max(0, c.track.children.length - getVisible(name));
-  if (c.btnPrev) c.btnPrev.classList.toggle('btn-hidden', c.index <= 0);
-  if (c.btnNext) c.btnNext.classList.toggle('btn-hidden', c.index >= maxIndex);
+  var atStart = c.index <= 0;
+  var atEnd = c.index >= maxIndex;
+  if (c.btnPrev) {
+    c.btnPrev.classList.toggle('btn-hidden', atStart);
+    c.btnPrev.disabled = atStart;
+  }
+  if (c.btnNext) {
+    c.btnNext.classList.toggle('btn-hidden', atEnd);
+    c.btnNext.disabled = atEnd;
+  }
 }
 
 function slideCarousel(name, dir) {
@@ -253,8 +261,31 @@ function slideCarousel(name, dir) {
   updateButtons(name);
 }
 
+function addSwipe(name) {
+  var c = carousels[name];
+  if (!c) return;
+  var wrapper = c.track.parentElement;
+  var startX = 0;
+  var isDragging = false;
+
+  wrapper.addEventListener('touchstart', function (e) {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  }, { passive: true });
+
+  wrapper.addEventListener('touchend', function (e) {
+    if (!isDragging) return;
+    isDragging = false;
+    var diff = startX - e.changedTouches[0].clientX;
+    if (diff > 50)       slideCarousel(name,  1);
+    else if (diff < -50) slideCarousel(name, -1);
+  }, { passive: true });
+}
+
 initCarousel('activities', 'activities-track', 'act-outer');
+addSwipe('activities');
 initCarousel('team',       'team-track',       'team-outer');
+addSwipe('team');
 
 window.addEventListener('resize', function () {
   ['activities', 'team'].forEach(function (name) {
