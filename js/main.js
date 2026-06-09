@@ -178,6 +178,7 @@ function initCarousel(name, trackId, outerId) {
   }
 
   carousels[name] = { track: track, btnPrev: btnPrev, btnNext: btnNext, index: 0 };
+  syncSlideWidths(name);
   applyCentering(name);
   updateButtons(name);
 }
@@ -192,9 +193,24 @@ function applyCentering(name) {
 }
 
 function getVisible(name) {
+  if (name === 'activities') {
+    var wrapper = document.querySelector('#act-outer .carousel-wrapper');
+    var w = wrapper ? wrapper.offsetWidth : window.innerWidth;
+    /* muestra 3 si hay ≥360px por tarjeta, 2 si ≥300px, si no 1 */
+    return Math.max(1, Math.min(3, Math.floor(w / 360)));
+  }
   var w = window.innerWidth;
-  if (name === 'activities') return w <= 600 ? 1 : 2;
   return w <= 600 ? 1 : w <= 992 ? 2 : 4;
+}
+
+function syncSlideWidths(name) {
+  var c = carousels[name];
+  if (!c || c.track.classList.contains('single')) return;
+  var visible = getVisible(name);
+  var pct = (100 / visible).toFixed(6) + '%';
+  Array.prototype.forEach.call(c.track.children, function (slide) {
+    slide.style.flexBasis = pct;
+  });
 }
 
 function updateButtons(name) {
@@ -226,6 +242,7 @@ window.addEventListener('resize', function () {
     if (!c || c.track.classList.contains('single')) return;
     c.index = 0;
     c.track.style.transform = '';
+    syncSlideWidths(name);
     applyCentering(name);
     updateButtons(name);
   });
