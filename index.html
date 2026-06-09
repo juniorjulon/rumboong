@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Rumbo</title>
   <meta name="description" content="RUMBO acompaña a jóvenes peruanos en su transición del colegio a la universidad con orientación vocacional, talleres y mentoría gratuita.">
   <meta property="og:title" content="RUMBO · Transformando decisiones en oportunidades">
@@ -13,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=7">
+  <link rel="stylesheet" href="css/styles.css?v=8">
 </head>
 <body>
 
@@ -247,20 +248,24 @@
         <h2 class="act-title">Nuestras actividades</h2>
       </header>
 
-      <div class="carousel-outer fade-up" id="act-outer">
-        <div class="carousel-wrapper"><div class="carousel-track" id="activities-track">
+      <div class="carousel-outer fade-up" id="act-outer" aria-roledescription="carrusel" aria-label="Actividades de Rumbo">
+        <div class="carousel-wrapper"><div class="carousel-track" id="activities-track" role="list">
 
-          <div class="activity-slide">
+          <article class="activity-slide" role="listitem">
             <div class="act-card">
               <div class="mini-photos">
                 <img src="assets/actividades/actividad4-charla-portencia-tu-perfil-con-IA-1.jpeg"
-                     alt="Charla Potencia tu Perfil Profesional con IA">
+                     alt="Charla Potencia tu Perfil Profesional con IA"
+                     loading="lazy" decoding="async">
                 <img src="assets/actividades/actividad4-charla-portencia-tu-perfil-con-IA-2.jpeg"
-                     alt="Charla Potencia tu Perfil Profesional con IA - Participantes">
+                     alt="Charla Potencia tu Perfil Profesional con IA - Participantes"
+                     loading="lazy" decoding="async">
                 <img src="assets/actividades/actividad4-charla-portencia-tu-perfil-con-IA-3.png"
-                     alt="Charla Potencia tu Perfil Profesional con IA - Equipo">
+                     alt="Charla Potencia tu Perfil Profesional con IA - Equipo"
+                     loading="lazy" decoding="async">
                 <img src="assets/actividades/actividad4-charla-portencia-tu-perfil-con-IA-4.png"
-                     alt="Charla Potencia tu Perfil Profesional con IA - Equipo">
+                     alt="Charla Potencia tu Perfil Profesional con IA - Equipo"
+                     loading="lazy" decoding="async">
               </div>
               <div class="act-body">
                 <span class="act-tag">Habilidades para el futuro</span>
@@ -272,15 +277,17 @@
                 <p class="act-quote">"Me pareció muy importante y de gran apoyo para jóvenes que recién empiezan con su desarrollo profesional y para algunos que ya empezaron su camino..."</p>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="activity-slide">
+          <article class="activity-slide" role="listitem">
             <div class="act-card">
               <div class="mini-photos">
                 <img src="assets/actividades/actividad3-charla-rumbo-a-tu-futuro-1.jpg"
-                     alt="Charla Rumbo a tu Futuro">
+                     alt="Charla Rumbo a tu Futuro"
+                     loading="lazy" decoding="async">
                 <img src="assets/actividades/actividad3-charla-rumbo-a-tu-futuro-2.jpg"
-                     alt="Charla Rumbo a tu Futuro - Participantes">
+                     alt="Charla Rumbo a tu Futuro - Participantes"
+                     loading="lazy" decoding="async">
               </div>
               <div class="act-body">
                 <span class="act-tag">Orientación vocacional</span>
@@ -292,17 +299,20 @@
                 <p class="act-quote">"Me gustó que en la charla y en las diapositivas daban la información precisa de cada tema. Sigan así."</p>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="activity-slide">
+          <article class="activity-slide" role="listitem">
             <div class="act-card">
               <div class="mini-photos">
                 <img src="assets/actividades/actividad2-charla-universitarios-1.jpeg"
-                     alt="Charla Construyendo tu Rumbo">
+                     alt="Charla Construyendo tu Rumbo"
+                     loading="lazy" decoding="async">
                 <img src="assets/actividades/actividad2-charla-universitarios-2.jpeg"
-                     alt="Charla Construyendo tu Rumbo">
+                     alt="Charla Construyendo tu Rumbo"
+                     loading="lazy" decoding="async">
                 <img src="assets/actividades/actividad2-charla-universitarios-3.jpg"
-                     alt="Charla Construyendo tu Rumbo">
+                     alt="Charla Construyendo tu Rumbo"
+                     loading="lazy" decoding="async">
               </div>
               <div class="act-body">
                 <span class="act-tag">Habilidades para el futuro</span>
@@ -314,15 +324,17 @@
                 <p class="act-quote">"Me gustó que compartieran experiencias reales y que dijeran que es importante empezar desde hoy. No es algo que siempre te dicen, pero hace mucha diferencia."</p>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="activity-slide">
+          <article class="activity-slide" role="listitem">
             <div class="act-card">
               <div class="mini-photos">
                 <img src="assets/actividades/actividad1-edelmira-del-pando-1.jpg"
-                     alt="Taller en IEE Edelmira del Pando">
+                     alt="Taller en IEE Edelmira del Pando"
+                     loading="lazy" decoding="async">
                 <img src="assets/actividades/actividad1-edelmira-del-pando-2.jpg"
-                     alt="Taller en IEE Edelmira del Pando - Equipo">
+                     alt="Taller en IEE Edelmira del Pando - Equipo"
+                     loading="lazy" decoding="async">
               </div>
               <div class="act-body">
                 <span class="act-tag">Orientación vocacional</span>
@@ -334,12 +346,12 @@
                 <p class="act-quote">"Se que en el futuro habra mucho por descubrir y aprender, tengo miedo pero quiero ser valiente por quienes amo y por mi futuro."</p>
               </div>
             </div>
-          </div>
+          </article>
 
         </div>
         </div>
-        <button class="carousel-btn prev" onclick="slideCarousel('activities',-1)">‹</button>
-        <button class="carousel-btn next" onclick="slideCarousel('activities',1)">›</button>
+        <button type="button" class="carousel-btn prev" aria-label="Ver actividades anteriores" onclick="slideCarousel('activities',-1)">‹</button>
+        <button type="button" class="carousel-btn next" aria-label="Ver actividades siguientes" onclick="slideCarousel('activities',1)">›</button>
       </div>
     </div>
   </section>
@@ -411,8 +423,8 @@
 
         </div>
         </div>
-        <button class="carousel-btn prev" onclick="slideCarousel('team',-1)">‹</button>
-        <button class="carousel-btn next" onclick="slideCarousel('team',1)">›</button>
+        <button type="button" class="carousel-btn prev" aria-label="Ver integrantes anteriores" onclick="slideCarousel('team',-1)">‹</button>
+        <button type="button" class="carousel-btn next" aria-label="Ver integrantes siguientes" onclick="slideCarousel('team',1)">›</button>
       </div>
     </div>
   </section>
@@ -606,7 +618,7 @@
     <div class="footer-copy">© <span id="year"></span> RUMBO. Todos los derechos reservados.</div>
   </footer>
 
-  <script src="js/main.js?v=5"></script>
+  <script src="js/main.js?v=6"></script>
 
 </body>
 </html>

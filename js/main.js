@@ -104,6 +104,8 @@ document.querySelectorAll('.team-avatar').forEach(function (el) {
 var miniCarousels = [];
 var autoplayTimer  = null;
 var AUTOPLAY_MS    = 3000;
+var prefersReducedMotion = window.matchMedia &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function initMiniCarousels() {
   document.querySelectorAll('.mini-photos').forEach(function (container) {
@@ -123,8 +125,10 @@ function initMiniCarousels() {
 
     imgs.forEach(function (_, i) {
       var dot = document.createElement('button');
+      dot.type = 'button';
       dot.className = 'mini-dot' + (i === 0 ? ' active' : '');
       dot.setAttribute('aria-label', 'Foto ' + (i + 1));
+      dot.setAttribute('aria-current', i === 0 ? 'true' : 'false');
       dot.addEventListener('click', (function (idx) {
         return function () { goMiniSlide(mc, idx); };
       })(i));
@@ -139,6 +143,7 @@ function goMiniSlide(mc, index) {
   mc.track.style.transform = 'translateX(-' + (100 * index) + '%)';
   Array.prototype.forEach.call(mc.dots.children, function (d, i) {
     d.classList.toggle('active', i === index);
+    d.setAttribute('aria-current', i === index ? 'true' : 'false');
   });
 }
 
@@ -148,13 +153,28 @@ function tickAutoplay() {
   });
 }
 
+function startMiniAutoplay() {
+  if (autoplayTimer || !miniCarousels.length || prefersReducedMotion) return;
+  autoplayTimer = setInterval(tickAutoplay, AUTOPLAY_MS);
+}
+
+function stopMiniAutoplay() {
+  if (!autoplayTimer) return;
+  clearInterval(autoplayTimer);
+  autoplayTimer = null;
+}
+
 initMiniCarousels();
 
 /* Leer configuración de auto-avance desde el atributo data-autoplay de la sección */
 var actSection = document.getElementById('actividades');
-if (actSection && actSection.dataset.autoplay === 'true') {
+if (actSection && actSection.dataset.autoplay === 'true' && !prefersReducedMotion) {
   AUTOPLAY_MS   = parseInt(actSection.dataset.autoplayMs, 10) || 3000;
-  autoplayTimer = setInterval(tickAutoplay, AUTOPLAY_MS);
+  startMiniAutoplay();
+  actSection.addEventListener('mouseenter', stopMiniAutoplay);
+  actSection.addEventListener('mouseleave', startMiniAutoplay);
+  actSection.addEventListener('focusin', stopMiniAutoplay);
+  actSection.addEventListener('focusout', startMiniAutoplay);
 }
 
 /* --- Carruseles ---
@@ -196,8 +216,8 @@ function getVisible(name) {
   if (name === 'activities') {
     var wrapper = document.querySelector('#act-outer .carousel-wrapper');
     var w = wrapper ? wrapper.offsetWidth : window.innerWidth;
-    /* muestra 3 si hay ≥360px por tarjeta, 2 si ≥300px, si no 1 */
-    return Math.max(1, Math.min(3, Math.floor(w / 360)));
+    /* muestra 3 si hay ≥280px por tarjeta, 2 si ≥200px, si no 1 */
+    return Math.max(1, Math.min(3, Math.floor(w / 280)));
   }
   var w = window.innerWidth;
   return w <= 600 ? 1 : w <= 992 ? 2 : 4;
