@@ -1,0 +1,616 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',system-ui,sans-serif}
+:root{
+  --navy:#1B4F8A;--navy-d:#163f6e;--navy-l:#eef4fb;
+  --teal:#17A89E;--teal-l:#e8f8f7;--teal-d:#0f8078;
+  --gold:#D4A017;--gold-l:#fdf3d7;
+  --bg:#F2EFE9;--white:#fff;
+  --txt:#1a2e3b;--muted:#64748b;--border:#dde3ed;
+  --green:#1D9E75;--green-l:#E1F5EE;
+  --red:#E24B4A;--red-l:#FCEBEB;
+  --r:10px
+}
+.page{background:var(--bg)}
+.topbar{background:var(--navy);padding:0 1.5rem;height:52px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:15px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.nav-links{display:flex;gap:16px}
+.nav-links a{font-size:12px;color:rgba(255,255,255,.6);text-decoration:none;cursor:pointer;transition:color .15s}
+.nav-links a:hover,.nav-links a.on{color:#fff}
+.nav-cta{background:var(--teal);color:#fff;border:none;border-radius:6px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer}
+
+.hero{background:var(--navy);padding:2.5rem 2rem;text-align:center}
+.hero-eyebrow{font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:24px;height:1px;background:var(--teal);opacity:.5}
+.hero h1{font-size:26px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.25}
+.hero p{font-size:13px;color:rgba(255,255,255,.75);max-width:480px;margin:0 auto 1.5rem;line-height:1.6}
+.hero-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:4px 10px;border-radius:20px;font-weight:500}
+.badge-w{background:rgba(255,255,255,.12);color:rgba(255,255,255,.85)}
+.badge-t{background:var(--teal);color:#fff}
+.hero-btns{display:flex;gap:10px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:10px 20px;border-radius:8px;border:none;cursor:pointer;transition:all .15s;text-decoration:none}
+.btn-primary{background:var(--teal);color:#fff}.btn-primary:hover{background:var(--teal-d)}
+.btn-outline-w{background:transparent;border:1.5px solid rgba(255,255,255,.35);color:#fff}.btn-outline-w:hover{border-color:#fff}
+
+.section{padding:2rem 1.5rem}
+.section-bg{background:var(--white)}
+.eyebrow{font-size:10px;font-weight:600;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.eyebrow::before{content:'—';color:var(--teal);opacity:.5}
+.sec-title{font-size:20px;font-weight:800;color:var(--txt);margin-bottom:4px}
+.sec-sub{font-size:13px;color:var(--muted);margin-bottom:1.5rem;line-height:1.5}
+
+.card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);padding:14px}
+.card-t{border-radius:var(--r);border:1px solid var(--border);overflow:hidden;background:var(--white)}
+.card-header{background:var(--navy);padding:10px 14px;display:flex;align-items:center;gap:8px}
+.card-header-t{background:var(--teal);padding:10px 14px;display:flex;align-items:center;gap:8px}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+
+.asesor-card{border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .15s,transform .15s;background:var(--white)}
+.asesor-card:hover{border-color:var(--teal);transform:translateY(-2px)}
+.asesor-card.sel{border-color:var(--teal);background:var(--teal-l)}
+.asesor-card.full{border-color:var(--border);opacity:.7}
+.asesor-header{padding:12px;display:flex;align-items:center;gap:10px}
+.av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.asesor-name{font-size:13px;font-weight:700;color:var(--txt)}
+.asesor-role{font-size:10px;color:var(--muted)}
+.asesor-body{padding:0 12px 12px}
+.tag-row{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.tag{font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;background:#f1f5f9;color:var(--muted)}
+.avail-bar{display:flex;gap:2px;margin-bottom:4px}
+.avail-slot{flex:1;height:4px;border-radius:2px}
+.avail-free{background:var(--green)}
+.avail-used{background:#e2e8f0}
+.avail-text{font-size:9px;color:var(--muted)}
+.next-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;display:inline-block;margin-top:4px}
+.next-g{background:var(--green-l);color:#085041}
+.next-y{background:var(--gold-l);color:#633806}
+.next-r{background:var(--red-l);color:#A32D2D}
+
+.form-label{font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;display:block;text-transform:uppercase;letter-spacing:.05em}
+.form-input{border:1.5px solid var(--border);border-radius:7px;padding:9px 12px;font-size:13px;color:var(--txt);background:var(--white);width:100%;outline:none;transition:border-color .15s}
+.form-input:focus{border-color:var(--teal)}
+.form-select{border:1.5px solid var(--border);border-radius:7px;padding:9px 12px;font-size:13px;color:var(--txt);background:var(--white);width:100%;outline:none;appearance:none;cursor:pointer}
+.form-select:focus{border-color:var(--teal)}
+
+.step-bar{display:flex;align-items:center;margin-bottom:1.5rem}
+.sdot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;transition:all .25s}
+.sdot.done{background:var(--green);color:#fff}
+.sdot.now{background:var(--navy);color:#fff}
+.sdot.wait{background:#f1f5f9;color:var(--muted)}
+.sline{flex:1;height:2px;background:#e2e8f0;transition:background .3s}
+.sline.done{background:var(--green)}
+.slbl-wrap{display:flex;flex-direction:column;align-items:center;gap:2px}
+.slbl{font-size:9px;color:var(--muted);text-align:center;white-space:nowrap;margin-top:2px}
+.slbl.now{color:var(--navy);font-weight:700}
+
+.pill{font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;display:inline-block}
+.pill-g{background:var(--green-l);color:#085041}
+.pill-y{background:var(--gold-l);color:#633806}
+.pill-b{background:var(--navy-l);color:var(--navy)}
+.pill-t{background:var(--teal-l);color:var(--teal-d)}
+.pill-r{background:var(--red-l);color:#A32D2D}
+
+.alert{border-radius:8px;padding:10px 12px;display:flex;gap:8px;align-items:flex-start;font-size:12px}
+.alert-y{background:var(--gold-l);border:1px solid #FAC775;color:#633806}
+.alert-g{background:var(--green-l);border:1px solid #9FE1CB;color:#085041}
+.alert-b{background:var(--navy-l);border:1px solid #B5D4F4;color:var(--navy)}
+.alert-t{background:var(--teal-l);border:1px solid #9FE1CB;color:var(--teal-d)}
+
+.wsp-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;border:none;border-radius:8px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s;width:100%}
+.wsp-btn:hover{background:#1ebe5d}
+
+.view{display:none}.view.on{display:block}
+
+.flow-step{display:flex;gap:10px;margin-bottom:12px;position:relative}
+.flow-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;z-index:1;position:relative}
+.flow-line{position:absolute;left:13px;top:28px;bottom:-12px;width:2px;background:var(--border)}
+.flow-step:last-child .flow-line{display:none}
+.flow-body{flex:1;padding-top:3px}
+.flow-title{font-size:12px;font-weight:700;color:var(--txt);margin-bottom:2px}
+.flow-desc{font-size:11px;color:var(--muted);line-height:1.5}
+.flow-tool{font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;display:inline-block;margin-top:3px}
+
+.conf-check{width:60px;height:60px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+
+.tab-bar2{display:flex;gap:2px;background:#f1f5f9;border-radius:8px;padding:3px;margin-bottom:1.25rem}
+.tb2{flex:1;text-align:center;padding:7px 4px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .15s}
+.tb2.on{background:var(--white);color:var(--txt)}
+
+.footer{background:#1a2e3b;padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center}
+</style>
+
+<h2 class="sr-only">Sección de asesorías personalizadas Rumbo con formulario, selección de asesor y flujo de agendamiento</h2>
+
+<div class="page">
+
+<div class="topbar">
+  <span class="logo">RUMBO</span>
+  <div class="nav-links">
+    <a>Problema</a><a>Propuesta</a><a>Actividades</a><a>Equipo</a>
+    <a class="on">Asesorías</a><a>Únete</a><a>FAQ</a>
+  </div>
+  <button class="nav-cta">Únete a la comunidad</button>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Nivel 03 — Acompañamiento</div>
+  <h1>Asesorías personalizadas<br>con expertos Rumbo</h1>
+  <p>Sesiones 1 a 1 con profesionales egresados de la Universidad del Pacífico. Becas, CV, orientación vocacional, entrevistas y más.</p>
+  <div class="hero-badges">
+    <span class="badge badge-w"><i class="ti ti-video" style="font-size:13px" aria-hidden="true"></i> Virtual (Google Meet / Zoom)</span>
+    <span class="badge badge-w"><i class="ti ti-map-pin" style="font-size:13px" aria-hidden="true"></i> Para todo el Perú</span>
+    <span class="badge badge-t"><i class="ti ti-clock" style="font-size:13px" aria-hidden="true"></i> 45–60 min</span>
+    <span class="badge badge-w"><i class="ti ti-currency-dollar" style="font-size:13px" aria-hidden="true"></i> Desde S/ 20</span>
+  </div>
+  <div class="hero-btns">
+    <button class="btn btn-primary" onclick="showTab('agendar')">
+      <i class="ti ti-calendar-plus" style="font-size:15px" aria-hidden="true"></i> Agendar mi asesoría
+    </button>
+    <button class="btn btn-outline-w" onclick="showTab('como')">
+      <i class="ti ti-info-circle" style="font-size:15px" aria-hidden="true"></i> ¿Cómo funciona?
+    </button>
+  </div>
+</div>
+
+<div style="background:var(--white);border-bottom:1px solid var(--border);padding:0 1.5rem">
+  <div class="tab-bar2" style="max-width:600px;margin:0 auto;background:transparent;padding:8px 0 0;border-radius:0;gap:0">
+    <button class="tb2 on" id="nav-agendar" onclick="showTab('agendar')" style="border-bottom:2px solid var(--navy);border-radius:0;color:var(--navy)">Agendar asesoría</button>
+    <button class="tb2" id="nav-como" onclick="showTab('como')" style="border-bottom:2px solid transparent;border-radius:0">¿Cómo funciona?</button>
+    <button class="tb2" id="nav-asesores" onclick="showTab('asesores')" style="border-bottom:2px solid transparent;border-radius:0">Nuestros asesores</button>
+    <button class="tb2" id="nav-precios" onclick="showTab('precios')" style="border-bottom:2px solid transparent;border-radius:0">Precios</button>
+  </div>
+</div>
+
+<div id="tab-agendar" class="view on">
+<div class="section" style="background:var(--bg)">
+  <div style="max-width:680px;margin:0 auto">
+
+    <div class="step-bar" id="stepbar">
+      <div class="slbl-wrap"><div class="sdot now" id="s1">1</div><div class="slbl now">Tu consulta</div></div>
+      <div class="sline" id="l1"></div>
+      <div class="slbl-wrap"><div class="sdot wait" id="s2">2</div><div class="slbl">Elige asesor</div></div>
+      <div class="sline" id="l2"></div>
+      <div class="slbl-wrap"><div class="sdot wait" id="s3">3</div><div class="slbl">Elige formato</div></div>
+      <div class="sline" id="l3"></div>
+      <div class="slbl-wrap"><div class="sdot wait" id="s4">4</div><div class="slbl">Confirma y paga</div></div>
+      <div class="sline" id="l4"></div>
+      <div class="slbl-wrap"><div class="sdot wait" id="s5">5</div><div class="slbl">Listo</div></div>
+    </div>
+
+    <div id="step1">
+      <div class="card" style="margin-bottom:10px">
+        <div style="font-size:14px;font-weight:700;color:var(--txt);margin-bottom:14px">Cuéntanos sobre ti</div>
+        <div class="grid2" style="gap:10px;margin-bottom:10px">
+          <div><label class="form-label">Nombre completo</label><input class="form-input" type="text" id="inp-nombre" placeholder="Tu nombre"></div>
+          <div><label class="form-label">Email</label><input class="form-input" type="email" id="inp-email" placeholder="tu@email.com"></div>
+        </div>
+        <div class="grid2" style="gap:10px;margin-bottom:10px">
+          <div><label class="form-label">Ciudad / región</label><input class="form-input" type="text" id="inp-ciudad" placeholder="Lima, Cusco, Piura..."></div>
+          <div><label class="form-label">Grado / año</label>
+            <select class="form-select" id="inp-grado">
+              <option value="">Selecciona</option>
+              <option>3ro de secundaria</option><option>4to de secundaria</option>
+              <option selected>5to de secundaria</option><option>1er año universitario</option>
+              <option>2do año universitario</option><option>Otro</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-bottom:10px">
+          <label class="form-label">¿Cuál es tu consulta principal?</label>
+          <select class="form-select" id="inp-tema" onchange="updateTemaMsg()">
+            <option value="">Selecciona un tema</option>
+            <option value="becas">Becas y financiamiento educativo</option>
+            <option value="cv">Armado de CV / Perfil profesional</option>
+            <option value="vocacional">Orientación vocacional (¿qué carrera estudiar?)</option>
+            <option value="universidad">Elección de universidad / instituto</option>
+            <option value="entrevistas">Preparación para entrevistas</option>
+            <option value="bienestar">Bienestar y gestión del estrés académico</option>
+            <option value="habilidades">Habilidades digitales / productividad</option>
+            <option value="otro">Otro tema</option>
+          </select>
+          <div id="tema-msg" style="display:none;margin-top:6px"></div>
+        </div>
+        <div>
+          <label class="form-label">Cuéntanos más (opcional)</label>
+          <textarea class="form-input" rows="2" placeholder="Ej: Estoy en 5to de secundaria y quiero postular a Beca 18 pero no sé por dónde empezar..." style="resize:none"></textarea>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;font-size:14px" onclick="goStep(2)">
+        Ver asesores disponibles <i class="ti ti-arrow-right" style="font-size:15px" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div id="step2" style="display:none">
+      <div class="alert alert-b" style="margin-bottom:12px">
+        <i class="ti ti-info-circle" style="font-size:16px;flex-shrink:0" aria-hidden="true"></i>
+        <div>Te mostramos los asesores más recomendados para tu tema. Puedes elegir cualquiera — si tiene el mes lleno, tu sesión queda agendada para el siguiente.</div>
+      </div>
+      <div class="grid3" id="asesores-grid" style="margin-bottom:12px">
+        <div class="asesor-card sel" id="ac-0" onclick="selectAsesor(0,'Junior Julón','Finanzas y becas','JJ','#e6f1fb','#0C447C')">
+          <div class="asesor-header">
+            <div class="av" style="background:#e6f1fb;color:#0C447C">JJ</div>
+            <div><div class="asesor-name">Junior Julón</div><div class="asesor-role">Finanzas · Analista Rimac</div></div>
+          </div>
+          <div class="asesor-body">
+            <div class="tag-row"><span class="tag">Becas</span><span class="tag">Finanzas</span><span class="tag">Estrategia</span></div>
+            <div class="avail-bar"><div class="avail-slot avail-free"></div><div class="avail-slot avail-free"></div><div class="avail-slot avail-used"></div><div class="avail-slot avail-used"></div></div>
+            <div class="avail-text">2 / 4 sesiones este mes</div>
+            <span class="next-badge next-g">Disponible esta semana</span>
+          </div>
+        </div>
+        <div class="asesor-card" id="ac-1" onclick="selectAsesor(1,'Sheyla Campos','Estrategia y liderazgo','SC','#E1F5EE','#085041')">
+          <div class="asesor-header">
+            <div class="av" style="background:#E1F5EE;color:#085041">SC</div>
+            <div><div class="asesor-name">Sheyla Campos</div><div class="asesor-role">Estrategia · Rappi</div></div>
+          </div>
+          <div class="asesor-body">
+            <div class="tag-row"><span class="tag">Vocacional</span><span class="tag">Liderazgo</span><span class="tag">CV</span></div>
+            <div class="avail-bar"><div class="avail-slot avail-free"></div><div class="avail-slot avail-used"></div><div class="avail-slot avail-used"></div><div class="avail-slot avail-used"></div></div>
+            <div class="avail-text">1 / 4 sesiones este mes</div>
+            <span class="next-badge next-g">Disponible esta semana</span>
+          </div>
+        </div>
+        <div class="asesor-card" id="ac-2" onclick="selectAsesor(2,'Nicol Contreras','Gestión del aprendizaje','NC','#FAEEDA','#633806')">
+          <div class="asesor-header">
+            <div class="av" style="background:#FAEEDA;color:#633806">NC</div>
+            <div><div class="asesor-name">Nicol Contreras</div><div class="asesor-role">Aprendizaje · U. Londres</div></div>
+          </div>
+          <div class="asesor-body">
+            <div class="tag-row"><span class="tag">Bienestar</span><span class="tag">Hábitos</span><span class="tag">Tiempo</span></div>
+            <div class="avail-bar"><div class="avail-slot avail-free"></div><div class="avail-slot avail-free"></div><div class="avail-slot avail-free"></div><div class="avail-slot avail-used"></div></div>
+            <div class="avail-text">3 / 4 sesiones este mes</div>
+            <span class="next-badge next-g">Disponible esta semana</span>
+          </div>
+        </div>
+        <div class="asesor-card" id="ac-3" onclick="selectAsesor(3,'Mariana Martínez','Comunicación y marca','MM','#f3e8fb','#5b21b6')">
+          <div class="asesor-header">
+            <div class="av" style="background:#f3e8fb;color:#5b21b6">MM</div>
+            <div><div class="asesor-name">Mariana Martínez</div><div class="asesor-role">Consultoría · Minsait</div></div>
+          </div>
+          <div class="asesor-body">
+            <div class="tag-row"><span class="tag">CV</span><span class="tag">Entrevistas</span><span class="tag">Marca</span></div>
+            <div class="avail-bar"><div class="avail-slot avail-used"></div><div class="avail-slot avail-used"></div><div class="avail-slot avail-used"></div><div class="avail-slot avail-used"></div></div>
+            <div class="avail-text">0 / 4 sesiones este mes</div>
+            <span class="next-badge next-y">Disponible en junio</span>
+          </div>
+        </div>
+        <div class="asesor-card" id="ac-4" onclick="selectAsesor(4,'Breinner Ramos','Operaciones y redes','BR','#e8f8f7','#085041')">
+          <div class="asesor-header">
+            <div class="av" style="background:#e8f8f7;color:#085041">BR</div>
+            <div><div class="asesor-name">Breinner Ramos</div><div class="asesor-role">Consultoría · Tuxpas</div></div>
+          </div>
+          <div class="asesor-body">
+            <div class="tag-row"><span class="tag">Networking</span><span class="tag">Productividad</span></div>
+            <div class="avail-bar"><div class="avail-slot avail-free"></div><div class="avail-slot avail-free"></div><div class="avail-slot avail-used"></div><div class="avail-slot avail-used"></div></div>
+            <div class="avail-text">2 / 4 sesiones este mes</div>
+            <span class="next-badge next-g">Disponible esta semana</span>
+          </div>
+        </div>
+        <div class="asesor-card" id="ac-rumbo" onclick="selectAsesor('rumbo','Rumbo decide','Te asignamos al mejor match','RU','#f1f5f9','#64748b')">
+          <div class="asesor-header">
+            <div class="av" style="background:var(--navy);color:#fff;font-size:9px;text-align:center;line-height:1.2;font-weight:700">RUM<br>BO</div>
+            <div><div class="asesor-name">Rumbo elige</div><div class="asesor-role">Asignación automática</div></div>
+          </div>
+          <div class="asesor-body">
+            <div class="tag-row"><span class="tag">Según tu tema</span><span class="tag">Más rápido</span></div>
+            <div style="font-size:10px;color:var(--muted);line-height:1.4;margin-bottom:4px">Te asignamos al asesor disponible que mejor calce con tu consulta.</div>
+            <span class="next-badge next-g">Confirmación en 24 h</span>
+          </div>
+        </div>
+      </div>
+      <div id="asesor-alert" class="alert alert-y" style="margin-bottom:12px;display:none">
+        <i class="ti ti-calendar-x" style="font-size:16px;flex-shrink:0" aria-hidden="true"></i>
+        <div id="asesor-alert-txt"></div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn" style="border:1px solid var(--border);color:var(--txt);padding:10px 16px" onclick="goStep(1)">← Volver</button>
+        <button class="btn btn-primary" style="flex:1;justify-content:center;padding:11px" onclick="goStep(3)">Continuar con <span id="btn-asesor-name">Junior Julón</span> <i class="ti ti-arrow-right" style="font-size:14px" aria-hidden="true"></i></button>
+      </div>
+    </div>
+
+    <div id="step3" style="display:none">
+      <div class="grid2" style="margin-bottom:12px">
+        <div class="card-t">
+          <div class="card-header"><i class="ti ti-device-laptop" style="font-size:16px;color:#fff" aria-hidden="true"></i><span style="font-size:13px;font-weight:700;color:#fff">Sesión individual</span></div>
+          <div style="padding:14px">
+            <div style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:4px">S/ 20–25</div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Una sesión de 45–60 min</div>
+            <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--muted);margin-bottom:14px">
+              <div style="display:flex;gap:6px"><i class="ti ti-check" style="color:var(--green);font-size:14px;flex-shrink:0" aria-hidden="true"></i>Diagnóstico previo personalizado</div>
+              <div style="display:flex;gap:6px"><i class="ti ti-check" style="color:var(--green);font-size:14px;flex-shrink:0" aria-hidden="true"></i>Informe con plan de acción</div>
+              <div style="display:flex;gap:6px"><i class="ti ti-check" style="color:var(--green);font-size:14px;flex-shrink:0" aria-hidden="true"></i>Seguimiento 2 semanas por WhatsApp</div>
+            </div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;padding:10px" onclick="selFormat('individual',22)">Elegir este plan</button>
+          </div>
+        </div>
+        <div class="card-t" style="border:2px solid var(--teal)">
+          <div class="card-header-t" style="justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:8px"><i class="ti ti-rocket" style="font-size:16px;color:#fff" aria-hidden="true"></i><span style="font-size:13px;font-weight:700;color:#fff">Pack 3 sesiones</span></div>
+            <span style="font-size:9px;font-weight:700;background:rgba(255,255,255,.25);color:#fff;padding:2px 8px;border-radius:20px">Más elegido</span>
+          </div>
+          <div style="padding:14px">
+            <div style="font-size:20px;font-weight:800;color:var(--teal);margin-bottom:4px">S/ 50</div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:10px">3 sesiones · acompañamiento completo</div>
+            <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--muted);margin-bottom:14px">
+              <div style="display:flex;gap:6px"><i class="ti ti-check" style="color:var(--green);font-size:14px;flex-shrink:0" aria-hidden="true"></i>Todo lo del plan individual</div>
+              <div style="display:flex;gap:6px"><i class="ti ti-check" style="color:var(--green);font-size:14px;flex-shrink:0" aria-hidden="true"></i>Revisión de documentos (CV, cartas)</div>
+              <div style="display:flex;gap:6px"><i class="ti ti-check" style="color:var(--green);font-size:14px;flex-shrink:0" aria-hidden="true"></i>Seguimiento extendido 1 mes</div>
+            </div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;padding:10px;background:var(--teal)" onclick="selFormat('pack',50)">Elegir este plan</button>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-t" style="margin-bottom:12px">
+        <i class="ti ti-users" style="font-size:16px;flex-shrink:0" aria-hidden="true"></i>
+        <div>¿Vienes con un amigo? Inscríbanse juntos y ambos obtienen <strong>10% de descuento</strong>. Escríbenos por WhatsApp.</div>
+      </div>
+      <button class="btn" style="border:1px solid var(--border);color:var(--txt);padding:10px 16px" onclick="goStep(2)">← Volver</button>
+    </div>
+
+    <div id="step4" style="display:none">
+      <div class="card" style="margin-bottom:12px">
+        <div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:12px">Resumen de tu asesoría</div>
+        <div style="background:#f7fafa;border-radius:8px;padding:12px;margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px"><span style="color:var(--muted)">Asesor</span><span style="font-weight:600" id="res-asesor">Junior Julón</span></div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px"><span style="color:var(--muted)">Plan</span><span id="res-plan" style="font-weight:600">Pack 3 sesiones</span></div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px"><span style="color:var(--muted)">Disponibilidad</span><span id="res-avail" style="font-weight:600;color:var(--green)">Esta semana</span></div>
+          <div style="display:flex;justify-content:space-between;border-top:1px solid var(--border);padding-top:8px"><span style="font-size:13px;font-weight:700">Total</span><span style="font-size:16px;font-weight:800;color:var(--teal)">S/ <span id="res-monto">50</span></span></div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:8px">¿Cómo quieres confirmar?</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+          <div id="pay-wsp" class="card" style="cursor:pointer;text-align:center;border:1.5px solid var(--teal);background:var(--teal-l);padding:12px" onclick="selPago('wsp')">
+            <i class="ti ti-brand-whatsapp" style="font-size:22px;color:#25D366;display:block;margin-bottom:4px" aria-hidden="true"></i>
+            <div style="font-size:12px;font-weight:700;color:var(--txt)">WhatsApp</div>
+            <div style="font-size:10px;color:var(--muted)">Más rápido · recomendado</div>
+          </div>
+          <div id="pay-web" class="card" style="cursor:pointer;text-align:center;padding:12px" onclick="selPago('web')">
+            <i class="ti ti-device-laptop" style="font-size:22px;color:var(--navy);display:block;margin-bottom:4px" aria-hidden="true"></i>
+            <div style="font-size:12px;font-weight:700;color:var(--txt)">Continuar aquí</div>
+            <div style="font-size:10px;color:var(--muted)">Paga por Yape / Plin</div>
+          </div>
+        </div>
+        <div id="pago-wsp-detail" style="margin-bottom:12px">
+          <button class="wsp-btn" onclick="handleWsp()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.555 4.116 1.524 5.843L0 24l6.302-1.498A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.372l-.36-.214-3.732.887.903-3.646-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/></svg>
+            Confirmar por WhatsApp con <span id="wsp-asesor-name" style="margin-left:3px">Junior</span>
+          </button>
+          <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:5px">El mensaje ya viene pre-redactado con tu nombre, tema y asesor elegido</div>
+        </div>
+        <div id="pago-web-detail" style="display:none;margin-bottom:12px">
+          <div class="alert alert-g" style="margin-bottom:8px">
+            <i class="ti ti-qrcode" style="font-size:16px;flex-shrink:0" aria-hidden="true"></i>
+            <div>Yape o Plin al QR de Rumbo · Monto: <strong>S/ <span id="pay-monto">50</span></strong> · Luego envíanos el voucher aquí o por WhatsApp</div>
+          </div>
+          <input class="form-input" type="text" placeholder="Nombre completo para la confirmación" style="margin-bottom:8px">
+          <input class="form-input" type="email" placeholder="Email para recibir la confirmación">
+        </div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn" style="border:1px solid var(--border);color:var(--txt);padding:10px 16px" onclick="goStep(3)">← Volver</button>
+        <button class="btn btn-primary" style="flex:1;justify-content:center;padding:11px" onclick="goStep(5)">Confirmar asesoría <i class="ti ti-check" style="font-size:14px" aria-hidden="true"></i></button>
+      </div>
+    </div>
+
+    <div id="step5" style="display:none;text-align:center;padding:1rem 0">
+      <div class="conf-check"><i class="ti ti-check" style="font-size:26px;color:var(--green)" aria-hidden="true"></i></div>
+      <div style="font-size:17px;font-weight:800;color:var(--txt);margin-bottom:4px">¡Solicitud recibida!</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Te contactaremos en máximo <strong>24 horas</strong> para confirmar fecha y hora.</div>
+      <div class="card" style="text-align:left;margin-bottom:14px">
+        <div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:10px">¿Qué pasa ahora?</div>
+        <div class="flow-step"><div class="flow-dot" style="background:var(--teal);color:#fff"><i class="ti ti-check" style="font-size:12px" aria-hidden="true"></i></div><div class="flow-line"></div><div class="flow-body"><div class="flow-title">Solicitud enviada</div><div class="flow-desc">El equipo de Rumbo recibe tu solicitud y asigna al asesor.</div></div></div>
+        <div class="flow-step"><div class="flow-dot" style="background:#e2e8f0;color:var(--muted)">2</div><div class="flow-line"></div><div class="flow-body"><div class="flow-title">Confirmación en 24 h</div><div class="flow-desc">Te llegará un WhatsApp o email con la fecha, hora y link de Meet.</div></div></div>
+        <div class="flow-step"><div class="flow-dot" style="background:#e2e8f0;color:var(--muted)">3</div><div class="flow-line"></div><div class="flow-body"><div class="flow-title">Formulario de diagnóstico</div><div class="flow-desc">24 h antes de tu sesión recibirás un formulario breve para que el asesor llegue preparado.</div></div></div>
+        <div class="flow-step"><div class="flow-dot" style="background:#e2e8f0;color:var(--muted)">4</div><div class="flow-body"><div class="flow-title">Tu asesoría</div><div class="flow-desc">Sesión de 45–60 min. Al terminar recibirás tu informe personalizado.</div></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <button class="wsp-btn" onclick="goStep(1)" style="background:var(--navy)">Agendar otra asesoría</button>
+        <button class="wsp-btn" onclick="showTab('asesores')">Ver el equipo</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div id="tab-como" class="view">
+<div class="section section-bg">
+  <div style="max-width:660px;margin:0 auto">
+    <div class="eyebrow">Proceso</div>
+    <div class="sec-title">¿Cómo funciona una asesoría?</div>
+    <div class="sec-sub">De tu solicitud a la sesión en 4 pasos simples</div>
+    <div style="display:flex;flex-direction:column;gap:0;margin-bottom:1.5rem">
+      <div class="flow-step"><div class="flow-dot" style="background:var(--navy);color:#fff">1</div><div class="flow-line"></div><div class="flow-body"><div class="flow-title">Completas el formulario (5 min)</div><div class="flow-desc">Nos dices tu tema, grado, ciudad y elige a tu asesor o déjanos asignarlo. Todo desde esta página o por WhatsApp.</div><span class="flow-tool" style="background:var(--teal-l);color:var(--teal-d)">Web o WhatsApp</span></div></div>
+      <div class="flow-step"><div class="flow-dot" style="background:var(--navy);color:#fff">2</div><div class="flow-line"></div><div class="flow-body"><div class="flow-title">Confirmamos en 24 horas</div><div class="flow-desc">Te enviamos fecha, hora y link de Meet. Si el asesor que elegiste está lleno este mes, queda agendado para el siguiente.</div><span class="flow-tool" style="background:var(--gold-l);color:#633806">WhatsApp + Email</span></div></div>
+      <div class="flow-step"><div class="flow-dot" style="background:var(--navy);color:#fff">3</div><div class="flow-line"></div><div class="flow-body"><div class="flow-title">Diagnóstico previo (24 h antes)</div><div class="flow-desc">Recibes un formulario breve para que tu asesor llegue preparado con recursos específicos para ti.</div><span class="flow-tool" style="background:#e6f1fb;color:var(--navy)">Google Forms</span></div></div>
+      <div class="flow-step"><div class="flow-dot" style="background:var(--teal);color:#fff"><i class="ti ti-star" style="font-size:12px" aria-hidden="true"></i></div><div class="flow-body"><div class="flow-title">Tu asesoría + seguimiento</div><div class="flow-desc">Sesión de 45–60 min por Google Meet o Zoom. Recibes informe personalizado + plan de acción. Seguimiento por WhatsApp durante 2 semanas.</div><span class="flow-tool" style="background:var(--green-l);color:#085041">Google Meet · Zoom</span></div></div>
+    </div>
+    <div class="alert alert-y" style="margin-bottom:1.5rem">
+      <i class="ti ti-calendar" style="font-size:16px;flex-shrink:0" aria-hidden="true"></i>
+      <div><strong>Sobre la disponibilidad:</strong> cada asesor tiene un máximo de 4 sesiones al mes para mantener la calidad. Si el que elegiste está lleno, puedes esperar al mes siguiente o elegir otro con disponibilidad inmediata.</div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;font-size:14px" onclick="showTab('agendar')">Agendar mi asesoría ahora <i class="ti ti-arrow-right" style="font-size:14px" aria-hidden="true"></i></button>
+  </div>
+</div>
+</div>
+
+<div id="tab-asesores" class="view">
+<div class="section" style="background:var(--bg)">
+  <div class="eyebrow">El equipo</div>
+  <div class="sec-title">Conoce a tus asesores</div>
+  <div class="sec-sub">Profesionales egresados de la UP con experiencia real en sus áreas</div>
+  <div class="grid2">
+    ${[['JJ','Junior Julón','Analista · Rimac Seguros','#e6f1fb','#0C447C','Becas, finanzas personales, estrategia educativa','2/4','Esta semana'],['SC','Sheyla Campos','Strategy Analyst · Rappi','#E1F5EE','#085041','Orientación vocacional, liderazgo, CV','1/4','Esta semana'],['MM','Mariana Martínez','Consultora · Minsait','#f3e8fb','#5b21b6','CV, entrevistas, marca personal','0/4','Junio'],['LM','Lucerito Malpartida','B2B Lead · Pepsico','#fdf3d7','#633806','Becas internacionales, habilidades digitales','2/4','Esta semana'],['BR','Breinner Ramos','Consultor · Tuxpas','#e8f8f7','#085041','Networking, productividad, orientación','2/4','Esta semana'],['NC','Nicol Contreras','BSc U. Londres','#FAEEDA','#633806','Bienestar, hábitos de estudio, gestión del tiempo','3/4','Esta semana'],['MA','María Arias','Consultora · Pacífico','#e6f1fb','#0C447C','Analítica, organización, vida universitaria','1/4','Esta semana']].map(([i,n,r,bg,c,t,avail,when])=>`
+    <div class="card-t">
+      <div style="padding:14px;display:flex;gap:12px;align-items:flex-start">
+        <div class="av" style="background:${bg};color:${c};width:44px;height:44px;font-size:13px;flex-shrink:0">${i}</div>
+        <div style="flex:1">
+          <div style="font-size:14px;font-weight:700;color:var(--txt)">${n}</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px">${r}</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.4">${t}</div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:10px;color:var(--muted)">${avail} sesiones este mes</span>
+            <span class="next-badge ${when==='Esta semana'?'next-g':'next-y'}">${when}</span>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border);padding:10px 14px">
+        <button class="btn btn-primary" style="width:100%;justify-content:center;padding:8px;font-size:12px" onclick="preSelectAsesor('${n}')">Agendar con ${n.split(' ')[0]} <i class="ti ti-arrow-right" style="font-size:12px" aria-hidden="true"></i></button>
+      </div>
+    </div>`).join('')}
+  </div>
+</div>
+</div>
+
+<div id="tab-precios" class="view">
+<div class="section section-bg">
+  <div style="max-width:600px;margin:0 auto">
+    <div class="eyebrow">Precios</div>
+    <div class="sec-title">Costo social, impacto real</div>
+    <div class="sec-sub">Diseñados para ser accesibles. Tu pago financia también las actividades gratuitas de Rumbo.</div>
+    <div class="grid2" style="margin-bottom:1rem">
+      <div class="card-t">
+        <div class="card-header"><i class="ti ti-device-laptop" style="font-size:16px;color:#fff" aria-hidden="true"></i><span style="color:#fff;font-size:13px;font-weight:700">Sesión individual</span></div>
+        <div style="padding:14px"><div style="font-size:24px;font-weight:800;color:var(--navy);margin-bottom:4px">S/ 20–25</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Una sesión de 45–60 minutos</div>
+        <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--muted)">
+          <div style="display:flex;gap:6px"><i class="ti ti-check" style="color:var(--green);font-size:14px" aria-hidden="true"></i>Diagnóstico personalizado previo</div>
+          <div style="display:flex;gap:6px"><i class="ti ti-check" style="color:var(--green);font-size:14px" aria-hidden="true"></i>Informe con plan de acción</div>
+          <div style="display:flex;gap:6px"><i class="ti ti-check" style="color:var(--green);font-size:14px" aria-hidden="true"></i>Seguimiento 2 semanas por WhatsApp</div>
+        </div></div>
+      </div>
+      <div class="card-t" style="border:2px solid var(--teal)">
+        <div class="card-header-t" style="justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:8px"><i class="ti ti-rocket" style="font-size:16px;color:#fff" aria-hidden="true"></i><span style="color:#fff;font-size:13px;font-weight:700">Pack 3 sesiones</span></div>
+          <span style="font-size:9px;font-weight:700;background:rgba(255,255,255,.25);color:#fff;padding:2px 8px;border-radius:20px">Más elegido</span>
+        </div>
+        <div style="padding:14px"><div style="font-size:24px;font-weight:800;color:var(--teal);margin-bottom:4px">S/ 50</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px">3 sesiones · acompañamiento completo</div>
+        <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--muted)">
+          <div style="display:flex;gap:6px"><i class="ti ti-check" style="color:var(--green);font-size:14px" aria-hidden="true"></i>Todo lo del plan individual</div>
+          <div style="display:flex;gap:6px"><i class="ti ti-check" style="color:var(--green);font-size:14px" aria-hidden="true"></i>Revisión de documentos (CV, cartas)</div>
+          <div style="display:flex;gap:6px"><i class="ti ti-check" style="color:var(--green);font-size:14px" aria-hidden="true"></i>Seguimiento extendido 1 mes</div>
+        </div></div>
+      </div>
+    </div>
+    <div class="alert alert-t" style="margin-bottom:1rem">
+      <i class="ti ti-users" style="font-size:16px;flex-shrink:0" aria-hidden="true"></i>
+      <div><strong>Descuento grupal:</strong> si vienes con un amigo, ambos obtienen 10% de descuento. Escríbenos por WhatsApp.</div>
+    </div>
+    <div class="alert alert-g" style="margin-bottom:1.5rem">
+      <i class="ti ti-gift" style="font-size:16px;flex-shrink:0" aria-hidden="true"></i>
+      <div><strong>¿No puedes pagarlo?</strong> Seguimos @rumbo.ong en Instagram — sorteamos asesorías gratuitas financiadas por donantes cada mes.</div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;font-size:14px" onclick="showTab('agendar')">Agendar mi asesoría <i class="ti ti-arrow-right" style="font-size:14px" aria-hidden="true"></i></button>
+  </div>
+</div>
+</div>
+
+<div class="footer">
+  <div><div style="font-size:15px;font-weight:800;color:#fff">RUMBO</div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:2px">Transformando decisiones en oportunidades</div></div>
+  <div style="font-size:11px;color:rgba(255,255,255,.4)">rumbo.transformatufuturo@gmail.com · @rumbo.ong</div>
+</div>
+
+</div>
+
+<script>
+var selAsesorName='Junior Julón';var selAsesorFull=false;var selMonto=50;var selPlan='pack';
+
+var temaMessages={
+  becas:'<div style="background:#e6f1fb;border:1px solid #B5D4F4;border-radius:6px;padding:8px 10px;font-size:11px;color:#0C447C"><strong>Recomendado:</strong> Junior Julón — Analista de Inversiones en Rimac. Ha guiado a estudiantes en Beca 18, Pronabec y becas privadas.</div>',
+  cv:'<div style="background:#f3e8fb;border:1px solid #c4b5f7;border-radius:6px;padding:8px 10px;font-size:11px;color:#5b21b6"><strong>Recomendada:</strong> Mariana Martínez — Consultora en Minsait. Especializada en armado de CV y preparación para entrevistas.</div>',
+  vocacional:'<div style="background:#E1F5EE;border:1px solid #9FE1CB;border-radius:6px;padding:8px 10px;font-size:11px;color:#085041"><strong>Recomendada:</strong> Sheyla Campos — Strategy Analyst en Rappi. Ha acompañado a decenas de jóvenes en su elección de carrera.</div>',
+  bienestar:'<div style="background:#FAEEDA;border:1px solid #FAC775;border-radius:6px;padding:8px 10px;font-size:11px;color:#633806"><strong>Recomendada:</strong> Nicol Contreras — BSc Management, U. de Londres. Especializada en bienestar académico y gestión del tiempo.</div>',
+};
+
+function updateTemaMsg(){
+  var v=document.getElementById('inp-tema').value;
+  var el=document.getElementById('tema-msg');
+  if(temaMessages[v]){el.style.display='block';el.innerHTML=temaMessages[v];}
+  else{el.style.display='none';}
+}
+
+function showTab(id){
+  ['agendar','como','asesores','precios'].forEach(function(t){
+    var v=document.getElementById('tab-'+t);
+    var n=document.getElementById('nav-'+t);
+    if(v) v.classList.toggle('on',t===id);
+    if(n){n.className='tb2'+(t===id?' on':'');n.style.borderBottom=t===id?'2px solid var(--navy)':'2px solid transparent';if(t===id)n.style.color='var(--navy)';else n.style.color='';}
+  });
+  if(id==='agendar') goStep(1);
+}
+
+var fullAsesores=[3];
+function selectAsesor(idx,name,spec,initials,bg,color){
+  document.querySelectorAll('.asesor-card').forEach(function(c){c.classList.remove('sel');});
+  var card=typeof idx==='number'?document.getElementById('ac-'+idx):document.getElementById('ac-rumbo');
+  if(card) card.classList.add('sel');
+  selAsesorName=name;
+  selAsesorFull=fullAsesores.indexOf(idx)>=0;
+  document.getElementById('btn-asesor-name').textContent=name;
+  var al=document.getElementById('asesor-alert');
+  var alt=document.getElementById('asesor-alert-txt');
+  if(selAsesorFull){
+    al.style.display='flex';
+    alt.innerHTML='<strong>'+name+' tiene el mes completo.</strong> Puedes elegirlo igual — tu sesión quedará agendada para el próximo mes. O elige otro asesor con disponibilidad inmediata.';
+  } else {al.style.display='none';}
+}
+
+function selFormat(type,monto){
+  selPlan=type;selMonto=monto;
+  goStep(4);
+  document.getElementById('res-plan').textContent=type==='pack'?'Pack 3 sesiones':'Sesión individual';
+  document.getElementById('res-monto').textContent=monto;
+  document.getElementById('pay-monto').textContent=monto;
+  document.getElementById('res-asesor').textContent=selAsesorName;
+  document.getElementById('res-avail').textContent=selAsesorFull?'Próximo mes':'Esta semana';
+  document.getElementById('res-avail').style.color=selAsesorFull?'var(--gold)':'var(--green)';
+}
+
+function selPago(m){
+  document.getElementById('pay-wsp').style.borderColor=m==='wsp'?'var(--teal)':'var(--border)';
+  document.getElementById('pay-wsp').style.background=m==='wsp'?'var(--teal-l)':'var(--white)';
+  document.getElementById('pay-web').style.borderColor=m==='web'?'var(--teal)':'var(--border)';
+  document.getElementById('pay-web').style.background=m==='web'?'var(--teal-l)':'var(--white)';
+  document.getElementById('pago-wsp-detail').style.display=m==='wsp'?'block':'none';
+  document.getElementById('pago-web-detail').style.display=m==='web'?'block':'none';
+}
+
+function handleWsp(){
+  var nombre=document.getElementById('inp-nombre').value||'(sin nombre)';
+  var tema=document.getElementById('inp-tema').options[document.getElementById('inp-tema').selectedIndex].text||'General';
+  var msg='Hola Rumbo! Quiero agendar una asesoría.\n\nNombre: '+nombre+'\nTema: '+tema+'\nAsesor elegido: '+selAsesorName+'\nPlan: '+(selPlan==='pack'?'Pack 3 sesiones (S/ 50)':'Sesión individual (S/ '+selMonto+')')+'\n\nQuedo a la espera de confirmación. Gracias!';
+  window.open('https://wa.me/51999999999?text='+encodeURIComponent(msg),'_blank');
+  setTimeout(function(){goStep(5);},500);
+}
+
+function preSelectAsesor(name){
+  showTab('agendar');
+  setTimeout(function(){goStep(2);selAsesorName=name;document.getElementById('btn-asesor-name').textContent=name;},100);
+}
+
+function goStep(n){
+  for(var i=1;i<=5;i++){
+    var el=document.getElementById('step'+i);
+    if(el) el.style.display=i===n?'block':'none';
+  }
+  for(var i=1;i<=5;i++){
+    var dot=document.getElementById('s'+i);
+    if(!dot) continue;
+    if(i<n){dot.className='sdot done';dot.innerHTML='<i class="ti ti-check" style="font-size:11px" aria-hidden="true"></i>';}
+    else if(i===n){dot.className='sdot now';dot.textContent=i;}
+    else{dot.className='sdot wait';dot.textContent=i;}
+    var lbl=dot.parentElement.querySelector('.slbl');
+    if(lbl) lbl.className='slbl'+(i===n?' now':'');
+    var line=document.getElementById('l'+i);
+    if(line) line.className='sline'+(i<n?' done':'');
+  }
+  if(n===4){
+    var firstName=selAsesorName.split(' ')[0];
+    var el=document.getElementById('wsp-asesor-name');
+    if(el) el.textContent=firstName;
+  }
+}
+</script>
