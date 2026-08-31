@@ -50,7 +50,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--banner-h, 0px) + 64px); }
 body {
   font-family: var(--font-body); font-weight: 300;
   color: var(--ink); background: var(--bg);
