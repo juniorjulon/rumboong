@@ -1064,6 +1064,9 @@ html.is-loading body { overflow: hidden; }
   flex: 0 0 44%;
   overflow: hidden;
   background: #0b1f36;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Copia desenfocada de la misma imagen: rellena el letterbox sin descarga extra */
@@ -1078,10 +1081,10 @@ html.is-loading body { overflow: hidden; }
 }
 
 .pop-poster-main {
-  position: relative;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   display: block;
-  width: 100%;
-  height: 100%;
 }
 
 .pop-poster-main img {
@@ -1287,14 +1290,30 @@ html.is-loading body { overflow: hidden; }
     overscroll-behavior: contain;
   }
 
-  /* El afiche se muestra SIEMPRE completo: se limita por alto y se ajusta
-     con contain. La copia desenfocada rellena los lados. */
+  /* El afiche NUNCA se recorta. La altura la fija la propia imagen
+     (height definido + width:auto), de modo que conserva su proporcion por
+     construccion: no hay ningun alto en porcentaje ni aspect-ratio de por
+     medio que un navegador pueda resolver de otra forma.
+     La caja se limita a envolverla y la copia desenfocada rellena el resto. */
   .pop-poster {
     flex: 0 0 auto;
     width: 100%;
-    aspect-ratio: 1080 / 1350;
-    max-height: 54vh;
-    max-height: 54dvh;
+  }
+
+  .pop-poster-main {
+    position: relative;
+    inset: auto;
+    width: auto;
+    height: auto;
+  }
+
+  .pop-poster-main img {
+    width: auto;
+    max-width: 100%;
+    /* Se adapta al alto de pantalla: pequeno en moviles bajos,
+       grande en los altos, sin pasarse en tablets. */
+    height: clamp(150px, 43vh, 470px);
+    height: clamp(150px, 43dvh, 470px);
   }
 
   .pop-body {
@@ -1304,36 +1323,35 @@ html.is-loading body { overflow: hidden; }
     padding: 18px var(--pop-pad) var(--pop-pad);
   }
 
-  .pop-card h2 { font-size: 22px; }
-  .pop-lede    { font-size: 13.5px; line-height: 1.55; }
-  .pop-facts   { gap: 8px; }
-  .pop-facts li { font-size: 13px; }
-  .pop-footer  { padding-top: 12px; }
-  .pop-actions { justify-content: center; }
-  .pop-cta     { flex: 1 1 auto; justify-content: center; }
+  .pop-card h2  { font-size: 21px; }
+  .pop-lede     { font-size: 13px; line-height: 1.5; }
+  .pop-facts    { gap: 7px; }
+  .pop-facts li { font-size: 12.5px; gap: 8px; }
+  .pop-facts svg { width: 16px; height: 16px; }
+  .pop-facts span { font-size: 12px; }
+  .pop-footer   { padding-top: 10px; }
+  .pop-actions  { justify-content: center; margin-bottom: 8px; }
+  .pop-cta      { flex: 1 1 auto; justify-content: center; }
 
-  /* En columna, el texto cede altura al afiche por niveles. Todo lo que se
-     oculta aqui ya esta impreso en el propio afiche y en el alt de la imagen,
-     asi que no se pierde informacion.
-     El limite inferior de 461px deja fuera el movil apaisado, que mas abajo
-     vuelve a disposicion en fila y si tiene sitio para el texto. */
+  /* Se muestra TODO el contenido en cualquier telefono. Lo unico que se
+     ajusta segun la pantalla es cuanto alto ocupa el afiche: cede espacio
+     al texto en las pantallas bajas y crece en las altas. */
 
-  /* Tablet vertical: sobra el parrafo de entrada */
-  @media (max-height: 1000px) and (min-height: 461px) {
-    .pop-lede { display: none; }
+  /* Pantallas bajas: el afiche se hace mas pequeno para dejar sitio al texto */
+  @media (max-height: 700px) and (min-height: 461px) {
+    .pop-poster-main img { height: clamp(140px, 29vh, 300px); height: clamp(140px, 29dvh, 300px); }
+    .pop-body { gap: 8px; padding-top: 16px; }
   }
 
-  /* Telefono: sobran tambien los datos, que el afiche ya muestra */
-  @media (max-height: 780px) and (min-height: 461px) {
-    .pop-facts { display: none; }
-    .pop-body  { gap: 8px; padding-top: 16px; }
-  }
-
-  /* Pantallas muy bajas (iPhone SE y similares) */
   @media (max-height: 580px) and (min-height: 461px) {
-    .pop-poster  { max-height: 46vh; max-height: 46dvh; }
+    .pop-poster-main img { height: clamp(120px, 26vh, 240px); height: clamp(120px, 26dvh, 240px); }
     .pop-card h2 { font-size: 19px; }
     .pop-body    { padding-top: 14px; }
+  }
+
+  /* Tablets: hay alto de sobra, el afiche luce mas grande */
+  @media (min-height: 900px) {
+    .pop-poster-main img { height: clamp(300px, 50vh, 640px); height: clamp(300px, 50dvh, 640px); }
   }
 }
 

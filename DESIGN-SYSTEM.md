@@ -222,36 +222,65 @@ dentro mientras está abierta y vuelve a su origen al cerrar.
 
 **Layout responsive**:
 
-**El afiche se muestra siempre completo** (`object-fit: contain`), nunca recortado: es
-la pieza que la gente vino a ver y ya lleva impresos fecha, hora, lugar, público y el QR.
-Lo que cede altura es el texto, por niveles, porque **repite lo que el afiche ya dice**:
+**En todos los tamaños se ve todo**: el afiche completo, el párrafo, los cuatro datos y
+el botón. Lo único que cambia con la pantalla es **cuánto alto ocupa el afiche**, que cede
+espacio al texto en pantallas bajas y crece en las altas.
 
-| Disposición | Condición | Qué se ve |
+| Disposición | Condición | Alto del afiche |
 |---|---|---|
-| Fila | ancho ≥ 880px | Afiche `flex: 0 0 44%` + todo el texto. Alto `min(88dvh, 640px)`. |
-| Fila | apaisado, alto ≤ 460px | Afiche al 32% + todo el texto. |
-| Columna | ancho < 880px | Afiche arriba, `max-height: 54dvh`. |
-| Columna | alto ≤ 1000px | Se oculta `.pop-lede`. |
-| Columna | alto ≤ 780px | Se oculta también `.pop-facts`. |
-| Columna | alto ≤ 580px | El afiche baja a `46dvh` y el H2 a 19px. |
+| Fila | ancho ≥ 880px | `flex: 0 0 44%` del ancho. Alto de tarjeta `min(88dvh, 640px)`. |
+| Fila | apaisado, alto ≤ 460px | 32% del ancho. |
+| Columna | ancho < 880px | `clamp(150px, 43dvh, 470px)` |
+| Columna | alto ≤ 700px | `clamp(140px, 29dvh, 300px)` |
+| Columna | alto ≤ 580px | `clamp(120px, 26dvh, 240px)` |
+| Columna | alto ≥ 900px (tablets) | `clamp(300px, 50dvh, 640px)` |
 
-Los niveles de columna usan `min-height: 461px` para dejar fuera el móvil apaisado, que
-vuelve a disposición en fila y sí tiene sitio para el texto.
+### Por qué el afiche no se puede recortar
 
-Lo que se oculta **no se pierde**: va en el `alt` de la imagen del afiche, así que los
-lectores de pantalla siguen anunciando fecha, hora, lugar y público.
+Es la parte delicada: **el alto lo fija la propia imagen**, no su contenedor.
+
+```css
+.pop-poster-main img {
+  width: auto;                          /* conserva la proporción nativa */
+  height: clamp(150px, 43dvh, 470px);   /* alto definido, sin porcentajes */
+  max-width: 100%;
+}
+```
+
+Con `height` definido y `width: auto`, una imagen reemplazada mantiene su relación
+1080:1350 **por construcción**. No hay forma de que se recorte.
+
+La versión anterior hacía lo contrario y **fallaba en Safari**: la caja sacaba su alto de
+`aspect-ratio` + `max-height`, y la imagen lo heredaba con `height: 100%`. Safari no
+resuelve ese porcentaje contra un alto derivado de `aspect-ratio`, así que la imagen volvía
+a su alto natural, desbordaba la caja y `overflow: hidden` le cortaba el pie — se perdían
+el QR y «Transforma tu futuro». Chrome sí lo resolvía, por lo que el fallo no aparecía en
+las pruebas hasta verlo en un iPhone real.
+
+**Regla para el futuro: nunca dar alto en % a un hijo de una caja con `aspect-ratio`.**
+En la disposición en fila la capa del afiche va `position: absolute; inset: 0`, que sí da
+un alto definido y hace que `height: 100%` resuelva en cualquier navegador.
+
+El afiche va en `object-fit: contain` sobre una copia desenfocada de sí mismo
+(`.pop-poster-blur`), que rellena los lados sin descarga extra — es la misma URL, así que
+el navegador la reutiliza de caché.
 
 El pie (`.pop-footer`) es `position: sticky` en todos los casos: **el botón de inscripción
 nunca queda bajo la línea de flotación**, por corta que sea la pantalla. El sangrado del
 pie se sincroniza con el padding del cuerpo mediante `--pop-pad`.
 
-**Verificado sin scroll ni desbordamiento** en: 320×520, 360×568, 375×553, 375×629,
-390×664, 412×730, 430×745, 844×390 (apaisado), 744×954, 768×954, 820×1080, 860×700,
-1366×641 y 1920×874.
+### Verificación
 
-El afiche va en `object-fit: contain` sobre una copia desenfocada de sí mismo
-(`.pop-poster-blur`), que rellena el letterbox sin descarga extra — es la misma URL, así
-que el navegador la reutiliza de caché.
+`scratchpad/validar.py` mide en 21 tamaños que la proporción pintada sea la nativa y que
+la imagen quepa entera en su caja, que el párrafo y los 4 datos estén visibles, que el CTA
+caiga dentro de pantalla y que no haya desbordamiento horizontal:
+
+375×553 · 375×629 · 375×667 · 390×664 · 393×659 · 393×852 · 430×745 · 430×932 · 360×568
+· 360×640 · 412×730 · 412×800 · 320×520 · 844×390 · 932×430 · 744×954 · 768×954 ·
+820×1080 · 860×700 · 1366×641 · 1920×874
+
+Sin scroll en todos salvo 320×520 (96px), un tamaño por debajo de cualquier móvil actual,
+donde el pie fijo mantiene el botón accesible.
 
 **Para cambiar de actividad**: reemplaza la imagen, actualiza los textos y pon un
 `data-pop-id` y un `data-pop-hasta` nuevos.
@@ -356,6 +385,6 @@ git push
 
 ### Versión actual
 
-`css/styles.css?v=12` · `js/main.js?v=12`
+`css/styles.css?v=13` · `js/main.js?v=13`
 
 Actualiza este número cada vez que lo incrementes para tener registro.
