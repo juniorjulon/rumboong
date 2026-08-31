@@ -2,6 +2,47 @@
    RUMBO — main.js
    ================================================================ */
 
+/* --- Pantalla de carga (cohete) ---
+   Se retira cuando la página termina de cargar, con un mínimo visible para que
+   no parpadee y un tope duro para que nunca retenga al usuario.
+   RUMBO_CARGA.listo(cb) permite encadenar lo que deba ocurrir después. */
+var RUMBO_CARGA = (function () {
+  var MIN_MS = 900;    /* tiempo mínimo en pantalla */
+  var MAX_MS = 3500;   /* tope absoluto: pase lo que pase, se retira */
+
+  var loader    = document.getElementById('rumboLoader');
+  var inicio    = Date.now();
+  var terminado = false;
+  var pendientes = [];
+
+  function terminar() {
+    if (terminado) return;
+    terminado = true;
+    document.documentElement.classList.remove('is-loading');
+    if (loader) loader.classList.add('is-done');
+    while (pendientes.length) { pendientes.shift()(); }
+  }
+
+  /* Espera a que se cumpla el mínimo antes de retirar */
+  function terminarConMinimo() {
+    var falta = MIN_MS - (Date.now() - inicio);
+    if (falta > 0) setTimeout(terminar, falta);
+    else terminar();
+  }
+
+  setTimeout(terminar, MAX_MS);
+
+  if (document.readyState === 'complete') terminarConMinimo();
+  else window.addEventListener('load', terminarConMinimo);
+
+  return {
+    listo: function (cb) {
+      if (terminado) cb();
+      else pendientes.push(cb);
+    }
+  };
+})();
+
 /* --- Banner de anuncio (Charla) --- */
 (function () {
   var closeBtn = document.getElementById('bannerClose');
@@ -424,3 +465,126 @@ function handleContactForm(event) {
     });
   }
 }
+
+
+/* --- Pop-up de actividades ---
+   Se configura desde los data-* de #popActividad en index.html:
+     data-pop-id     identificador de la actividad. Al cambiarlo, el pop-up vuelve
+                     a aparecer aunque la persona hubiera cerrado el anterior.
+     data-pop-hasta  fecha ISO tras la cual deja de mostrarse solo.
+     data-pop-delay  milisegundos de espera tras la pantalla de carga.
+   Se muestra una vez por sesión; si la persona pulsa el botón de inscripción,
+   no se le vuelve a mostrar esta actividad en ese navegador. */
+(function () {
+  var modal = document.getElementById('popActividad');
+  if (!modal) return;
+
+  var card    = modal.querySelector('.pop-card');
+  var cuerpo  = modal.querySelector('.pop-body');
+  var cta     = modal.querySelector('[data-pop-cta]');
+  var cierres = modal.querySelectorAll('[data-pop-close]');
+
+  var id    = modal.getAttribute('data-pop-id') || 'actividad';
+  var hasta = modal.getAttribute('data-pop-hasta');
+  var delay = parseInt(modal.getAttribute('data-pop-delay'), 10);
+  if (isNaN(delay)) delay = 700;
+
+  var CLAVE_SESION = 'rumbo:popup:' + id;
+  var CLAVE_HECHO  = 'rumbo:popup:' + id + ':registrado';
+
+  var focoPrevio = null;
+  var abierto    = false;
+
+  /* Los modos privados de algunos navegadores lanzan al tocar el storage */
+  function leer(store, clave) {
+    try { return window[store].getItem(clave); } catch (e) { return null; }
+  }
+  function guardar(store, clave) {
+    try { window[store].setItem(clave, '1'); } catch (e) {}
+  }
+
+  /* --- Bloqueo de scroll sin salto de layout --- */
+  var padPrevio = '';
+  function bloquearScroll(activo) {
+    if (activo) {
+      var barra = window.innerWidth - document.documentElement.clientWidth;
+      padPrevio = document.body.style.paddingRight;
+      if (barra > 0) document.body.style.paddingRight = barra + 'px';
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = padPrevio;
+    }
+  }
+
+  function abrir() {
+    if (abierto) return;
+    abierto = true;
+    focoPrevio = document.activeElement;
+    modal.classList.add('is-open');
+    bloquearScroll(true);
+    /* El foco va a la tarjeta, no al CTA: enfocar un botón dentro de una
+       zona con scroll la desplaza y escondería el título. */
+    if (card) {
+      try { card.focus({ preventScroll: true }); } catch (e) { card.focus(); }
+      card.scrollTop = 0;
+      if (cuerpo) cuerpo.scrollTop = 0;
+    }
+  }
+
+  function cerrar() {
+    if (!abierto) return;
+    abierto = false;
+    modal.classList.remove('is-open');
+    bloquearScroll(false);
+    guardar('sessionStorage', CLAVE_SESION);
+    if (focoPrevio && focoPrevio.focus) focoPrevio.focus();
+  }
+
+  Array.prototype.forEach.call(cierres, function (el) {
+    el.addEventListener('click', cerrar);
+  });
+
+  /* Inscribirse cuenta como atendido: no volver a interrumpir con esta actividad */
+  if (cta) {
+    cta.addEventListener('click', function () {
+      guardar('localStorage', CLAVE_HECHO);
+      guardar('sessionStorage', CLAVE_SESION);
+      setTimeout(cerrar, 120);
+    });
+  }
+
+  /* Escape para cerrar y Tab atrapado dentro de la tarjeta */
+  document.addEventListener('keydown', function (e) {
+    if (!abierto) return;
+
+    if (e.key === 'Escape' || e.keyCode === 27) { cerrar(); return; }
+    if (e.key !== 'Tab' && e.keyCode !== 9) return;
+
+    var focoables = card.querySelectorAll('a[href], button:not([disabled])');
+    if (!focoables.length) return;
+    var primero = focoables[0];
+    var ultimo  = focoables[focoables.length - 1];
+
+    if (e.shiftKey && document.activeElement === primero) {
+      e.preventDefault(); ultimo.focus();
+    } else if (!e.shiftKey && document.activeElement === ultimo) {
+      e.preventDefault(); primero.focus();
+    }
+  });
+
+  /* --- ¿Corresponde mostrarlo? --- */
+  function corresponde() {
+    if (leer('localStorage', CLAVE_HECHO) === '1') return false;
+    if (leer('sessionStorage', CLAVE_SESION) === '1') return false;
+    if (hasta) {
+      var fin = new Date(hasta);
+      if (!isNaN(fin.getTime()) && Date.now() > fin.getTime()) return false;
+    }
+    return true;
+  }
+
+  if (corresponde()) {
+    RUMBO_CARGA.listo(function () { setTimeout(abrir, delay); });
+  }
+})();

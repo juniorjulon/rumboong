@@ -14,9 +14,63 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=10">
+  <link rel="stylesheet" href="css/styles.css?v=11">
+  <script>
+    /* Bloquea el scroll mientras se muestra la pantalla de carga.
+       El temporizador es una red de seguridad: si main.js fallara,
+       la pantalla se retira igual y la página queda usable. */
+    document.documentElement.classList.add('is-loading');
+    setTimeout(function () {
+      document.documentElement.classList.remove('is-loading');
+      var l = document.getElementById('rumboLoader');
+      if (l) l.classList.add('is-done');
+    }, 6000);
+  </script>
+  <noscript>
+    <style>
+      .rumbo-loader { display: none !important; }
+      html.is-loading, html.is-loading body { overflow: auto !important; }
+    </style>
+  </noscript>
 </head>
 <body>
+
+  <!-- ═══ Pantalla de carga ═══ -->
+  <div class="rumbo-loader" id="rumboLoader" role="status" aria-live="polite" aria-label="Cargando RUMBO">
+    <div class="loader-stars" aria-hidden="true">
+      <i class="loader-star"></i><i class="loader-star"></i><i class="loader-star"></i>
+      <i class="loader-star"></i><i class="loader-star"></i><i class="loader-star"></i>
+    </div>
+
+    <svg class="loader-rocket" viewBox="0 0 120 190" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- llama -->
+      <path class="loader-flame" d="M60 122 C72 144 74 160 60 178 C46 160 48 144 60 122 Z"
+            fill="rgba(255,255,255,.22)" stroke="rgba(255,255,255,.55)" stroke-width="2.5" stroke-linejoin="round"/>
+      <path class="loader-flame-inner" d="M60 134 C66 147 67 155 60 166 C53 155 54 147 60 134 Z"
+            fill="rgba(255,255,255,.62)"/>
+      <!-- aletas -->
+      <path d="M35 88 C20 100 13 116 13 134 L35 120 Z"
+            fill="rgba(255,255,255,.16)" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M85 88 C100 100 107 116 107 134 L85 120 Z"
+            fill="rgba(255,255,255,.16)" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/>
+      <!-- tobera -->
+      <path d="M45 118 L75 118 L70 132 L50 132 Z"
+            fill="rgba(255,255,255,.16)" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/>
+      <!-- fuselaje -->
+      <path d="M60 8 C76 30 85 60 85 92 L85 118 L35 118 L35 92 C35 60 44 30 60 8 Z"
+            fill="rgba(255,255,255,.14)" stroke="#fff" stroke-width="4" stroke-linejoin="round"/>
+      <!-- escotilla -->
+      <circle cx="60" cy="62" r="14" fill="rgba(255,255,255,.28)" stroke="#fff" stroke-width="3.5"/>
+      <!-- costura -->
+      <path d="M38 102 L82 102" stroke="rgba(255,255,255,.6)" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+
+    <div class="loader-brand">
+      <span class="loader-wordmark">RUMBO</span>
+      <span class="loader-tagline">Transformando decisiones en oportunidades</span>
+      <div class="loader-bar" aria-hidden="true"><span></span></div>
+    </div>
+  </div>
 
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
@@ -702,7 +756,74 @@
     <div class="footer-copy">© <span id="year"></span> RUMBO. Todos los derechos reservados.</div>
   </footer>
 
-  <script src="js/main.js?v=10"></script>
+  <!-- ═══ Pop-up de actividades ═══
+       Para anunciar otra actividad: cambia data-pop-id (obliga a mostrarlo de nuevo
+       a quien ya cerró el anterior), data-pop-hasta (se oculta solo al pasar la fecha),
+       la imagen y los textos. Ver DESIGN-SYSTEM.md → "Pop-up de actividades". -->
+  <div class="pop-modal" id="popActividad"
+       data-pop-id="charla-rumbo-hacia-tu-beca-2026-09-05"
+       data-pop-hasta="2026-09-05T12:30:00-05:00"
+       data-pop-delay="700">
+    <div class="pop-backdrop" data-pop-close></div>
+
+    <div class="pop-card" role="dialog" aria-modal="true" tabindex="-1"
+         aria-labelledby="popTitulo" aria-describedby="popTexto">
+
+      <button type="button" class="pop-close" data-pop-close aria-label="Cerrar aviso">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <div class="pop-poster">
+        <img class="pop-poster-blur" src="assets/popup-charla-rumbo-hacia-tu-beca.jpg" alt="" aria-hidden="true">
+        <picture class="pop-poster-main">
+          <source srcset="assets/popup-charla-rumbo-hacia-tu-beca.webp" type="image/webp">
+          <img src="assets/popup-charla-rumbo-hacia-tu-beca.jpg" width="1080" height="1350"
+               alt="Afiche de la charla Rumbo hacia tu Beca: sábado 5 de setiembre de 2026, de 10:30 a. m. a 12:30 p. m., en la Universidad del Pacífico.">
+        </picture>
+      </div>
+
+      <div class="pop-body">
+        <span class="pop-eyebrow">Próxima actividad</span>
+        <h2 id="popTitulo">Charla &laquo;Rumbo hacia tu Beca&raquo;</h2>
+        <p class="pop-lede" id="popTexto">
+          Presencial y gratuita. Becarias de Pronabec, Patronato BCP y Líderes con
+          Propósito te cuentan cómo lo lograron.
+        </p>
+
+        <ul class="pop-facts">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <strong>Sábado 5 de setiembre, 2026</strong>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>
+            <strong>10:30 a.&nbsp;m. &ndash; 12:30 p.&nbsp;m.</strong>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div><strong>Universidad del Pacífico</strong><span>Jr. Luis Sánchez Cerro 2141</span></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg>
+            <div><strong>Para 5.&ordm; de secundaria</strong><span>y recién egresados</span></div>
+          </li>
+        </ul>
+
+        <div class="pop-footer">
+          <div class="pop-actions">
+            <a class="pop-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSfDukMLq8uh_hFqhQwTG51XdRuXXFic_iSgOYs3Ej_PKHoA1A/viewform?usp=send_form" target="_blank" rel="noopener noreferrer" data-pop-cta>
+              Inscríbete gratis
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <button type="button" class="pop-dismiss" data-pop-close>Ahora no</button>
+          </div>
+          <p class="pop-note">100&nbsp;% gratuito &middot; Reserva tu lugar</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=11"></script>
 
 </body>
 </html>
