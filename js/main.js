@@ -2,6 +2,23 @@
    RUMBO — main.js
    ================================================================ */
 
+/* --- Banner de anuncio (Charla) --- */
+(function () {
+  var closeBtn = document.getElementById('bannerClose');
+  if (!closeBtn) return;
+
+  if (sessionStorage.getItem('bannerClosed') === '1') {
+    document.body.classList.add('banner-hidden');
+  }
+
+  closeBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.body.classList.add('banner-hidden');
+    sessionStorage.setItem('bannerClosed', '1');
+  });
+})();
+
 /* --- Toggle QR donación --- */
 function toggleQR(btn) {
   var panel = btn.nextElementSibling;
