@@ -1287,12 +1287,14 @@ html.is-loading body { overflow: hidden; }
     overscroll-behavior: contain;
   }
 
+  /* El afiche se muestra SIEMPRE completo: se limita por alto y se ajusta
+     con contain. La copia desenfocada rellena los lados. */
   .pop-poster {
     flex: 0 0 auto;
     width: 100%;
     aspect-ratio: 1080 / 1350;
-    max-height: 34vh;
-    max-height: 34dvh;
+    max-height: 54vh;
+    max-height: 54dvh;
   }
 
   .pop-body {
@@ -1307,17 +1309,31 @@ html.is-loading body { overflow: hidden; }
   .pop-facts   { gap: 8px; }
   .pop-facts li { font-size: 13px; }
   .pop-footer  { padding-top: 12px; }
+  .pop-actions { justify-content: center; }
   .pop-cta     { flex: 1 1 auto; justify-content: center; }
 
-  /* Pantallas cortas (iPhone SE, Android de 640px): el afiche cede aun mas */
-  @media (max-height: 700px) {
-    .pop-poster { max-height: 26vh; max-height: 26dvh; }
-    /* En pantallas bajas el afiche se recorta a una banda con el titular:
-       rinde mucho mejor que reducirlo entero a un sello diminuto. */
-    .pop-poster-main img { object-fit: cover; object-position: 50% 12%; }
-    .pop-body   { gap: 8px; padding-top: 16px; }
-    .pop-card h2 { font-size: 20px; }
-    .pop-lede    { font-size: 13px; }
+  /* En columna, el texto cede altura al afiche por niveles. Todo lo que se
+     oculta aqui ya esta impreso en el propio afiche y en el alt de la imagen,
+     asi que no se pierde informacion.
+     El limite inferior de 461px deja fuera el movil apaisado, que mas abajo
+     vuelve a disposicion en fila y si tiene sitio para el texto. */
+
+  /* Tablet vertical: sobra el parrafo de entrada */
+  @media (max-height: 1000px) and (min-height: 461px) {
+    .pop-lede { display: none; }
+  }
+
+  /* Telefono: sobran tambien los datos, que el afiche ya muestra */
+  @media (max-height: 780px) and (min-height: 461px) {
+    .pop-facts { display: none; }
+    .pop-body  { gap: 8px; padding-top: 16px; }
+  }
+
+  /* Pantallas muy bajas (iPhone SE y similares) */
+  @media (max-height: 580px) and (min-height: 461px) {
+    .pop-poster  { max-height: 46vh; max-height: 46dvh; }
+    .pop-card h2 { font-size: 19px; }
+    .pop-body    { padding-top: 14px; }
   }
 }
 

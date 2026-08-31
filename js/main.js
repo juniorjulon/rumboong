@@ -486,6 +486,9 @@ function handleContactForm(event) {
 
   var id    = modal.getAttribute('data-pop-id') || 'actividad';
   var hasta = modal.getAttribute('data-pop-hasta');
+  /* 'siempre' = en cada carga de la pagina; 'sesion' = una vez por visita */
+  var frecuencia = modal.getAttribute('data-pop-frecuencia') || 'siempre';
+  var unaVezPorSesion = frecuencia === 'sesion';
   var delay = parseInt(modal.getAttribute('data-pop-delay'), 10);
   if (isNaN(delay)) delay = 700;
 
@@ -537,7 +540,9 @@ function handleContactForm(event) {
     abierto = false;
     modal.classList.remove('is-open');
     bloquearScroll(false);
-    guardar('sessionStorage', CLAVE_SESION);
+    /* Solo se anota si el modo es 'sesion'. En 'siempre' no se guarda nada,
+       para que cambiar de modo mas adelante no lo silencie con datos viejos. */
+    if (unaVezPorSesion) guardar('sessionStorage', CLAVE_SESION);
     if (focoPrevio && focoPrevio.focus) focoPrevio.focus();
   }
 
@@ -548,8 +553,10 @@ function handleContactForm(event) {
   /* Inscribirse cuenta como atendido: no volver a interrumpir con esta actividad */
   if (cta) {
     cta.addEventListener('click', function () {
-      guardar('localStorage', CLAVE_HECHO);
-      guardar('sessionStorage', CLAVE_SESION);
+      if (unaVezPorSesion) {
+        guardar('localStorage', CLAVE_HECHO);
+        guardar('sessionStorage', CLAVE_SESION);
+      }
       setTimeout(cerrar, 120);
     });
   }
@@ -575,11 +582,14 @@ function handleContactForm(event) {
 
   /* --- ¿Corresponde mostrarlo? --- */
   function corresponde() {
-    if (leer('localStorage', CLAVE_HECHO) === '1') return false;
-    if (leer('sessionStorage', CLAVE_SESION) === '1') return false;
+    /* La actividad ya paso: no se muestra en ningun modo. */
     if (hasta) {
       var fin = new Date(hasta);
       if (!isNaN(fin.getTime()) && Date.now() > fin.getTime()) return false;
+    }
+    if (unaVezPorSesion) {
+      if (leer('localStorage', CLAVE_HECHO) === '1') return false;
+      if (leer('sessionStorage', CLAVE_SESION) === '1') return false;
     }
     return true;
   }

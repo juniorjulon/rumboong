@@ -200,13 +200,21 @@ la sección Actividades y colisionarían.
 
 | Atributo | Efecto |
 |---|---|
-| `data-pop-id` | Identifica la actividad. Al cambiarlo, el pop-up reaparece aunque la persona hubiera cerrado el anterior. |
-| `data-pop-hasta` | Fecha ISO tras la cual deja de mostrarse solo. |
+| `data-pop-id` | Identifica la actividad. Solo se usa en modo `sesion`. |
+| `data-pop-hasta` | Fecha ISO tras la cual deja de mostrarse solo. Se respeta en los dos modos. |
+| `data-pop-frecuencia` | `siempre` (actual) o `sesion`. |
 | `data-pop-delay` | Milisegundos de espera tras la pantalla de carga (700 por defecto). |
 
-**Cuándo se muestra**: una vez por sesión (`sessionStorage`). Si la persona pulsa
-«Inscríbete gratis», se guarda en `localStorage` y no se le vuelve a mostrar **esa**
-actividad en ese navegador.
+**Cuándo se muestra** — lo decide `data-pop-frecuencia`:
+
+- **`siempre`** (el modo configurado): en **cada carga de la página**, incluidas las
+  recargas. No escribe nada en el navegador.
+- **`sesion`**: una sola vez por visita (`sessionStorage`). Si además la persona pulsa
+  «Inscríbete gratis», se anota en `localStorage` y no se le vuelve a mostrar **esa**
+  actividad en ese navegador.
+
+En modo `siempre` no se guarda nada a propósito: si más adelante se cambia a `sesion`,
+no habrá datos viejos que lo silencien de entrada.
 
 **Cierre**: botón ×, «Ahora no», clic en el fondo o `Escape`. El foco entra en la tarjeta
 (con `preventScroll`, para no desplazar el diálogo y esconder el título), queda atrapado
@@ -214,16 +222,32 @@ dentro mientras está abierta y vuelve a su origen al cerrar.
 
 **Layout responsive**:
 
-| Ancho | Disposición |
-|---|---|
-| ≥ 880px | Fila: afiche `flex: 0 0 44%`, contenido al lado. Alto `min(88dvh, 640px)`. |
-| < 880px | Columna: afiche arriba (`34dvh`), contenido debajo. |
-| < 880px y alto ≤ 700px | El afiche se recorta a una banda con el titular (`object-fit: cover`) en vez de encogerse entero. |
-| Apaisado, alto ≤ 460px | Vuelve a fila, afiche al 32%. |
+**El afiche se muestra siempre completo** (`object-fit: contain`), nunca recortado: es
+la pieza que la gente vino a ver y ya lleva impresos fecha, hora, lugar, público y el QR.
+Lo que cede altura es el texto, por niveles, porque **repite lo que el afiche ya dice**:
+
+| Disposición | Condición | Qué se ve |
+|---|---|---|
+| Fila | ancho ≥ 880px | Afiche `flex: 0 0 44%` + todo el texto. Alto `min(88dvh, 640px)`. |
+| Fila | apaisado, alto ≤ 460px | Afiche al 32% + todo el texto. |
+| Columna | ancho < 880px | Afiche arriba, `max-height: 54dvh`. |
+| Columna | alto ≤ 1000px | Se oculta `.pop-lede`. |
+| Columna | alto ≤ 780px | Se oculta también `.pop-facts`. |
+| Columna | alto ≤ 580px | El afiche baja a `46dvh` y el H2 a 19px. |
+
+Los niveles de columna usan `min-height: 461px` para dejar fuera el móvil apaisado, que
+vuelve a disposición en fila y sí tiene sitio para el texto.
+
+Lo que se oculta **no se pierde**: va en el `alt` de la imagen del afiche, así que los
+lectores de pantalla siguen anunciando fecha, hora, lugar y público.
 
 El pie (`.pop-footer`) es `position: sticky` en todos los casos: **el botón de inscripción
 nunca queda bajo la línea de flotación**, por corta que sea la pantalla. El sangrado del
 pie se sincroniza con el padding del cuerpo mediante `--pop-pad`.
+
+**Verificado sin scroll ni desbordamiento** en: 320×520, 360×568, 375×553, 375×629,
+390×664, 412×730, 430×745, 844×390 (apaisado), 744×954, 768×954, 820×1080, 860×700,
+1366×641 y 1920×874.
 
 El afiche va en `object-fit: contain` sobre una copia desenfocada de sí mismo
 (`.pop-poster-blur`), que rellena el letterbox sin descarga extra — es la misma URL, así
@@ -332,6 +356,6 @@ git push
 
 ### Versión actual
 
-`css/styles.css?v=11` · `js/main.js?v=11`
+`css/styles.css?v=12` · `js/main.js?v=12`
 
 Actualiza este número cada vez que lo incrementes para tener registro.

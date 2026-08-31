@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=11">
+  <link rel="stylesheet" href="css/styles.css?v=12">
   <script>
     /* Bloquea el scroll mientras se muestra la pantalla de carga.
        El temporizador es una red de seguridad: si main.js fallara,
@@ -757,12 +757,14 @@
   </footer>
 
   <!-- ═══ Pop-up de actividades ═══
-       Para anunciar otra actividad: cambia data-pop-id (obliga a mostrarlo de nuevo
-       a quien ya cerró el anterior), data-pop-hasta (se oculta solo al pasar la fecha),
-       la imagen y los textos. Ver DESIGN-SYSTEM.md → "Pop-up de actividades". -->
+       Para anunciar otra actividad: cambia data-pop-id, data-pop-hasta (se oculta
+       solo al pasar la fecha), la imagen y los textos.
+       data-pop-frecuencia="siempre" lo muestra en cada recarga; "sesion" lo muestra
+       una sola vez por visita. Ver DESIGN-SYSTEM.md → "Pop-up de actividades". -->
   <div class="pop-modal" id="popActividad"
        data-pop-id="charla-rumbo-hacia-tu-beca-2026-09-05"
        data-pop-hasta="2026-09-05T12:30:00-05:00"
+       data-pop-frecuencia="siempre"
        data-pop-delay="700">
     <div class="pop-backdrop" data-pop-close></div>
 
@@ -778,7 +780,7 @@
         <picture class="pop-poster-main">
           <source srcset="assets/popup-charla-rumbo-hacia-tu-beca.webp" type="image/webp">
           <img src="assets/popup-charla-rumbo-hacia-tu-beca.jpg" width="1080" height="1350"
-               alt="Afiche de la charla Rumbo hacia tu Beca: sábado 5 de setiembre de 2026, de 10:30 a. m. a 12:30 p. m., en la Universidad del Pacífico.">
+               alt="Afiche de la charla Rumbo hacia tu Beca. Sábado 5 de setiembre de 2026, de 10:30 a. m. a 12:30 p. m., en la Universidad del Pacífico, Jr. Luis Sánchez Cerro 2141. Para estudiantes de 5.º de secundaria o recién egresados. Ingreso 100 % gratuito.">
         </picture>
       </div>
 
@@ -823,7 +825,7 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=11"></script>
+  <script src="js/main.js?v=12"></script>
 
 </body>
 </html>
