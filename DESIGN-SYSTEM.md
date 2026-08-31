@@ -242,6 +242,6 @@ git push
 
 ### Versión actual
 
-`css/styles.css?v=2` · `js/main.js?v=2`
+`css/styles.css?v=10` · `js/main.js?v=10`
 
 Actualiza este número cada vez que lo incrementes para tener registro.
