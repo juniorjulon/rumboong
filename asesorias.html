@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asesorías personalizadas — RUMBO</title>
+<meta name="description" content="Sesiones 1 a 1 con profesionales de RUMBO: becas, CV, orientación vocacional, elección de universidad, entrevistas y bienestar. Reserva tu horario en línea.">
+<meta property="og:title" content="Asesorías personalizadas · RUMBO">
+<meta property="og:description" content="Reserva una sesión 1 a 1 por Google Meet con un profesional de RUMBO.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="css/asesorias.css?v=1">
+</head>
+<body>
+
+<div class="banner-demo" id="bannerDemo" hidden>Modo demostración: los datos son de ejemplo y no se guarda ninguna reserva.</div>
+
+<!-- ══════════ TOPBAR ══════════ -->
+<header class="topbar">
+  <a class="logo" href="index.html">RUMBO</a>
+  <nav class="nav-links" aria-label="Secciones">
+    <a href="index.html#propuesta">Propuesta</a>
+    <a href="index.html#actividades">Actividades</a>
+    <a href="index.html#equipo">Equipo</a>
+    <a class="on" href="asesorias.html" aria-current="page">Asesorías</a>
+    <a href="index.html#unete">Únete</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="index.html#contacto">Contacto</a>
+  </nav>
+  <a class="nav-cta" href="#agendar" data-ir="agendar">Agendar</a>
+</header>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <div class="hero-eyebrow">Nivel 03 — Acompañamiento</div>
+  <h1>Asesorías personalizadas<br>con el equipo RUMBO</h1>
+  <p>Sesiones 1 a 1 con profesionales egresados de la Universidad del Pacífico. Becas, CV, orientación vocacional, elección de universidad, entrevistas y más.</p>
+  <div class="hero-badges">
+    <span class="badge badge-w"><i class="ti ti-video" aria-hidden="true"></i> Por Google Meet</span>
+    <span class="badge badge-w"><i class="ti ti-map-pin" aria-hidden="true"></i> Para todo el Perú</span>
+    <span class="badge badge-a"><i class="ti ti-clock" aria-hidden="true"></i> 60 min</span>
+    <span class="badge badge-w"><i class="ti ti-coin" aria-hidden="true"></i> Desde <span data-precio="individual">S/ 20</span></span>
+  </div>
+  <div class="hero-btns">
+    <button class="btn btn-amber btn-lg" type="button" data-ir="agendar"><i class="ti ti-calendar-plus" aria-hidden="true"></i> Reservar mi horario</button>
+    <button class="btn btn-ghost btn-lg" type="button" data-ir="como"><i class="ti ti-info-circle" aria-hidden="true"></i> ¿Cómo funciona?</button>
+  </div>
+</section>
+
+<!-- ══════════ PESTAÑAS ══════════ -->
+<div class="tabs-wrap">
+  <div class="tab-bar" role="tablist">
+    <button class="tab-btn on" type="button" role="tab" data-tab="agendar" aria-selected="true">Agendar</button>
+    <button class="tab-btn" type="button" role="tab" data-tab="como" aria-selected="false">¿Cómo funciona?</button>
+    <button class="tab-btn" type="button" role="tab" data-tab="asesores" aria-selected="false">Asesores</button>
+    <button class="tab-btn" type="button" role="tab" data-tab="precios" aria-selected="false">Precios</button>
+    <button class="tab-btn" type="button" role="tab" data-tab="preguntas" aria-selected="false">Preguntas</button>
+  </div>
+</div>
+
+<main>
+<!-- ══════════ AGENDAR ══════════ -->
+<div id="tab-agendar" class="view on" role="tabpanel">
+<section class="section" id="agendar">
+  <div class="narrow">
+
+    <!-- Reservas cerradas / sin conexión -->
+    <div id="cerrado" class="card center" hidden>
+      <i class="ti ti-calendar-pause" style="font-size:38px;color:var(--rumbo-navy)" aria-hidden="true"></i>
+      <h2 class="paso-titulo" style="margin-top:8px">Reservas en línea muy pronto</h2>
+      <p class="paso-sub" id="cerradoMsg">Mientras tanto, escríbenos por WhatsApp y coordinamos tu asesoría.</p>
+      <a class="btn btn-wsp" id="cerradoWsp" href="#" target="_blank" rel="noopener"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i> Escribir por WhatsApp</a>
+    </div>
+
+    <div id="wizard">
+      <div class="step-bar" id="stepbar" aria-label="Progreso">
+        <div class="slbl-wrap"><div class="sdot now" data-dot="1">1</div><div class="slbl">Tu consulta</div></div>
+        <div class="sline" data-line="1"></div>
+        <div class="slbl-wrap"><div class="sdot wait" data-dot="2">2</div><div class="slbl">Asesor</div></div>
+        <div class="sline" data-line="2"></div>
+        <div class="slbl-wrap"><div class="sdot wait" data-dot="3">3</div><div class="slbl">Fecha y hora</div></div>
+        <div class="sline" data-line="3"></div>
+        <div class="slbl-wrap"><div class="sdot wait" data-dot="4">4</div><div class="slbl">Tus datos</div></div>
+        <div class="sline" data-line="4"></div>
+        <div class="slbl-wrap"><div class="sdot wait" data-dot="5">5</div><div class="slbl">Confirmar</div></div>
+      </div>
+
+      <!-- PASO 1: tema y plan -->
+      <div class="paso" data-paso="1">
+        <h2 class="paso-titulo">¿En qué te ayudamos?</h2>
+        <p class="paso-sub">Elige el tema y el tipo de asesoría. Te recomendaremos a quien más sabe de eso.</p>
+        <div class="card">
+          <div class="campo">
+            <label class="form-label" for="f-tema">Tema principal</label>
+            <select class="form-select" id="f-tema"><option value="">Cargando temas…</option></select>
+          </div>
+          <div class="campo" style="margin-bottom:0">
+            <span class="form-label">Tipo de asesoría</span>
+            <div class="planes" role="radiogroup" aria-label="Tipo de asesoría">
+              <button type="button" class="plan sel" data-plan="individual" role="radio" aria-checked="true">
+                <span class="p-radio" aria-hidden="true"></span>
+                <div class="p-nombre">Sesión individual</div>
+                <div class="p-precio" data-precio="individual">S/ 20</div>
+                <div class="p-desc">1 sesión de 60 min + informe con plan de acción + seguimiento 2 semanas por WhatsApp.</div>
+              </button>
+              <button type="button" class="plan" data-plan="pack" role="radio" aria-checked="false">
+                <span class="p-radio" aria-hidden="true"></span>
+                <div class="p-nombre">Pack de 3 sesiones</div>
+                <div class="p-precio" data-precio="pack">S/ 50</div>
+                <div class="p-desc">3 sesiones en días distintos + revisión de documentos (CV, cartas) + seguimiento 1 mes.</div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <label class="form-label" for="f-detalle">Cuéntanos tu situación <span class="opc">(opcional)</span></label>
+          <textarea class="form-textarea" id="f-detalle" maxlength="1500" placeholder="Ej.: Estoy en 5.º de secundaria, quiero postular a Beca 18 y no sé por dónde empezar…"></textarea>
+        </div>
+        <div id="asesorPrevio" class="alert alert-b" style="margin-top:14px" hidden></div>
+        <div class="acciones"><button class="btn btn-primary btn-lg" type="button" data-siguiente="2">Elegir asesor <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>
+      </div>
+
+      <!-- PASO 2: asesor -->
+      <div class="paso" data-paso="2" hidden>
+        <h2 class="paso-titulo">Elige a tu asesor</h2>
+        <p class="paso-sub">Los marcados con ★ son especialistas en tu tema. Si prefieres el primer horario libre, elige <strong>RUMBO elige</strong>.</p>
+        <div class="grid3" id="gridAsesores"><div class="cargando">Cargando asesores…</div></div>
+        <div class="acciones">
+          <button class="btn btn-line" type="button" data-anterior="1">← Volver</button>
+          <button class="btn btn-primary" type="button" data-siguiente="3" id="btnPaso3" disabled>Ver horarios <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <!-- PASO 3: fecha y hora -->
+      <div class="paso" data-paso="3" hidden>
+        <h2 class="paso-titulo" id="tituloHorario">Elige día y hora</h2>
+        <p class="paso-sub" id="subHorario">Horarios en hora de Lima. Sesiones de 60 minutos.</p>
+        <div id="calCont"><div class="cargando">Buscando horarios libres…</div></div>
+        <div class="acciones">
+          <button class="btn btn-line" type="button" data-anterior="2">← Volver</button>
+          <button class="btn btn-primary" type="button" data-siguiente="4" id="btnPaso4" disabled>Continuar <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <!-- PASO 4: datos -->
+      <div class="paso" data-paso="4" hidden>
+        <h2 class="paso-titulo">Tus datos</h2>
+        <p class="paso-sub">Los usaremos solo para coordinar tu asesoría.</p>
+        <form id="formDatos" novalidate>
+          <div class="card">
+            <div class="grid2">
+              <div class="campo"><label class="form-label" for="f-nombre">Nombre completo</label><input class="form-input" id="f-nombre" autocomplete="name" maxlength="120" required></div>
+              <div class="campo"><label class="form-label" for="f-email">Correo</label><input class="form-input" id="f-email" type="email" autocomplete="email" maxlength="160" required><div class="ayuda">Aquí te llegará el link de Google Meet.</div></div>
+            </div>
+            <div class="grid2">
+              <div class="campo"><label class="form-label" for="f-whatsapp">WhatsApp</label><input class="form-input" id="f-whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="987 654 321" maxlength="20" required></div>
+              <div class="campo"><label class="form-label" for="f-ciudad">Ciudad / región</label><input class="form-input" id="f-ciudad" maxlength="80" placeholder="Lima, Cusco, Piura…"></div>
+            </div>
+            <div class="campo">
+              <label class="form-label" for="f-grado">Grado / año</label>
+              <select class="form-select" id="f-grado">
+                <option value="">Selecciona</option>
+                <option>3.º de secundaria</option><option>4.º de secundaria</option><option>5.º de secundaria</option>
+                <option>Egresado(a) del colegio</option><option>1.er año universitario / instituto</option>
+                <option>2.º año universitario / instituto</option><option>Otro</option>
+              </select>
+            </div>
+            <label class="toggle" for="f-menor">
+              <span><strong style="font-family:var(--font-display);font-size:14px">Soy menor de 18 años</strong><br><span class="small muted">Te pediremos los datos de tu padre, madre o apoderado.</span></span>
+              <input type="checkbox" id="f-menor"><span class="pista" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="bloque-apoderado" id="bloqueApoderado" hidden>
+            <div class="campo"><label class="form-label" for="f-apo-nombre">Nombre del padre, madre o apoderado</label><input class="form-input" id="f-apo-nombre" maxlength="120"></div>
+            <div class="grid2">
+              <div class="campo"><label class="form-label" for="f-apo-email">Su correo <span class="opc">(recomendado)</span></label><input class="form-input" id="f-apo-email" type="email" maxlength="160"><div class="ayuda">Recibirá copia de la confirmación.</div></div>
+              <div class="campo"><label class="form-label" for="f-apo-tel">Su celular</label><input class="form-input" id="f-apo-tel" type="tel" inputmode="tel" maxlength="20"></div>
+            </div>
+            <label class="check"><input type="checkbox" id="f-apo-autoriza"> Mi padre, madre o apoderado está informado(a) y autoriza que participe en la asesoría y que RUMBO use estos datos para coordinarla.</label>
+          </div>
+
+          <div class="card" style="margin-top:14px">
+            <label class="form-label" for="f-cupon">Código de descuento o beca <span class="opc">(opcional)</span></label>
+            <div class="fila-codigo">
+              <input class="form-input" id="f-cupon" maxlength="40" autocomplete="off" placeholder="Ej.: AMIGOS">
+              <button class="btn btn-line" type="button" id="btnCupon">Aplicar</button>
+            </div>
+            <div id="cuponMsg" class="ayuda"></div>
+            <div class="campo" id="campoAmigo" style="margin:12px 0 0" hidden>
+              <label class="form-label" for="f-amigo">Correo de tu amigo(a)</label>
+              <input class="form-input" id="f-amigo" type="email" maxlength="160">
+            </div>
+          </div>
+
+          <div class="card">
+            <label class="check"><input type="checkbox" id="f-privacidad" required> Acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a> y el uso de mis datos para coordinar la asesoría.</label>
+          </div>
+          <div class="honeypot" aria-hidden="true"><label for="f-web">Tu sitio web</label><input id="f-web" tabindex="-1" autocomplete="off"></div>
+        </form>
+        <div class="acciones">
+          <button class="btn btn-line" type="button" data-anterior="3">← Volver</button>
+          <button class="btn btn-primary" type="button" data-siguiente="5">Revisar mi reserva <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <!-- PASO 5: confirmar -->
+      <div class="paso" data-paso="5" hidden>
+        <h2 class="paso-titulo">Revisa y confirma</h2>
+        <p class="paso-sub">Al confirmar apartamos tu horario. Tendrás <strong data-plazo>24 horas</strong> para subir tu comprobante de pago.</p>
+        <div class="card">
+          <div class="resumen" id="resumen"></div>
+        </div>
+        <div class="alert alert-b" style="margin-top:14px"><i class="ti ti-shield-check" aria-hidden="true"></i><div>Puedes reprogramar <strong>1 vez</strong> hasta 24 horas antes desde el enlace que te enviaremos por correo.</div></div>
+        <div class="acciones">
+          <button class="btn btn-line" type="button" data-anterior="4">← Volver</button>
+          <button class="btn btn-teal btn-lg" type="button" id="btnReservar"><i class="ti ti-lock" aria-hidden="true"></i> Apartar mi horario</button>
+        </div>
+      </div>
+
+      <!-- PASO 6: pago / listo -->
+      <div class="paso" data-paso="6" hidden>
+        <div id="resultado"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════ CÓMO FUNCIONA ══════════ -->
+<div id="tab-como" class="view" role="tabpanel">
+<section class="section" style="background:var(--surface)">
+  <div class="narrow">
+    <div class="eyebrow">Proceso</div>
+    <h2 class="sec-title">¿Cómo funciona una asesoría?</h2>
+    <p class="sec-sub">De tu reserva a tu plan de acción, en 5 pasos.</p>
+    <div class="flow-step"><div class="flow-dot">1</div><div class="flow-line"></div><div class="flow-body"><div class="flow-title">Reservas tu horario (5 min)</div><div class="flow-desc">Eliges tema, asesor y un horario libre en tiempo real. Tu horario queda apartado.</div><span class="flow-tool">rumbo.org.pe</span></div></div>
+    <div class="flow-step"><div class="flow-dot">2</div><div class="flow-line"></div><div class="flow-body"><div class="flow-title">Pagas y subes tu comprobante</div><div class="flow-desc">Yape o Plin, dentro de las <span data-plazo>24 horas</span>. Un coordinador lo verifica y te llega la confirmación con el link de Google Meet y la invitación al calendario.</div><span class="flow-tool">Yape · Plin</span></div></div>
+    <div class="flow-step"><div class="flow-dot">3</div><div class="flow-line"></div><div class="flow-body"><div class="flow-title">Diagnóstico previo (3 min)</div><div class="flow-desc">Respondes unas preguntas breves para que tu asesor llegue con recursos pensados para ti. Te recordamos 24 h y 2 h antes.</div><span class="flow-tool">Correo</span></div></div>
+    <div class="flow-step"><div class="flow-dot teal">4</div><div class="flow-line"></div><div class="flow-body"><div class="flow-title">Tu asesoría de 60 minutos</div><div class="flow-desc">Por Google Meet, desde tu celular o computadora.</div><span class="flow-tool">Google Meet</span></div></div>
+    <div class="flow-step"><div class="flow-dot verde"><i class="ti ti-star" aria-hidden="true"></i></div><div class="flow-body"><div class="flow-title">Informe + seguimiento</div><div class="flow-desc">En 48 h recibes tu informe con plan de acción, y seguimiento por WhatsApp (2 semanas en la sesión individual, 1 mes en el pack).</div><span class="flow-tool">WhatsApp</span></div></div>
+    <div class="alert alert-y" style="margin:8px 0 22px"><i class="ti ti-calendar" aria-hidden="true"></i><div><strong>Sobre la disponibilidad:</strong> cada asesor atiende un número limitado de sesiones al mes para cuidar la calidad. Si tu asesor favorito no tiene horarios, elige otro o “RUMBO elige”.</div></div>
+    <button class="btn btn-primary btn-lg btn-block" type="button" data-ir="agendar">Reservar mi horario <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+  </div>
+</section>
+</div>
+
+<!-- ══════════ ASESORES ══════════ -->
+<div id="tab-asesores" class="view" role="tabpanel">
+<section class="section" style="background:var(--bg-cream)">
+  <div class="container">
+    <div class="eyebrow">El equipo</div>
+    <h2 class="sec-title">Conoce a tus asesores</h2>
+    <p class="sec-sub">Profesionales egresados de la Universidad del Pacífico con experiencia real en sus áreas.</p>
+    <div class="team-grid" id="gridEquipo"><div class="cargando">Cargando equipo…</div></div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════ PRECIOS ══════════ -->
+<div id="tab-precios" class="view" role="tabpanel">
+<section class="section" style="background:var(--surface)">
+  <div class="narrow">
+    <div class="eyebrow">Precios</div>
+    <h2 class="sec-title">Costo social, impacto real</h2>
+    <p class="sec-sub">Diseñados para ser accesibles. Lo que pagas financia también las charlas gratuitas de RUMBO en colegios.</p>
+    <div class="grid2 mb">
+      <div class="price-card">
+        <div class="price-head"><div class="price-head-title"><i class="ti ti-device-laptop" aria-hidden="true"></i> Sesión individual</div></div>
+        <div class="price-body">
+          <div class="price-amount" data-precio="individual">S/ 20</div>
+          <div class="price-desc">Una sesión de 60 minutos</div>
+          <div class="price-feats">
+            <div class="price-feat"><i class="ti ti-check" aria-hidden="true"></i>Diagnóstico previo personalizado</div>
+            <div class="price-feat"><i class="ti ti-check" aria-hidden="true"></i>Informe con plan de acción</div>
+            <div class="price-feat"><i class="ti ti-check" aria-hidden="true"></i>Seguimiento 2 semanas por WhatsApp</div>
+          </div>
+        </div>
+      </div>
+      <div class="price-card featured">
+        <div class="price-head"><div class="price-head-title"><i class="ti ti-rocket" aria-hidden="true"></i> Pack de 3 sesiones</div><span class="price-fav">Más completo</span></div>
+        <div class="price-body">
+          <div class="price-amount" data-precio="pack">S/ 50</div>
+          <div class="price-desc">3 sesiones · acompañamiento completo</div>
+          <div class="price-feats">
+            <div class="price-feat"><i class="ti ti-check" aria-hidden="true"></i>Todo lo de la sesión individual</div>
+            <div class="price-feat"><i class="ti ti-check" aria-hidden="true"></i>Revisión de documentos (CV, cartas)</div>
+            <div class="price-feat"><i class="ti ti-check" aria-hidden="true"></i>Seguimiento extendido de 1 mes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-b"><i class="ti ti-users" aria-hidden="true"></i><div><strong>¿Vienes con un amigo?</strong> Usen el código <strong>AMIGOS</strong> y cada uno obtiene 10% de descuento.</div></div>
+    <div class="alert alert-b"><i class="ti ti-gift" aria-hidden="true"></i><div><strong>Recomienda y gana:</strong> al confirmar tu asesoría recibes un código personal. Tu amigo obtiene <span data-referido>S/ 5</span> de descuento y tú, un premio para tu próxima sesión.</div></div>
+    <div class="alert alert-g"><i class="ti ti-heart-handshake" aria-hidden="true"></i><div><strong>¿No puedes pagarlo?</strong> Síguenos en Instagram <a href="https://www.instagram.com/rumbo.ong/" target="_blank" rel="noopener">@rumbo.ong</a>: sorteamos asesorías gratuitas financiadas por donantes.</div></div>
+    <button class="btn btn-primary btn-lg btn-block" style="margin-top:22px" type="button" data-ir="agendar">Reservar mi horario <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+  </div>
+</section>
+</div>
+
+<!-- ══════════ PREGUNTAS ══════════ -->
+<div id="tab-preguntas" class="view" role="tabpanel">
+<section class="section">
+  <div class="narrow">
+    <div class="eyebrow">Dudas frecuentes</div>
+    <h2 class="sec-title">Preguntas sobre las asesorías</h2>
+    <p class="sec-sub">Si no encuentras tu respuesta, escríbenos por <a href="#" data-wsp>WhatsApp</a>.</p>
+    <details class="faq-item"><summary>¿Cómo pago?</summary><p>Por Yape o Plin. Al apartar tu horario verás el número y el QR; luego subes la captura del pago en la misma página (o desde el enlace que te llega por correo). Tienes <span data-plazo>24 horas</span>.</p></details>
+    <details class="faq-item"><summary>¿Qué pasa si no pago a tiempo?</summary><p>El horario se libera automáticamente para otro estudiante y te avisamos por correo. Puedes volver a reservar cuando quieras.</p></details>
+    <details class="faq-item"><summary>¿Puedo cambiar la fecha?</summary><p>Sí, puedes reprogramar cada sesión 1 vez, hasta 24 horas antes, desde el enlace “Ver mi reserva” de tu correo. Para cambios de último momento escríbenos por WhatsApp.</p></details>
+    <details class="faq-item"><summary>¿Y si necesito cancelar?</summary><p>Escríbenos por WhatsApp con tu código de reserva. Si ya pagaste, coordinamos una nueva fecha o la devolución.</p></details>
+    <details class="faq-item"><summary>Soy menor de edad, ¿puedo reservar?</summary><p>Sí. Te pediremos el nombre y el contacto de tu padre, madre o apoderado y su autorización; recibirá copia de la confirmación si nos das su correo.</p></details>
+    <details class="faq-item"><summary>¿Qué necesito para la sesión?</summary><p>Celular o computadora con internet y tu correo de Google (si tienes). Ten a la mano tus dudas y, si aplica, tu CV o documentos.</p></details>
+    <details class="faq-item"><summary>¿Cómo funcionan las asesorías gratuitas?</summary><p>Son financiadas por donantes y se entregan mediante sorteos en Instagram priorizando a quienes más lo necesitan. Los ganadores reciben un código de beca que deben escribir al reservar.</p></details>
+  </div>
+</section>
+</div>
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <div><div class="f-logo">RUMBO</div><div class="f-tag">Transformando decisiones en oportunidades</div></div>
+  <div class="f-links">
+    <a href="index.html">Inicio</a>
+    <a href="privacidad.html">Privacidad</a>
+    <a href="mailto:rumbo.transformatufuturo@gmail.com">rumbo.transformatufuturo@gmail.com</a>
+    <a href="panel.html">Equipo</a>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/rumbo-config.js?v=1"></script>
+<script src="js/rumbo-comun.js?v=1"></script>
+<script src="js/asesorias.js?v=1"></script>
+</body>
+</html>

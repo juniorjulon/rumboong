@@ -1,3 +1,5 @@
+> ✅ **Implementado (octubre 2026).** Esta propuesta evolucionó al sistema actual con Supabase, panel del equipo y Google Meet automático. La documentación vigente está en [`docs/asesorias/`](docs/asesorias/README.md).
+
 # Asesorías Personalizadas — Propuesta de gestión de reservas
 
 > Documento de decisión para el equipo Rumbo. El prototipo visual vive en

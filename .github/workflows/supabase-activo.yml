@@ -1,0 +1,40 @@
+# ---------------------------------------------------------------------
+# Mantener Supabase activo
+# El plan gratuito de Supabase pausa los proyectos que pasan 7 días sin
+# actividad. Este flujo hace una consulta mínima a la base de datos cada
+# 2 días como respaldo (las tareas automáticas cada 10 min ya generan
+# actividad). Lee la URL y la clave PÚBLICA de js/rumbo-config.js, así que
+# no necesitas configurar nada aquí.
+# Para ejecutarlo a mano: pestaña Actions → "Mantener Supabase activo" → Run workflow.
+# ---------------------------------------------------------------------
+name: Mantener Supabase activo
+
+on:
+  schedule:
+    - cron: '17 13 */2 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Consultar la base de datos
+        run: |
+          URL=$(grep -oP "supabaseUrl:\s*'\K[^']+" js/rumbo-config.js || true)
+          KEY=$(grep -oP "supabaseKey:\s*'\K[^']+" js/rumbo-config.js || true)
+          if [ -z "$URL" ] || [ -z "$KEY" ]; then
+            echo "Supabase aún no está configurado en js/rumbo-config.js. Nada que hacer."
+            exit 0
+          fi
+          if [[ "$KEY" == sb_* ]]; then
+            curl -sS -f -X POST "$URL/rest/v1/rpc/ping" -H "apikey: $KEY" -H "Content-Type: application/json" -d '{}'
+          else
+            curl -sS -f -X POST "$URL/rest/v1/rpc/ping" -H "apikey: $KEY" -H "Authorization: Bearer $KEY" -H "Content-Type: application/json" -d '{}'
+          fi
+          echo ""
+          echo "✔ Supabase respondió."
