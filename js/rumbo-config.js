@@ -15,7 +15,7 @@
                     Se usa como respaldo si la base de datos no responde.
    ===================================================================== */
 window.RUMBO_CONFIG = {
-  supabaseUrl: '',
-  supabaseKey: '',
-  whatsapp: '51999999999'
+  supabaseUrl: 'https://uzjulvhjnklzcpbovdit.supabase.co/rest/v1/',
+  supabaseKey: 'sb_publishable_EUKy00oOxhZ4BAhh22DvIw_cwfsL28W',
+  whatsapp: '51933285212'
 };
