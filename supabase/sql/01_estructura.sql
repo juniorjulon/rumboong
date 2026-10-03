@@ -1222,6 +1222,22 @@ begin
   );
 end $$;
 
+-- El estudiante recupera su enlace secreto con su código de reserva y su correo.
+create or replace function public.buscar_reserva(p_codigo text, p_email text) returns uuid
+language plpgsql volatile security definer set search_path = public as $$
+declare
+  v_cod   text := upper(regexp_replace(coalesce(p_codigo, ''), '\s', '', 'g'));
+  v_token uuid;
+begin
+  perform pg_sleep(0.4);  -- frena intentos masivos de adivinar códigos
+  if v_cod = '' or coalesce(trim(p_email), '') = '' then return null; end if;
+  if v_cod !~ '^RB-' then v_cod := 'RB-' || v_cod; end if;
+  select token into v_token from public.reservas
+   where codigo = v_cod and lower(email) = lower(trim(p_email))
+   limit 1;
+  return v_token;
+end $$;
+
 create or replace function public.guardar_diagnostico(p_token uuid, p_respuestas jsonb) returns boolean
 language plpgsql security definer set search_path = public as $$
 declare r public.reservas%rowtype;
@@ -1554,6 +1570,7 @@ begin
     'public.ajustes_publicos()',
     'public.validar_cupon(text, text, text)',
     'public.reserva_por_token(uuid)',
+    'public.buscar_reserva(text, text)',
     'public.guardar_diagnostico(uuid, jsonb)',
     'public.guardar_encuesta(uuid, uuid, int, int, text, text, text, boolean)',
     'public.ping()'

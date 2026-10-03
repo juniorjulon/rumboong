@@ -240,6 +240,7 @@
         }
         if (n === 'reserva_por_token') return espera(DEMO.reservaEjemplo());
         if (n === 'guardar_diagnostico' || n === 'guardar_encuesta') return espera(true);
+        if (n === 'buscar_reserva') return espera(/DEMO/i.test(String(p.p_codigo || '')) ? '00000000-0000-4000-8000-000000000000' : null);
         return Promise.reject(new Error('Demo: ' + n + ' no disponible'));
       },
       api: function (accion, d) {
@@ -251,6 +252,7 @@
         }
         if (accion === 'subir_voucher') return espera({ ok: true, estado: 'en_revision' });
         if (accion === 'reprogramar') return espera({ ok: true, inicio: d.inicio });
+        if (accion === 'recuperar_reservas') return espera({ ok: true, aviso: 'Demo: si hay reservas con ese correo, se enviarían sus enlaces.' });
         return Promise.reject(new Error('Demo: acción no disponible'));
       },
       reservaEjemplo: function () {

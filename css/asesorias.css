@@ -64,6 +64,8 @@ button { cursor: pointer; }
 .badge-w { background: rgba(255,255,255,.13); color: rgba(255,255,255,.92); }
 .badge-a { background: var(--rumbo-amber); color: var(--rumbo-navy-deep); font-weight: 700; }
 .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.hero-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; font-size: 13.5px; color: rgba(255,255,255,.88); text-decoration: underline; text-underline-offset: 3px; position: relative; z-index: 1; }
+.hero-link:hover { color: #fff; }
 
 /* ── Botones ── */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-display); font-size: 14px; font-weight: 600; padding: 12px 24px; border-radius: 999px; border: none; cursor: pointer; transition: all .25s cubic-bezier(.2,.8,.2,1); text-decoration: none; line-height: 1.2; }
@@ -135,6 +137,8 @@ button { cursor: pointer; }
 .honeypot { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
 .fila-codigo { display: flex; gap: 8px; }
 .fila-codigo .form-input { text-transform: uppercase; }
+.fila-codigo .form-input[type="email"] { text-transform: none; }
+@media (max-width: 480px) { .fila-recuperar { flex-direction: column; } .fila-recuperar .btn { width: 100%; } }
 
 /* Interruptor (toggle) */
 .toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: var(--r-sm); cursor: pointer; }

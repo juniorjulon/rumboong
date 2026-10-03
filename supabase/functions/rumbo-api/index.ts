@@ -112,6 +112,8 @@ Deno.serve(async (req: Request) => {
         return json(await accionSubirVoucher(body));
       case "reprogramar":
         return json(await accionReprogramarEstudiante(body));
+      case "recuperar_reservas":
+        return json(await accionRecuperarReservas(body));
 
       // --- Panel del equipo -------------------------------------------
       case "verificar_pago":
@@ -818,6 +820,54 @@ async function avisarReprogramacion(res: any, actor: string) {
       }),
     });
   }
+}
+
+// El estudiante perdió su código o su correo: le reenviamos sus enlaces.
+// Siempre responde lo mismo, para no revelar si un correo tiene reservas.
+async function accionRecuperarReservas(b: any) {
+  if (b.sitio_web) throw new ErrorRumbo("No pudimos procesar tu solicitud.");
+  const email = String(b.email ?? "").trim().toLowerCase();
+  if (!EMAIL_RE.test(email)) throw new ErrorRumbo("Escribe un correo válido.");
+  const respuesta = {
+    ok: true,
+    aviso: "Si hay reservas activas con ese correo, te acabamos de enviar sus enlaces. Revisa también la carpeta de Spam.",
+  };
+
+  // Máximo 3 reenvíos por hora para el mismo correo
+  const haceUnaHora = new Date(Date.now() - 3600_000).toISOString();
+  const { count } = await db.from("notificaciones").select("id", { count: "exact", head: true })
+    .eq("tipo", "recuperar_reservas").eq("destinatario", email).gte("created_at", haceUnaHora);
+  if ((count ?? 0) >= 3) return respuesta;
+
+  const hace180 = new Date(Date.now() - 180 * 864e5).toISOString();
+  const { data: reservas } = await db.from("reservas")
+    .select("id, codigo, token, estado, plan, apoderado_email, miembros!reservas_miembro_id_fkey(nombre), sesiones(inicio, estado, numero)")
+    .eq("email", email).in("estado", ["pendiente_pago", "en_revision", "confirmada"])
+    .gte("created_at", hace180).order("created_at", { ascending: false }).limit(10);
+  if (!reservas?.length) return respuesta;
+
+  const aj = await ajustes();
+  const etiqueta: Record<string, string> = {
+    pendiente_pago: "Falta tu pago", en_revision: "Verificando tu pago", confirmada: "Confirmada",
+  };
+  const filas = reservas.map((r: any) => {
+    const ses = (r.sesiones ?? []).filter((s: any) => s.estado !== "cancelada")
+      .sort((x: any, y: any) => x.numero - y.numero);
+    const fechas = ses.map((s: any) => esc(cuando(s.inicio))).join("<br>");
+    return caja(
+      `<strong>${esc(r.codigo)}</strong> · ${esc(etiqueta[r.estado] ?? r.estado)} · con ${esc(r.miembros?.nombre ?? "RUMBO")}<br>` +
+      `${fechas}<br><a href="${esc(linkMiReserva(aj, r.token))}" style="color:#004F8C;font-weight:700">Ver esta reserva</a>`,
+    );
+  });
+  await enviarCorreo({
+    tipo: "recuperar_reservas", para: [email], asunto: "Tus enlaces de reserva — RUMBO", responderA: aj.email_respuesta,
+    reserva_id: reservas[0].id,
+    html: plantilla({
+      aj, titulo: "Aquí están tus reservas",
+      bloques: [p("Pediste que te reenviáramos los enlaces de tus asesorías. Cada enlace es personal: no lo compartas."), ...filas],
+    }),
+  });
+  return respuesta;
 }
 
 async function accionReprogramarEstudiante(b: any) {

@@ -450,9 +450,11 @@ Hazla desde tu celular, como si fueras estudiante, con un **correo personal dist
    - ✅ El link de Meet abre la sala **sin pedir que te admitan**.
 4. Abre **“Ver mi reserva”** desde el correo → completa el **diagnóstico** → prueba **Reprogramar**.
    - ✅ Llega el correo de reprogramación y el evento del calendario cambia de hora.
-5. Prueba una **beca**: panel → **Cupones y becas** → **Registrar donante** (“Prueba”) → **Generar códigos de beca** (1) → reserva con ese código.
+5. Prueba la entrada **sin enlace**: abre <https://rumbo.org.pe/mi-reserva.html> en una **ventana de incógnito** → escribe tu código (RB-…) y tu correo → **Ver mi reserva**. Luego vuelve a esa página y usa **Reenviarme mis enlaces**.
+   - ✅ Se abre tu reserva, y te llega el correo “Tus enlaces de reserva — RUMBO”.
+6. Prueba una **beca**: panel → **Cupones y becas** → **Registrar donante** (“Prueba”) → **Generar códigos de beca** (1) → reserva con ese código.
    - ✅ La reserva queda confirmada al instante, sin pago.
-6. **Limpia las pruebas:** en el panel abre cada reserva de prueba → **Cancelar reserva** (desmarca “Avisar por correo” si quieres). Los horarios se liberan. Desactiva el código de beca de prueba.
+7. **Limpia las pruebas:** en el panel abre cada reserva de prueba → **Cancelar reserva** (desmarca “Avisar por correo” si quieres). Los horarios se liberan. Desactiva el código de beca de prueba.
 
 ---
 
@@ -528,7 +530,10 @@ Supabase Free no incluye copias descargables automáticas. Una vez al mes, expor
 | Un integrante no puede entrar al panel | Contraseña errónea o acceso no creado | Administrador → **Equipo → Editar → Cambiar contraseña / Crear acceso**. |
 | “Tu usuario no está vinculado…” | El usuario existe pero no está unido al perfil | Administrador → **Equipo → Editar → Crear acceso** con ese mismo correo. Para tu propio usuario: paso 3.5. |
 | No llegan recordatorios | La tarea automática no corre o no llega a la función | Paso 6: ejecuta la consulta de `net._http_response`. Si muestra `401`, la clave `TU-CLAVE-SECRETA` del archivo 3 no coincide con `CRON_SECRET`: corrige el archivo y vuelve a ejecutarlo. Si muestra `404`, revisa `TU-PROYECTO` y que la función se llame `rumbo-api`. |
-| El estudiante no encuentra el correo con su enlace | Spam o correo mal escrito | Coordinación abre la reserva → **Abrir “Mi reserva”** y le envía ese enlace por WhatsApp, o **Reenviar confirmación**. |
+| El estudiante no encuentra el correo con su enlace | Spam, lo borró o cambió de celular | Que entre a <https://rumbo.org.pe/mi-reserva.html> (o **“¿Ya reservaste?”** en la página de asesorías) con su **código + correo**, o que use **Reenviarme mis enlaces**. Si escribió mal su correo al reservar, coordinación abre la reserva → **Abrir “Mi reserva”** y le manda ese enlace por WhatsApp. |
+| En `mi-reserva.html` sale “No encontramos una reserva con ese código y ese correo” | El correo no es exactamente el que usó al reservar, o el código está mal | Revisar el correo en el panel (abre la reserva). Mayúsculas, espacios y el prefijo `RB-` no importan. |
+| “Reenviarme mis enlaces” dice que envió, pero no llega nada | No hay reservas **activas** con ese correo (las canceladas o vencidas no se reenvían), ya pidió 3 veces en la última hora, o cayó en Spam | Revisar en el panel → **Correos** si salió “recuperar_reservas”. Si no, mandar el enlace con **Abrir “Mi reserva”**. |
+| Entro a `mi-reserva.html` y me pide el código, aunque ya reservé | Es lo normal si entras sin el enlace del correo. El acceso rápido “En este navegador tienes la reserva…” solo aparece en el mismo navegador donde reservaste | Escribe tu código y tu correo, o abre el enlace del correo. |
 
 Si nada de esto lo resuelve, revisa **Supabase → Edge Functions → rumbo-api → Logs**: allí aparece el detalle técnico de cada error.
 

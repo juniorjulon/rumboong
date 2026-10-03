@@ -88,7 +88,7 @@ Cuando un estudiante sube su comprobante, llega un correo **“💸 Voucher por 
 | **Cancelar reserva** | Libera los horarios y el código usado, borra el evento de Calendar y avisa (opcional). Las devoluciones se coordinan por WhatsApp. |
 | **Reintentar Meet** | Si al confirmar Google falló, crea el Meet y reenvía los correos. |
 | **Reenviar confirmación / datos de pago** | Si el estudiante no encuentra el correo. |
-| **Abrir “Mi reserva”** | El enlace personal del estudiante, por si hay que mandárselo por WhatsApp. |
+| **Abrir “Mi reserva”** | El enlace personal del estudiante, por si hay que mandárselo por WhatsApp. (El estudiante también puede entrar solo: ver la pregunta frecuente de abajo.) |
 | **Notas internas** | Solo para el equipo. |
 | **Historial** | Quién hizo qué y cuándo. |
 
@@ -167,5 +167,11 @@ Así funciona el ciclo, alineado al plan 2.0:
 **Marqué disponibilidad, pero no me aparecen reservas.** Revisa que estés **publicado** y con **cupo libre** (coordinación, en Equipo), y que tus horarios estén a más de 48 h.
 
 **¿Qué pasa si se cae Google justo al confirmar?** La reserva queda confirmada igual. En el panel aparece **Reintentar Meet** y en **Correos** el motivo.
+
+**Un estudiante perdió el correo o el enlace de su reserva. ¿Cómo entra?** Que abra <https://rumbo.org.pe/mi-reserva.html> (también está el enlace **“¿Ya reservaste? Consulta tu reserva con tu código”** en la página de asesorías y **“Mi reserva”** en el menú). Ahí puede:
+- escribir su **código** (RB-XXXXX) y el **correo con el que reservó**, o
+- si tampoco tiene el código, tocar **“Reenviarme mis enlaces”**: le llega un correo con todas sus reservas activas.
+
+Si escribió mal su correo al reservar, nada de eso le funcionará: búscalo en el panel por su nombre o WhatsApp y mándale el enlace con **Abrir “Mi reserva”**.
 
 **¿Cómo veo la página como la ve un estudiante?** Abre <https://rumbo.org.pe/asesorias.html> en una ventana de incógnito.
