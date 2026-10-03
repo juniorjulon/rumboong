@@ -202,10 +202,26 @@ Aquí le das permiso al sistema para crear salas de Meet, invitaciones de calend
    - **Público** (*Audience*): **Externo** (*External*) → **Siguiente**
    - **Información de contacto:** el Gmail de RUMBO → **Siguiente**
    - Acepta la política → **Continuar** → **Crear**.
-3. En el menú de la izquierda entra a **Público** (*Audience*). Verás **Estado de publicación: Prueba** (*Testing*).
-4. Presiona **Publicar app** (*Publish app*) → **Confirmar**. El estado debe cambiar a **En producción** (*In production*).
+3. **Completa la información de marca.** Google no deja publicar sin ella. En el menú de la izquierda entra a **Desarrollo de la marca** (*Branding*); la página se titula **Información de marca**:
+   - **Nombre de la aplicación:** `RUMBO Reservas` (ya viene del paso anterior).
+   - **Correo electrónico de asistencia al usuario:** el Gmail de RUMBO.
+   - **Logotipo de la app:** ⚠️ **déjalo vacío.** Si subiste uno, presiona **Quitar**. Google lo advierte en la misma página: con logotipo, la app debe pasar por una **verificación formal** (que tarda semanas) antes de publicarse. Sin logotipo no hace falta.
+   - **Dominio de la app:**
+     - **Página principal de la aplicación:** `https://rumbo.org.pe`
+     - **Vínculo a la Política de Privacidad de la aplicación:** `https://rumbo.org.pe/privacidad.html`
+     - **Vínculo a las Condiciones del Servicio de la aplicación:** déjalo vacío (si te lo exige, pon `https://rumbo.org.pe`).
+   - **Dominios autorizados:** **+ Agregar un dominio** → `rumbo.org.pe` (sin `https://` ni `www`).
+   - **Información de contacto del desarrollador:** el Gmail de RUMBO.
+   - Presiona **Guardar**, al final de la página.
+4. En el menú de la izquierda entra a **Público** (*Audience*). Verás **Estado de publicación: Prueba** (*Testing*).
+5. Presiona **Publicar app** (*Publish app*) → **Confirmar**. El estado debe cambiar a **En producción** (*In production*).
+   - Si aparece un aviso de que la app **necesita verificación** o **no está verificada**, confirma igual. Solo significa que en el paso 4.5 verás la pantalla “Google no verificó esta app”, y eso es normal.
 
 > ❓ **¿Por qué publicarla?** Si la dejas en “Prueba”, Google corta el permiso cada 7 días y los correos dejarían de salir. En “Producción” el permiso dura indefinidamente. **No necesitas** enviar la app a verificación: solo la usará la cuenta de RUMBO.
+>
+> ❓ **¿Y si la página de privacidad aún no está en línea?** No pasa nada. Google solo revisa esos enlaces si pides la verificación formal. La página existirá cuando publiques la versión con asesorías.
+
+**✅ Cómo saber que salió bien:** en **Público** dice **En producción**, y en **Información de marca** no hay logotipo.
 
 ### 4.4 Crear las credenciales (Client ID y Client secret)
 
@@ -348,6 +364,14 @@ window.RUMBO_CONFIG = {
 5. Espera 1 a 3 minutos (pestaña **Actions** con ✅).
 
 > Es seguro que estas dos claves estén en GitHub: son públicas por diseño. La seguridad la ponen los permisos de la base de datos.
+
+> 🧪 **¿Quieres probar todo en tu computadora antes de que la web pública se conecte?** En vez de editar en GitHub:
+> 1. Edita `js/rumbo-config.js` en **VS Code**, en tu carpeta local, en una rama de pruebas (no en `main`).
+> 2. Abre las páginas con la extensión **Live Server** (clic derecho en `asesorias.html` → *Open with Live Server*).
+> 3. Mientras pruebas, en el panel → **Ajustes → Dirección de la web**, pon la dirección de Live Server (por ejemplo `http://127.0.0.1:5500`), para que los enlaces de los correos abran tu versión local.
+> 4. Cuando todo funcione, vuelve a poner `https://rumbo.org.pe` en Ajustes y une tu rama a `main`: recién ahí la web pública se conecta.
+>
+> Usa tus propios correos para las reservas de prueba: los correos e invitaciones se envían de verdad.
 
 ### 7.3 Dirección del sitio en Supabase
 
@@ -495,6 +519,7 @@ Supabase Free no incluye copias descargables automáticas. Una vez al mes, expor
 | La reserva se crea, pero no llegan correos | Faltan los Secrets de Google o el token caducó | **Ajustes → Probar conexión** y **Correos** (verás el motivo). Revisa el 5.3. Si dice `invalid_grant`: repite el 4.5. |
 | `invalid_grant` en Correos | Cambiaste la contraseña del Gmail, revocaste el acceso o la app quedó en “Prueba” | Verifica que la app esté **En producción** (4.3) y repite el 4.5. |
 | `access_not_configured` o “API has not been used” | Falta activar una API | Paso 4.2 (las tres APIs). |
+| Google no deja **Publicar app** y pide completar la información de marca | Faltan los datos de **Información de marca**, o subiste un logotipo (con logotipo, Google exige verificación formal) | Paso 4.3, punto 3: quita el logotipo, completa página principal, política de privacidad y dominio autorizado `rumbo.org.pe`, guarda y vuelve a **Público → Publicar app**. |
 | Prueba de conexión: “⚠️ La API de Meet no está disponible” | No activaste **Google Meet REST API** o falta el permiso `meetings.space.created` | Actívala (4.2) y repite el 4.5 con los 3 permisos. Mientras tanto se usa el Meet del calendario. |
 | Al confirmar el pago: “no se pudo crear el Meet” | Fallo temporal de Google | En la reserva → **Reintentar Meet**. |
 | Los correos caen en Spam | Gmail nuevo o pocas interacciones | Pide a los primeros estudiantes marcarlos como “No es spam”. Agrega el correo de RUMBO a contactos. |
