@@ -200,6 +200,40 @@ Ver sección Tipografía.
 
 ---
 
+## Páginas internas
+
+| Página | Header | Estilos propios |
+|---|---|---|
+| `index.html` | navbar completo (`.navbar`) | `css/styles.css` |
+| `asesorias.html` | **el mismo navbar completo** | `css/styles.css` + `css/asesorias.css` |
+| `becas.html` | mini-header propio | inline |
+| `universidades.html` | mini-header propio | inline |
+
+`asesorias.html` reutiliza navbar, footer, tokens, botones (`.btn-primary`,
+`.btn-ghost`, `.btn-ghost-dark`), `.container`, `.eyebrow` y `js/main.js` tal cual.
+Todo lo exclusivo de esa página vive en `css/asesorias.css` con **prefijo `.asr-`**,
+justamente para no chocar con las clases genéricas de `styles.css` (`.hero`,
+`.section`, `.card`, `.tag`, `.badge`…).
+
+> Si agregas otra página interna con el navbar completo, recuerda incluir los ids que
+> `js/main.js` usa sin comprobar: `#navbar`, `#navToggle`, `#mobileMenu` y `#year`.
+
+### Estructura de `asesorias.html`
+
+| # | Sección | Fondo | Tono |
+|---|---|---|---|
+| 1 | Navbar | transparente → blanco al scroll | — |
+| 2 | Hero | gradiente navy-deep → navy → coral | OSCURO |
+| 3 | Por qué tiene un costo | `--rumbo-navy-deep` | OSCURO |
+| 4 | Tabs (sticky bajo el navbar) | `--surface` | claro |
+| 5 | Agendar (wizard 5 pasos) | `--bg` | claro |
+| 6 | ¿Cómo funciona? | `--surface` | claro |
+| 7 | Nuestros asesores | `--bg-cream` | claro |
+| 8 | Precios | `--surface` | claro |
+| 9 | Footer | `--rumbo-navy` | OSCURO |
+
+---
+
 ## Despliegue y caché (GitHub Pages)
 
 ### El problema del caché
