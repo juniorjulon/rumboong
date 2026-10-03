@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Panel del equipo — RUMBO</title>
+<link rel="icon" href="assets/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="css/asesorias.css?v=1">
+<link rel="stylesheet" href="css/panel.css?v=1">
+</head>
+<body class="panel">
+
+<!-- ══════════ LOGIN ══════════ -->
+<div id="vistaLogin" class="login-wrap" hidden>
+  <form class="login-card" id="formLogin" novalidate>
+    <div class="logo-txt">RUMBO</div>
+    <div class="sub">Panel del equipo</div>
+    <div id="loginAviso" class="alert alert-y mb" hidden></div>
+    <div class="campo"><label class="form-label" for="lg-email">Correo</label><input class="form-input" id="lg-email" type="email" autocomplete="username" required></div>
+    <div class="campo"><label class="form-label" for="lg-pass">Contraseña</label><input class="form-input" id="lg-pass" type="password" autocomplete="current-password" required></div>
+    <button class="btn btn-primary btn-lg btn-block" type="submit" id="btnLogin">Entrar</button>
+    <p class="ayuda center" style="margin-top:14px">¿Olvidaste tu contraseña? Pídele al administrador del panel que te asigne una nueva.</p>
+  </form>
+</div>
+
+<!-- ══════════ APP ══════════ -->
+<div id="vistaApp" hidden>
+  <header class="p-top">
+    <a class="marca" href="#inicio">RUMBO<span>Panel</span></a>
+    <div class="p-user"><span class="nom" id="uNombre"></span><span id="uRoles"></span><button type="button" id="btnSalir">Salir</button></div>
+  </header>
+  <nav class="p-nav" aria-label="Secciones del panel"><div class="p-nav-in" id="nav"></div></nav>
+  <main class="p-main" id="contenido"><div class="cargando">Cargando…</div></main>
+</div>
+
+<div id="sinConfig" class="login-wrap" hidden>
+  <div class="login-card">
+    <div class="logo-txt">RUMBO</div>
+    <div class="sub">Panel del equipo</div>
+    <p class="p-sub">El panel aún no está conectado a la base de datos. Completa <strong>js/rumbo-config.js</strong> siguiendo la guía (paso 6).</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/rumbo-config.js?v=1"></script>
+<script src="js/rumbo-comun.js?v=1"></script>
+<script src="js/panel.js?v=1"></script>
+</body>
+</html>

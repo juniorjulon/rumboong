@@ -1388,3 +1388,28 @@ html.is-loading body { overflow: hidden; }
   .pop-cta:hover   { transform: none; }
   .pop-close:hover { transform: none; }
 }
+
+/* ========== Asesorías personalizadas (bloque de inicio) ========== */
+.nav-links a.nav-asesorias { color: var(--rumbo-amber); }
+.navbar.scrolled .nav-links a.nav-asesorias { color: var(--rumbo-coral); }
+.ase-section { background: var(--bg); padding: clamp(44px, 6vw, 84px) 0; }
+.ase-grid { display: grid; grid-template-columns: 1fr; gap: clamp(24px, 4vw, 48px); align-items: center; }
+@media (min-width: 900px) { .ase-grid { grid-template-columns: 1.15fr 1fr; } }
+.ase-title { font-family: var(--font-display); font-size: clamp(28px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800; color: var(--ink); margin: 6px 0 14px; }
+.ase-title em { font-style: normal; color: var(--rumbo-coral); }
+.ase-lede { font-size: clamp(15px, 1.5vw, 17px); line-height: 1.65; color: var(--ink-soft); margin-bottom: 20px; max-width: 560px; }
+.ase-temas { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+.ase-temas li { font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; padding: 6px 12px; border-radius: 999px; background: var(--rumbo-sky-mist); color: var(--rumbo-navy); }
+.ase-acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+.ase-link { font-family: var(--font-display); font-weight: 600; font-size: 0.88rem; color: var(--rumbo-navy); }
+.ase-link:hover { color: var(--rumbo-coral); }
+.ase-card { background: var(--rumbo-navy-deep); color: #fff; border-radius: var(--r-lg); padding: clamp(24px, 3vw, 34px); position: relative; overflow: hidden; }
+.ase-card::after { content: ''; position: absolute; right: -90px; top: -90px; width: 240px; height: 240px; border-radius: 50%; background: radial-gradient(circle, rgba(107,197,210,.28), transparent 70%); pointer-events: none; }
+.ase-precio { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; font-size: 13.5px; color: rgba(255,255,255,.75); }
+.ase-precio strong { font-family: var(--font-display); font-size: 40px; font-weight: 800; color: var(--rumbo-amber); letter-spacing: -0.02em; line-height: 1; }
+.ase-pasos { list-style: none; counter-reset: paso; display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.ase-pasos li { counter-increment: paso; display: flex; gap: 12px; align-items: flex-start; font-size: 14.5px; line-height: 1.5; color: rgba(255,255,255,.88); }
+.ase-pasos li::before { content: counter(paso); width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,.12); color: var(--rumbo-amber); font-family: var(--font-display); font-weight: 700; font-size: 12px; display: grid; place-items: center; flex-shrink: 0; }
+.ase-pasos b { color: #fff; font-weight: 600; }
+.ase-nota { font-size: 12.5px; line-height: 1.55; color: rgba(255,255,255,.7); border-top: 1px solid rgba(255,255,255,.14); padding-top: 14px; }
+.ase-nota a { color: var(--rumbo-amber); text-decoration: underline; }

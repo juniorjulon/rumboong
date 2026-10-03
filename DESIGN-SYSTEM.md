@@ -419,6 +419,6 @@ git push
 
 ### Versión actual
 
-`css/styles.css?v=13` · `js/main.js?v=13`
+`css/styles.css?v=14` · `js/main.js?v=14`
 
 Actualiza este número cada vez que lo incrementes para tener registro.
