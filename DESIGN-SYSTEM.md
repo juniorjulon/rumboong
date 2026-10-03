@@ -165,6 +165,145 @@ Todos los botones tienen `border-radius: 999px` y font `Montserrat 500`.
 
 Ver sección Tipografía.
 
+### Pantalla de carga (`.rumbo-loader`)
+
+Cubre la pantalla mientras carga `index.html`. Cohete vectorial en blanco translúcido
+sobre el degradado de marca (navy → navy-deep → coral), con estelas de fondo, el
+wordmark RUMBO y una barra de progreso indeterminada.
+
+**Cómo se retira** — `RUMBO_CARGA` en `js/main.js`:
+
+| Constante | Valor | Rol |
+|---|---|---|
+| `MIN_MS` | 900 ms | Tiempo mínimo en pantalla, para que no parpadee en cargas rápidas |
+| `MAX_MS` | 3500 ms | Tope absoluto: se retira aunque algún recurso siga cargando |
+
+Se retira en `window.load` respetando `MIN_MS`. `RUMBO_CARGA.listo(cb)` encadena lo que
+deba ocurrir después (lo usa el pop-up).
+
+**Tres redes de seguridad**, porque una pantalla de carga atascada bloquea el sitio entero:
+
+1. `MAX_MS` en `main.js`.
+2. Un `setTimeout` de 6 s en un `<script>` en línea dentro del `<head>` — se registra antes
+   de que `main.js` se descargue, así que sobrevive a cualquier error en ese archivo.
+3. Un `<noscript>` que la oculta del todo si no hay JavaScript.
+
+El bloqueo de scroll vive en `html.is-loading`; las tres redes lo liberan.
+
+### Pop-up de actividades (`.pop-modal`)
+
+Modal de bienvenida para anunciar la próxima actividad. Afiche a un lado y datos + CTA
+al otro. **Prefijo `pop-`, no `act-`**: `.act-card` y `.act-body` ya son las tarjetas de
+la sección Actividades y colisionarían.
+
+**Configuración** — atributos `data-*` en `#popActividad` (`index.html`):
+
+| Atributo | Efecto |
+|---|---|
+| `data-pop-id` | Identifica la actividad. Solo se usa en modo `sesion`. |
+| `data-pop-hasta` | Fecha ISO tras la cual deja de mostrarse solo. Se respeta en los dos modos. |
+| `data-pop-frecuencia` | `siempre` (actual) o `sesion`. |
+| `data-pop-delay` | Milisegundos de espera tras la pantalla de carga (700 por defecto). |
+
+**Cuándo se muestra** — lo decide `data-pop-frecuencia`:
+
+- **`siempre`** (el modo configurado): en **cada carga de la página**, incluidas las
+  recargas. No escribe nada en el navegador.
+- **`sesion`**: una sola vez por visita (`sessionStorage`). Si además la persona pulsa
+  «Inscríbete gratis», se anota en `localStorage` y no se le vuelve a mostrar **esa**
+  actividad en ese navegador.
+
+En modo `siempre` no se guarda nada a propósito: si más adelante se cambia a `sesion`,
+no habrá datos viejos que lo silencien de entrada.
+
+**Cierre**: botón ×, «Ahora no», clic en el fondo o `Escape`. El foco entra en la tarjeta
+(con `preventScroll`, para no desplazar el diálogo y esconder el título), queda atrapado
+dentro mientras está abierta y vuelve a su origen al cerrar.
+
+**Layout responsive**:
+
+**En todos los tamaños se ve todo**: el afiche completo, el párrafo, los cuatro datos y
+el botón. Lo único que cambia con la pantalla es **cuánto alto ocupa el afiche**, que cede
+espacio al texto en pantallas bajas y crece en las altas.
+
+| Disposición | Condición | Alto del afiche |
+|---|---|---|
+| Fila | ancho ≥ 880px | `flex: 0 0 44%` del ancho. Alto de tarjeta `min(88dvh, 640px)`. |
+| Fila | apaisado, alto ≤ 460px | 32% del ancho. |
+| Columna | ancho < 880px | `clamp(150px, 43dvh, 470px)` |
+| Columna | alto ≤ 700px | `clamp(140px, 29dvh, 300px)` |
+| Columna | alto ≤ 580px | `clamp(120px, 26dvh, 240px)` |
+| Columna | alto ≥ 900px (tablets) | `clamp(300px, 50dvh, 640px)` |
+
+### Por qué el afiche no se puede recortar
+
+Es la parte delicada: **el alto lo fija la propia imagen**, no su contenedor.
+
+```css
+.pop-poster-main img {
+  width: auto;                          /* conserva la proporción nativa */
+  height: clamp(150px, 43dvh, 470px);   /* alto definido, sin porcentajes */
+  max-width: 100%;
+}
+```
+
+Con `height` definido y `width: auto`, una imagen reemplazada mantiene su relación
+1080:1350 **por construcción**. No hay forma de que se recorte.
+
+La versión anterior hacía lo contrario y **fallaba en Safari**: la caja sacaba su alto de
+`aspect-ratio` + `max-height`, y la imagen lo heredaba con `height: 100%`. Safari no
+resuelve ese porcentaje contra un alto derivado de `aspect-ratio`, así que la imagen volvía
+a su alto natural, desbordaba la caja y `overflow: hidden` le cortaba el pie — se perdían
+el QR y «Transforma tu futuro». Chrome sí lo resolvía, por lo que el fallo no aparecía en
+las pruebas hasta verlo en un iPhone real.
+
+**Regla para el futuro: nunca dar alto en % a un hijo de una caja con `aspect-ratio`.**
+En la disposición en fila la capa del afiche va `position: absolute; inset: 0`, que sí da
+un alto definido y hace que `height: 100%` resuelva en cualquier navegador.
+
+El afiche va en `object-fit: contain` sobre una copia desenfocada de sí mismo
+(`.pop-poster-blur`), que rellena los lados sin descarga extra — es la misma URL, así que
+el navegador la reutiliza de caché.
+
+El pie (`.pop-footer`) es `position: sticky` en todos los casos: **el botón de inscripción
+nunca queda bajo la línea de flotación**, por corta que sea la pantalla. El sangrado del
+pie se sincroniza con el padding del cuerpo mediante `--pop-pad`.
+
+### Verificación
+
+`scratchpad/validar.py` mide en 21 tamaños que la proporción pintada sea la nativa y que
+la imagen quepa entera en su caja, que el párrafo y los 4 datos estén visibles, que el CTA
+caiga dentro de pantalla y que no haya desbordamiento horizontal:
+
+375×553 · 375×629 · 375×667 · 390×664 · 393×659 · 393×852 · 430×745 · 430×932 · 360×568
+· 360×640 · 412×730 · 412×800 · 320×520 · 844×390 · 932×430 · 744×954 · 768×954 ·
+820×1080 · 860×700 · 1366×641 · 1920×874
+
+Sin scroll en todos salvo 320×520 (96px), un tamaño por debajo de cualquier móvil actual,
+donde el pie fijo mantiene el botón accesible.
+
+**Para cambiar de actividad**: reemplaza la imagen, actualiza los textos y pon un
+`data-pop-id` y un `data-pop-hasta` nuevos.
+
+### Imagen del afiche
+
+`assets/popup-charla-rumbo-hacia-tu-beca.webp` (105 KB) con respaldo `.jpg` (238 KB),
+ambos de 1080×1350, servidos con `<picture>`.
+
+Salen del SVG original (`assets/Pop up - …svg`, 11,6 MB): ese archivo son 49 imágenes
+rasterizadas incrustadas en base64, así que **no debe enlazarse desde la web** — se queda
+como fuente editable. Para regenerar los derivados tras un cambio de afiche:
+
+```bash
+# 1. Rasterizar el SVG a 1080×1350 con Chrome sin interfaz
+chrome --headless --screenshot=poster.png --window-size=1080,1350 file:///ruta/render.html
+# 2. Derivar los formatos web
+ffmpeg -i poster.png -c:v libwebp -quality 80 assets/popup-....webp
+ffmpeg -i poster.png -q:v 4 assets/popup-....jpg
+```
+
+Comprueba que el QR quede nítido antes de publicar.
+
 ---
 
 ## Animaciones
@@ -177,6 +316,10 @@ Ver sección Tipografía.
 | Hover de card | 300–400ms | `cubic-bezier(.2,.8,.2,1)` | Todas las cards |
 | Pulse del hero-dot | 2s infinite | ease | `.hero-dot` via `@keyframes rumbo-pulse` |
 | Tabs FAQ | 250ms | ease | `.faq-tab` |
+| Flotación del cohete | 2.6s infinite | ease-in-out | `.loader-rocket` |
+| Llama del cohete | 0.42s / 0.28s alternate | ease-in-out | `.loader-flame`, `.loader-flame-inner` |
+| Desvanecido del loader | 550ms | ease | `.rumbo-loader.is-done` |
+| Entrada del pop-up | 420ms | `cubic-bezier(.2,.8,.2,1)` | `.pop-modal.is-open .pop-card` |
 
 ---
 
@@ -276,6 +419,6 @@ git push
 
 ### Versión actual
 
-`css/styles.css?v=2` · `js/main.js?v=2`
+`css/styles.css?v=13` · `js/main.js?v=13`
 
 Actualiza este número cada vez que lo incrementes para tener registro.
