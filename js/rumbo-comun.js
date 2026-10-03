@@ -7,6 +7,15 @@
   'use strict';
 
   var CFG = window.RUMBO_CONFIG || {};
+  // Tolerancia: si se pegó la dirección con "/rest/v1/" (u otra ruta de la API)
+  // o con espacios, se deja solo https://TU-PROYECTO.supabase.co
+  if (CFG.supabaseUrl) {
+    CFG.supabaseUrl = String(CFG.supabaseUrl).trim()
+      .replace(/\/+$/, '')
+      .replace(/\/(rest|auth|functions|storage)\/v1$/i, '')
+      .replace(/\/+$/, '');
+  }
+  if (CFG.supabaseKey) CFG.supabaseKey = String(CFG.supabaseKey).trim();
   var ZONA = 'America/Lima';
   var params = new URLSearchParams(location.search);
   var configurado = !!(CFG.supabaseUrl && CFG.supabaseKey && window.supabase);

@@ -27,6 +27,7 @@ jobs:
         run: |
           URL=$(grep -oP "supabaseUrl:\s*'\K[^']+" js/rumbo-config.js || true)
           KEY=$(grep -oP "supabaseKey:\s*'\K[^']+" js/rumbo-config.js || true)
+          URL="${URL%/}"; URL="${URL%/rest/v1}"; URL="${URL%/}"
           if [ -z "$URL" ] || [ -z "$KEY" ]; then
             echo "Supabase aún no está configurado en js/rumbo-config.js. Nada que hacer."
             exit 0

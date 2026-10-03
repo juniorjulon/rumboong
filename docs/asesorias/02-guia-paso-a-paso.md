@@ -344,6 +344,8 @@ Debe mostrar `200` y un texto como `{"ok":true,"expiradas":0,"r24":0,…}`: eso 
    - Si no la ves, en la pestaña **Legacy API keys** copia la **anon public** (empieza con `eyJ`).
    - ⚠️ **Nunca** copies la *secret* ni la *service_role*.
 3. Tu **Project URL** es `https://TU-PROYECTO.supabase.co` (también la ves en **Project Settings → Data API**).
+   - ⚠️ Copia **solo hasta `.supabase.co`**. Si Supabase te la muestra como `https://TU-PROYECTO.supabase.co/rest/v1/`, borra el `/rest/v1/` del final.
+   - Si abres esa dirección en el navegador y ves `"No API key found in request"`, es normal: confirma que el proyecto existe.
 
 ### 7.2 Pegarlas en tu web
 
@@ -511,7 +513,7 @@ Supabase Free no incluye copias descargables automáticas. Una vez al mes, expor
 
 | Qué ves | Causa probable | Qué hacer |
 |---|---|---|
-| La web sigue diciendo “Reservas en línea muy pronto” | `js/rumbo-config.js` vacío, con un error de comillas o caché del navegador | Revisa el paso 7.2 (comillas simples `'…'` y comas). Recarga con `Ctrl + F5`. |
+| La web sigue diciendo “Reservas en línea muy pronto” | Mira el texto de abajo. Si dice “Mientras terminamos de activar…”: `js/rumbo-config.js` vacío en `main`, con un error de comillas, o el navegador tiene la versión vieja. Si dice “No pudimos cargar los horarios…”: la dirección o la clave están mal (por ejemplo, la dirección termina en `/rest/v1/`), o falta ejecutar los archivos SQL del paso 3 | Revisa el paso 7.1 y 7.2: la dirección debe ser exactamente `https://TU-PROYECTO.supabase.co`, entre comillas simples `'…'` y con comas. Recarga con `Ctrl + F5`. Si persiste, revisa el paso 3. |
 | “No pudimos cargar los horarios” | URL o clave mal copiadas, o el proyecto está pausado | Revisa el 7.1. En Supabase, mira si el proyecto dice *Paused* → **Restore**. |
 | Los asesores dicen “Sin horarios” | No marcaron disponibilidad, llenaron su cupo o los horarios están a menos de 48 h | Paso 9. Revisa los cupos en **Equipo**. |
 | Al reservar: “Ese horario acaba de ser tomado” | Otra persona lo reservó segundos antes | Es el sistema evitando dobles reservas. Elegir otro horario. |
