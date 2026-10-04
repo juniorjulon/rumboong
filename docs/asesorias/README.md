@@ -8,5 +8,5 @@ Sistema de reservas en línea para las asesorías 1 a 1 de RUMBO: horarios en ti
 | [02 · Guía paso a paso](02-guia-paso-a-paso.md) | Quien lo instala (no hace falta programar) | De cero a publicado: Supabase, Google, función, tareas automáticas, conexión de la web, pruebas y solución de problemas. |
 | [03 · Manual del equipo](03-manual-del-equipo.md) | Los asesores, coordinación y administración | Uso diario del panel: disponibilidad, sesiones, pagos, becas, cupones y roles. |
 
-**Páginas:** `asesorias.html` (reserva) · `mi-reserva.html` (enlace del estudiante) · `panel.html` (equipo) · `privacidad.html`.
+**Páginas:** `asesorias.html` (reserva) · `mi-reserva.html` (seguimiento del estudiante: con su enlace o con código + correo) · `panel.html` (equipo) · `privacidad.html`.
 **Vista previa sin conexión:** `asesorias.html?demo=1` y `mi-reserva.html?demo=1`.

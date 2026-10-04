@@ -202,10 +202,26 @@ Aquí le das permiso al sistema para crear salas de Meet, invitaciones de calend
    - **Público** (*Audience*): **Externo** (*External*) → **Siguiente**
    - **Información de contacto:** el Gmail de RUMBO → **Siguiente**
    - Acepta la política → **Continuar** → **Crear**.
-3. En el menú de la izquierda entra a **Público** (*Audience*). Verás **Estado de publicación: Prueba** (*Testing*).
-4. Presiona **Publicar app** (*Publish app*) → **Confirmar**. El estado debe cambiar a **En producción** (*In production*).
+3. **Completa la información de marca.** Google no deja publicar sin ella. En el menú de la izquierda entra a **Desarrollo de la marca** (*Branding*); la página se titula **Información de marca**:
+   - **Nombre de la aplicación:** `RUMBO Reservas` (ya viene del paso anterior).
+   - **Correo electrónico de asistencia al usuario:** el Gmail de RUMBO.
+   - **Logotipo de la app:** ⚠️ **déjalo vacío.** Si subiste uno, presiona **Quitar**. Google lo advierte en la misma página: con logotipo, la app debe pasar por una **verificación formal** (que tarda semanas) antes de publicarse. Sin logotipo no hace falta.
+   - **Dominio de la app:**
+     - **Página principal de la aplicación:** `https://rumbo.org.pe`
+     - **Vínculo a la Política de Privacidad de la aplicación:** `https://rumbo.org.pe/privacidad.html`
+     - **Vínculo a las Condiciones del Servicio de la aplicación:** déjalo vacío (si te lo exige, pon `https://rumbo.org.pe`).
+   - **Dominios autorizados:** **+ Agregar un dominio** → `rumbo.org.pe` (sin `https://` ni `www`).
+   - **Información de contacto del desarrollador:** el Gmail de RUMBO.
+   - Presiona **Guardar**, al final de la página.
+4. En el menú de la izquierda entra a **Público** (*Audience*). Verás **Estado de publicación: Prueba** (*Testing*).
+5. Presiona **Publicar app** (*Publish app*) → **Confirmar**. El estado debe cambiar a **En producción** (*In production*).
+   - Si aparece un aviso de que la app **necesita verificación** o **no está verificada**, confirma igual. Solo significa que en el paso 4.5 verás la pantalla “Google no verificó esta app”, y eso es normal.
 
 > ❓ **¿Por qué publicarla?** Si la dejas en “Prueba”, Google corta el permiso cada 7 días y los correos dejarían de salir. En “Producción” el permiso dura indefinidamente. **No necesitas** enviar la app a verificación: solo la usará la cuenta de RUMBO.
+>
+> ❓ **¿Y si la página de privacidad aún no está en línea?** No pasa nada. Google solo revisa esos enlaces si pides la verificación formal. La página existirá cuando publiques la versión con asesorías.
+
+**✅ Cómo saber que salió bien:** en **Público** dice **En producción**, y en **Información de marca** no hay logotipo.
 
 ### 4.4 Crear las credenciales (Client ID y Client secret)
 
@@ -277,6 +293,13 @@ Esta función recibe llamadas de la web pública (estudiantes sin cuenta) y del 
 | `GOOGLE_EMAIL` | `rumbo.transformatufuturo@gmail.com` |
 | `CRON_SECRET` | una clave larga que **inventes tú**: 30 o más letras y números, **sin espacios ni comillas** (puedes usar un generador de contraseñas). Anótala: la usarás en el paso 6. |
 
+> **Cómo se ven bien copiados** (en *Value* va solo el valor, sin el nombre ni comillas):
+> - `GOOGLE_CLIENT_ID` → algo como `123456789012-a1b2c3d4e5.apps.googleusercontent.com` (números, guion, letras y termina en `.apps.googleusercontent.com`).
+> - `GOOGLE_CLIENT_SECRET` → empieza con `GOCSPX-`.
+> - `GOOGLE_REFRESH_TOKEN` → empieza con `1//` (no confundir con el *Access token*, que empieza con `ya29.`).
+>
+> Los tres deben salir del **mismo cliente OAuth**, creado con el **Gmail de RUMBO**. Si después creas otro cliente, cambia los tres. Para corregir un Secret ya guardado: en la lista de Secrets, junto a su nombre, **⋮ → Edit** (o vuelve a agregarlo con el **mismo nombre**: reemplaza al anterior), pega el valor nuevo y guarda. Supabase no te deja ver el valor guardado (solo muestra un código), por eso **Ajustes → Probar conexión** en el panel te muestra el ID de cliente que la función está usando. No hace falta volver a publicar la función.
+
 ### 5.4 Probar que responde
 
 Abre en tu navegador (cambia `TU-PROYECTO`):
@@ -328,6 +351,8 @@ Debe mostrar `200` y un texto como `{"ok":true,"expiradas":0,"r24":0,…}`: eso 
    - Si no la ves, en la pestaña **Legacy API keys** copia la **anon public** (empieza con `eyJ`).
    - ⚠️ **Nunca** copies la *secret* ni la *service_role*.
 3. Tu **Project URL** es `https://TU-PROYECTO.supabase.co` (también la ves en **Project Settings → Data API**).
+   - ⚠️ Copia **solo hasta `.supabase.co`**. Si Supabase te la muestra como `https://TU-PROYECTO.supabase.co/rest/v1/`, borra el `/rest/v1/` del final.
+   - Si abres esa dirección en el navegador y ves `"No API key found in request"`, es normal: confirma que el proyecto existe.
 
 ### 7.2 Pegarlas en tu web
 
@@ -348,6 +373,14 @@ window.RUMBO_CONFIG = {
 5. Espera 1 a 3 minutos (pestaña **Actions** con ✅).
 
 > Es seguro que estas dos claves estén en GitHub: son públicas por diseño. La seguridad la ponen los permisos de la base de datos.
+
+> 🧪 **¿Quieres probar todo en tu computadora antes de que la web pública se conecte?** En vez de editar en GitHub:
+> 1. Edita `js/rumbo-config.js` en **VS Code**, en tu carpeta local, en una rama de pruebas (no en `main`).
+> 2. Abre las páginas con la extensión **Live Server** (clic derecho en `asesorias.html` → *Open with Live Server*).
+> 3. Mientras pruebas, en el panel → **Ajustes → Dirección de la web**, pon la dirección de Live Server (por ejemplo `http://127.0.0.1:5500`), para que los enlaces de los correos abran tu versión local.
+> 4. Cuando todo funcione, vuelve a poner `https://rumbo.org.pe` en Ajustes y une tu rama a `main`: recién ahí la web pública se conecta.
+>
+> Usa tus propios correos para las reservas de prueba: los correos e invitaciones se envían de verdad.
 
 ### 7.3 Dirección del sitio en Supabase
 
@@ -424,9 +457,11 @@ Hazla desde tu celular, como si fueras estudiante, con un **correo personal dist
    - ✅ El link de Meet abre la sala **sin pedir que te admitan**.
 4. Abre **“Ver mi reserva”** desde el correo → completa el **diagnóstico** → prueba **Reprogramar**.
    - ✅ Llega el correo de reprogramación y el evento del calendario cambia de hora.
-5. Prueba una **beca**: panel → **Cupones y becas** → **Registrar donante** (“Prueba”) → **Generar códigos de beca** (1) → reserva con ese código.
+5. Prueba la entrada **sin enlace**: abre <https://rumbo.org.pe/mi-reserva.html> en una **ventana de incógnito** → escribe tu código (RB-…) y tu correo → **Ver mi reserva**. Luego vuelve a esa página y usa **Reenviarme mis enlaces**.
+   - ✅ Se abre tu reserva, y te llega el correo “Tus enlaces de reserva — RUMBO”.
+6. Prueba una **beca**: panel → **Cupones y becas** → **Registrar donante** (“Prueba”) → **Generar códigos de beca** (1) → reserva con ese código.
    - ✅ La reserva queda confirmada al instante, sin pago.
-6. **Limpia las pruebas:** en el panel abre cada reserva de prueba → **Cancelar reserva** (desmarca “Avisar por correo” si quieres). Los horarios se liberan. Desactiva el código de beca de prueba.
+7. **Limpia las pruebas:** en el panel abre cada reserva de prueba → **Cancelar reserva** (desmarca “Avisar por correo” si quieres). Los horarios se liberan. Desactiva el código de beca de prueba.
 
 ---
 
@@ -487,21 +522,28 @@ Supabase Free no incluye copias descargables automáticas. Una vez al mes, expor
 
 | Qué ves | Causa probable | Qué hacer |
 |---|---|---|
-| La web sigue diciendo “Reservas en línea muy pronto” | `js/rumbo-config.js` vacío, con un error de comillas o caché del navegador | Revisa el paso 7.2 (comillas simples `'…'` y comas). Recarga con `Ctrl + F5`. |
+| La web sigue diciendo “Reservas en línea muy pronto” | Mira el texto de abajo. Si dice “Mientras terminamos de activar…”: `js/rumbo-config.js` vacío en `main`, con un error de comillas, o el navegador tiene la versión vieja. Si dice “No pudimos cargar los horarios…”: la dirección o la clave están mal (por ejemplo, la dirección termina en `/rest/v1/`), o falta ejecutar los archivos SQL del paso 3 | Revisa el paso 7.1 y 7.2: la dirección debe ser exactamente `https://TU-PROYECTO.supabase.co`, entre comillas simples `'…'` y con comas. Recarga con `Ctrl + F5`. Si persiste, revisa el paso 3. |
 | “No pudimos cargar los horarios” | URL o clave mal copiadas, o el proyecto está pausado | Revisa el 7.1. En Supabase, mira si el proyecto dice *Paused* → **Restore**. |
 | Los asesores dicen “Sin horarios” | No marcaron disponibilidad, llenaron su cupo o los horarios están a menos de 48 h | Paso 9. Revisa los cupos en **Equipo**. |
 | Al reservar: “Ese horario acaba de ser tomado” | Otra persona lo reservó segundos antes | Es el sistema evitando dobles reservas. Elegir otro horario. |
 | La función responde *Missing authorization header* o *Invalid JWT* | La verificación JWT sigue activa | Paso 5.2. |
 | La reserva se crea, pero no llegan correos | Faltan los Secrets de Google o el token caducó | **Ajustes → Probar conexión** y **Correos** (verás el motivo). Revisa el 5.3. Si dice `invalid_grant`: repite el 4.5. |
+| `invalid_client: The OAuth client was not found` | El valor de `GOOGLE_CLIENT_ID` no corresponde a ningún cliente de Google: le sobra o le falta un carácter, se pegó otro dato (el nombre del proyecto, el secreto) o el cliente se borró o es de otra cuenta de Google | En Google Cloud, con el Gmail de RUMBO: **Google Auth Platform → Clientes** → abre tu cliente → copia el **ID de cliente** con el botón de copiar. En Supabase → **Edge Functions → Secrets** → `GOOGLE_CLIENT_ID` → **⋮ → Edit** (o agrégalo de nuevo con el mismo nombre) → pega → guarda. Luego **Ajustes → Probar conexión** (te muestra el ID guardado para compararlo). Si ese cliente ya no existe, crea uno nuevo (4.4), actualiza el ID y el secreto, y repite el 4.5. Después, en cada reserva sin Meet, usa **Reintentar Meet**. |
+| `invalid_client: Unauthorized` | El ID está bien, pero `GOOGLE_CLIENT_SECRET` es de otro cliente o está mal copiado | Copia de nuevo el secreto (empieza con `GOCSPX-`) del mismo cliente. Si ya no lo ves, en el cliente usa **Agregar secreto**. |
+| `unauthorized_client` | El *Refresh token* se generó con otro cliente (o sin marcar “Use your own OAuth credentials” en el Playground) | Repite el 4.5 con el mismo ID y secreto que están en Secrets. |
 | `invalid_grant` en Correos | Cambiaste la contraseña del Gmail, revocaste el acceso o la app quedó en “Prueba” | Verifica que la app esté **En producción** (4.3) y repite el 4.5. |
 | `access_not_configured` o “API has not been used” | Falta activar una API | Paso 4.2 (las tres APIs). |
+| Google no deja **Publicar app** y pide completar la información de marca | Faltan los datos de **Información de marca**, o subiste un logotipo (con logotipo, Google exige verificación formal) | Paso 4.3, punto 3: quita el logotipo, completa página principal, política de privacidad y dominio autorizado `rumbo.org.pe`, guarda y vuelve a **Público → Publicar app**. |
 | Prueba de conexión: “⚠️ La API de Meet no está disponible” | No activaste **Google Meet REST API** o falta el permiso `meetings.space.created` | Actívala (4.2) y repite el 4.5 con los 3 permisos. Mientras tanto se usa el Meet del calendario. |
 | Al confirmar el pago: “no se pudo crear el Meet” | Fallo temporal de Google | En la reserva → **Reintentar Meet**. |
 | Los correos caen en Spam | Gmail nuevo o pocas interacciones | Pide a los primeros estudiantes marcarlos como “No es spam”. Agrega el correo de RUMBO a contactos. |
 | Un integrante no puede entrar al panel | Contraseña errónea o acceso no creado | Administrador → **Equipo → Editar → Cambiar contraseña / Crear acceso**. |
 | “Tu usuario no está vinculado…” | El usuario existe pero no está unido al perfil | Administrador → **Equipo → Editar → Crear acceso** con ese mismo correo. Para tu propio usuario: paso 3.5. |
 | No llegan recordatorios | La tarea automática no corre o no llega a la función | Paso 6: ejecuta la consulta de `net._http_response`. Si muestra `401`, la clave `TU-CLAVE-SECRETA` del archivo 3 no coincide con `CRON_SECRET`: corrige el archivo y vuelve a ejecutarlo. Si muestra `404`, revisa `TU-PROYECTO` y que la función se llame `rumbo-api`. |
-| El estudiante no encuentra el correo con su enlace | Spam o correo mal escrito | Coordinación abre la reserva → **Abrir “Mi reserva”** y le envía ese enlace por WhatsApp, o **Reenviar confirmación**. |
+| El estudiante no encuentra el correo con su enlace | Spam, lo borró o cambió de celular | Que entre a <https://rumbo.org.pe/mi-reserva.html> (o **“¿Ya reservaste?”** en la página de asesorías) con su **código + correo**, o que use **Reenviarme mis enlaces**. Si escribió mal su correo al reservar, coordinación abre la reserva → **Abrir “Mi reserva”** y le manda ese enlace por WhatsApp. |
+| En `mi-reserva.html` sale “No encontramos una reserva con ese código y ese correo” | El correo no es exactamente el que usó al reservar, o el código está mal | Revisar el correo en el panel (abre la reserva). Mayúsculas, espacios y el prefijo `RB-` no importan. |
+| “Reenviarme mis enlaces” dice que envió, pero no llega nada | No hay reservas **activas** con ese correo (las canceladas o vencidas no se reenvían), ya pidió 3 veces en la última hora, o cayó en Spam | Revisar en el panel → **Correos** si salió “recuperar_reservas”. Si no, mandar el enlace con **Abrir “Mi reserva”**. |
+| Entro a `mi-reserva.html` y me pide el código, aunque ya reservé | Es lo normal si entras sin el enlace del correo. El acceso rápido “En este navegador tienes la reserva…” solo aparece en el mismo navegador donde reservaste | Escribe tu código y tu correo, o abre el enlace del correo. |
 
 Si nada de esto lo resuelve, revisa **Supabase → Edge Functions → rumbo-api → Logs**: allí aparece el detalle técnico de cada error.
 

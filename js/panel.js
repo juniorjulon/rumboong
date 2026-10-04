@@ -1217,7 +1217,7 @@
     if (bg) bg.addEventListener('click', function () {
       cargando(bg, true, 'Probando…');
       api('probar_google', {}).then(function (r) {
-        $('#resGoogle').innerHTML = ['credenciales', 'meet', 'correo'].filter(function (k) { return r[k]; }).map(function (k) { return '<div class="small" style="margin:4px 0">' + esc(r[k]) + '</div>'; }).join('');
+        $('#resGoogle').innerHTML = ['credenciales', 'cliente', 'meet', 'correo'].filter(function (k) { return r[k]; }).map(function (k) { return '<div class="small" style="margin:4px 0">' + esc(r[k]) + '</div>'; }).join('');
       }).catch(function (e) { $('#resGoogle').innerHTML = '<div class="alert alert-r">' + esc(e.message) + '</div>'; }).then(function () { cargando(bg, false); });
     });
     pintarTemasAj();
