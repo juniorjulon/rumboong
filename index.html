@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="es">
+<!-- Banner de anuncios DESACTIVADO (evento del 05/09 ya pasó).
+     Para reactivarlo: quita la clase "sin-banner" de <html> y actualiza
+     el texto, la fecha y el enlace dentro de <div class="announcement-banner">. -->
+<html lang="es" class="sin-banner">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -80,7 +83,8 @@
         <li><a href="#propuesta">Propuesta</a></li>
         <li><a href="#actividades">Actividades</a></li>
         <li><a href="#equipo">Equipo</a></li>
-        <li><a href="asesorias.html" class="nav-asesorias">Asesorías</a></li>
+        <!-- Temporal: apunta a la sección del index hasta que asesorias.html esté lista. -->
+        <li><a href="#asesorias" class="nav-asesorias">Asesorías</a></li>
         <li><a href="#unete">Únete</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contacto">Contacto</a></li>
@@ -129,7 +133,7 @@
       <a href="#propuesta">Propuesta</a>
       <a href="#actividades">Actividades</a>
       <a href="#equipo">Equipo</a>
-      <a href="asesorias.html">Asesorías personalizadas</a>
+      <a href="#asesorias">Asesorías personalizadas</a>
       <a href="#unete">Únete</a>
       <a href="#faq">FAQ</a>
       <a href="#contacto">Contacto</a>
@@ -569,12 +573,12 @@
     </div>
   </section>
 
-  <!-- ═══ Asesorías personalizadas (resumen; la reserva vive en asesorias.html) ═══ -->
+  <!-- ═══ Asesorías personalizadas (resumen; por ahora la reserva se coordina por WhatsApp) ═══ -->
   <section id="asesorias" class="ase-section">
     <div class="container">
       <div class="ase-grid">
         <div class="ase-texto fade-up">
-          <span class="eyebrow">Nivel 03 · Acompañamiento</span>
+          <span class="eyebrow">Acompañamiento</span>
           <h2 class="ase-title">Asesorías personalizadas <em>1 a 1</em></h2>
           <p class="ase-lede">Reserva una sesión por Google Meet con alguien del equipo RUMBO. Eliges el tema, la persona y el horario en tiempo real.</p>
           <ul class="ase-temas" aria-label="Temas de asesoría">
@@ -582,8 +586,10 @@
             <li>CV y perfil profesional</li><li>Entrevistas</li><li>Bienestar académico</li>
           </ul>
           <div class="ase-acciones">
-            <a href="asesorias.html" class="btn btn-primary">Reservar mi asesoría</a>
-            <a href="asesorias.html#como" class="ase-link">¿Cómo funciona? →</a>
+            <!-- Temporal: la reserva se coordina por WhatsApp hasta que asesorias.html esté lista.
+                 Para volver al flujo web: href="asesorias.html" y reactivar el enlace "¿Cómo funciona?". -->
+            <a href="https://wa.me/51933285212?text=Hola%20RUMBO%2C%20quiero%20reservar%20una%20asesor%C3%ADa%20personalizada%201%20a%201."
+               target="_blank" rel="noopener noreferrer" class="btn btn-primary">Reservar mi asesoría</a>
           </div>
         </div>
         <div class="ase-card fade-up">
@@ -690,7 +696,7 @@
         <details class="faq-item"><summary>¿Atienden a alumnos de universidades públicas y privadas?</summary><div class="faq-item-body"><p>Sí. Nuestra orientación cubre públicas, privadas e institutos técnicos superiores.</p></div></details>
         <details class="faq-item"><summary>¿Cómo contactarlos si mi colegio no tiene convenio con RUMBO?</summary><div class="faq-item-body"><p>Escríbenos a <strong>rumbo.transformatufuturo@gmail.com</strong> o únete a nuestra comunidad de WhatsApp.</p></div></details>
         <details class="faq-item"><summary>¿Tienen redes sociales o comunidad donde pueda seguir aprendiendo?</summary><div class="faq-item-body"><p>Sí. Síguenos como <strong>@rumbo.ong</strong> en Instagram, TikTok, Facebook y LinkedIn. También tenemos comunidad de WhatsApp.</p></div></details>
-        <details class="faq-item"><summary>¿Brindan asesorías personalizadas?</summary><div class="faq-item-body"><p>Sí, como parte del Nivel 03 de acompañamiento: sesiones 1 a 1 de 60 minutos por Google Meet sobre becas, orientación vocacional, elección de universidad, CV, entrevistas y bienestar. <a href="asesorias.html"><strong>Reserva tu horario aquí</strong></a>.</p></div></details>
+        <details class="faq-item"><summary>¿Brindan asesorías personalizadas?</summary><div class="faq-item-body"><p>Sí, como parte de nuestro acompañamiento: sesiones 1 a 1 de 60 minutos por Google Meet sobre becas, orientación vocacional, elección de universidad, CV, entrevistas y bienestar. <a href="#asesorias"><strong>Mira cómo reservar aquí</strong></a>.</p></div></details>
       </div>
 
     </div>

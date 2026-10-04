@@ -650,6 +650,17 @@ details.faq-item[open] summary::after { transform: rotate(45deg); }
   --banner-h: 36px;
 }
 
+/* Interruptor del banner — <html class="sin-banner"> lo apaga por completo:
+   altura 0, sin padding en body, navbar pegado arriba y scroll-padding correcto.
+   Quita esa clase en index.html para volver a mostrarlo. */
+html.sin-banner {
+  --banner-h: 0px;
+}
+
+html.sin-banner .announcement-banner {
+  display: none;
+}
+
 body {
   padding-top: var(--banner-h);
 }
