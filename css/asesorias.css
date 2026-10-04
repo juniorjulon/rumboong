@@ -359,7 +359,7 @@ button { cursor: pointer; }
 
 /* ── Avisos flotantes ── */
 #rumbo-toasts { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 8px; width: min(92vw, 420px); pointer-events: none; }
-.rumbo-toast { background: var(--ink); color: #fff; padding: 12px 16px; border-radius: 12px; font-size: 14px; box-shadow: var(--shadow-md); animation: aparecer .3s ease; transition: opacity .4s, transform .4s; }
+.rumbo-toast { pointer-events: auto; cursor: pointer; background: var(--ink); color: #fff; padding: 12px 16px; border-radius: 12px; font-size: 14px; box-shadow: var(--shadow-md); animation: aparecer .3s ease; transition: opacity .4s, transform .4s; }
 .rumbo-toast.error { background: var(--red); }
 .rumbo-toast.ok { background: var(--rumbo-navy-deep); }
 .rumbo-toast.fuera { opacity: 0; transform: translateY(8px); }

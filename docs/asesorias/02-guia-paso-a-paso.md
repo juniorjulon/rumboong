@@ -293,6 +293,13 @@ Esta función recibe llamadas de la web pública (estudiantes sin cuenta) y del 
 | `GOOGLE_EMAIL` | `rumbo.transformatufuturo@gmail.com` |
 | `CRON_SECRET` | una clave larga que **inventes tú**: 30 o más letras y números, **sin espacios ni comillas** (puedes usar un generador de contraseñas). Anótala: la usarás en el paso 6. |
 
+> **Cómo se ven bien copiados** (en *Value* va solo el valor, sin el nombre ni comillas):
+> - `GOOGLE_CLIENT_ID` → algo como `123456789012-a1b2c3d4e5.apps.googleusercontent.com` (números, guion, letras y termina en `.apps.googleusercontent.com`).
+> - `GOOGLE_CLIENT_SECRET` → empieza con `GOCSPX-`.
+> - `GOOGLE_REFRESH_TOKEN` → empieza con `1//` (no confundir con el *Access token*, que empieza con `ya29.`).
+>
+> Los tres deben salir del **mismo cliente OAuth**, creado con el **Gmail de RUMBO**. Si después creas otro cliente, cambia los tres. Para corregir un Secret ya guardado: en la lista de Secrets, junto a su nombre, **⋮ → Edit** (o vuelve a agregarlo con el **mismo nombre**: reemplaza al anterior), pega el valor nuevo y guarda. Supabase no te deja ver el valor guardado (solo muestra un código), por eso **Ajustes → Probar conexión** en el panel te muestra el ID de cliente que la función está usando. No hace falta volver a publicar la función.
+
 ### 5.4 Probar que responde
 
 Abre en tu navegador (cambia `TU-PROYECTO`):
@@ -521,6 +528,9 @@ Supabase Free no incluye copias descargables automáticas. Una vez al mes, expor
 | Al reservar: “Ese horario acaba de ser tomado” | Otra persona lo reservó segundos antes | Es el sistema evitando dobles reservas. Elegir otro horario. |
 | La función responde *Missing authorization header* o *Invalid JWT* | La verificación JWT sigue activa | Paso 5.2. |
 | La reserva se crea, pero no llegan correos | Faltan los Secrets de Google o el token caducó | **Ajustes → Probar conexión** y **Correos** (verás el motivo). Revisa el 5.3. Si dice `invalid_grant`: repite el 4.5. |
+| `invalid_client: The OAuth client was not found` | El valor de `GOOGLE_CLIENT_ID` no corresponde a ningún cliente de Google: le sobra o le falta un carácter, se pegó otro dato (el nombre del proyecto, el secreto) o el cliente se borró o es de otra cuenta de Google | En Google Cloud, con el Gmail de RUMBO: **Google Auth Platform → Clientes** → abre tu cliente → copia el **ID de cliente** con el botón de copiar. En Supabase → **Edge Functions → Secrets** → `GOOGLE_CLIENT_ID` → **⋮ → Edit** (o agrégalo de nuevo con el mismo nombre) → pega → guarda. Luego **Ajustes → Probar conexión** (te muestra el ID guardado para compararlo). Si ese cliente ya no existe, crea uno nuevo (4.4), actualiza el ID y el secreto, y repite el 4.5. Después, en cada reserva sin Meet, usa **Reintentar Meet**. |
+| `invalid_client: Unauthorized` | El ID está bien, pero `GOOGLE_CLIENT_SECRET` es de otro cliente o está mal copiado | Copia de nuevo el secreto (empieza con `GOCSPX-`) del mismo cliente. Si ya no lo ves, en el cliente usa **Agregar secreto**. |
+| `unauthorized_client` | El *Refresh token* se generó con otro cliente (o sin marcar “Use your own OAuth credentials” en el Playground) | Repite el 4.5 con el mismo ID y secreto que están en Secrets. |
 | `invalid_grant` en Correos | Cambiaste la contraseña del Gmail, revocaste el acceso o la app quedó en “Prueba” | Verifica que la app esté **En producción** (4.3) y repite el 4.5. |
 | `access_not_configured` o “API has not been used” | Falta activar una API | Paso 4.2 (las tres APIs). |
 | Google no deja **Publicar app** y pide completar la información de marca | Faltan los datos de **Información de marca**, o subiste un logotipo (con logotipo, Google exige verificación formal) | Paso 4.3, punto 3: quita el logotipo, completa página principal, política de privacidad y dominio autorizado `rumbo.org.pe`, guarda y vuelve a **Público → Publicar app**. |

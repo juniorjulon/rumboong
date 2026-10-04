@@ -188,7 +188,7 @@ async function administrador(req: Request): Promise<any> {
 }
 
 function validarCron(req: Request) {
-  const esperado = Deno.env.get("CRON_SECRET");
+  const esperado = secreto("CRON_SECRET", false);
   if (!esperado || req.headers.get("x-cron-secret") !== esperado) {
     throw new ErrorRumbo("No autorizado.", 401);
   }
@@ -274,21 +274,79 @@ async function historial(reservaId: string, accion: string, detalle: unknown, ac
 // =====================================================================
 let cacheToken: { token: string; vence: number } | null = null;
 
+// Lee un Secret tolerando errores comunes al copiar y pegar: espacios o saltos
+// de línea, comillas alrededor y el nombre pegado delante ("GOOGLE_CLIENT_ID=...").
+function secreto(nombre: string, quitarEspacios = true): string {
+  const comillas = (x: string) => x.trim().replace(/^["'`\u201C\u201D\u2018\u2019]+|["'`\u201C\u201D\u2018\u2019]+$/g, "").trim();
+  let v = comillas(Deno.env.get(nombre) ?? "");
+  v = comillas(v.replace(new RegExp(`^${nombre}\\s*[:=]\\s*`, "i"), ""));
+  // Los IDs, secretos y tokens de Google nunca llevan espacios ni saltos de línea.
+  return quitarEspacios ? v.replace(/\s+/g, "") : v;
+}
+
+const RE_CLIENT_ID = /^\d+-[a-z0-9]+\.apps\.googleusercontent\.com$/;
+
+// Revisa el formato de los 3 Secrets de Google antes de llamar a Google.
+function credencialesGoogle(): { client_id: string; client_secret: string; refresh_token: string } {
+  const client_id = secreto("GOOGLE_CLIENT_ID");
+  const client_secret = secreto("GOOGLE_CLIENT_SECRET");
+  const refresh_token = secreto("GOOGLE_REFRESH_TOKEN");
+  const faltan = [
+    !client_id && "GOOGLE_CLIENT_ID", !client_secret && "GOOGLE_CLIENT_SECRET", !refresh_token && "GOOGLE_REFRESH_TOKEN",
+  ].filter(Boolean);
+  if (faltan.length) throw new Error(`Faltan estos Secrets de Google en Supabase: ${faltan.join(", ")} (paso 5.3 de la guía).`);
+  if (client_secret.includes(".apps.googleusercontent.com") || client_id.startsWith("GOCSPX-")) {
+    throw new Error("Parece que GOOGLE_CLIENT_ID y GOOGLE_CLIENT_SECRET están intercambiados: el ID termina en .apps.googleusercontent.com y el secreto empieza con GOCSPX- (paso 5.3).");
+  }
+  if (!RE_CLIENT_ID.test(client_id)) {
+    throw new Error(`GOOGLE_CLIENT_ID no tiene el formato de un ID de cliente: debe verse como 123456789012-abc123.apps.googleusercontent.com y lo guardado es “${recortar(client_id)}”. Cópialo de nuevo desde Google Cloud → Google Auth Platform → Clientes (paso 4.4).`);
+  }
+  if (/^ya29\./.test(refresh_token)) {
+    throw new Error("GOOGLE_REFRESH_TOKEN tiene el “Access token” (empieza con ya29.), que dura 1 hora. Copia el “Refresh token” (empieza con 1//) del paso 4.5.");
+  }
+  if (/^4\//.test(refresh_token)) {
+    throw new Error("GOOGLE_REFRESH_TOKEN tiene el “Authorization code” (empieza con 4/). Copia el “Refresh token” (empieza con 1//) del paso 4.5.");
+  }
+  return { client_id, client_secret, refresh_token };
+}
+
+function recortar(v: string): string {
+  return v.length > 60 ? v.slice(0, 28) + "…" + v.slice(-24) : v;
+}
+
+// Traduce la respuesta de Google a qué revisar en la guía.
+function explicarErrorGoogle(error: string, detalle: string, client_id: string): string {
+  const d = detalle.toLowerCase();
+  let que: string;
+  if (error === "invalid_client" && d.includes("not found")) {
+    que = `Google no encuentra un cliente OAuth con el ID guardado en GOOGLE_CLIENT_ID (${recortar(client_id)}). ` +
+      "Suele ser un carácter de más o de menos al copiarlo, un cliente que se borró, o uno de otro proyecto o de otra cuenta de Google. " +
+      "Copia de nuevo el “ID de cliente” desde Google Cloud (con el Gmail de RUMBO) → Google Auth Platform → Clientes, pégalo en Supabase → Edge Functions → Secrets → GOOGLE_CLIENT_ID y vuelve a probar. " +
+      "Si creaste un cliente nuevo, también tienes que actualizar GOOGLE_CLIENT_SECRET y repetir el paso 4.5 para un nuevo GOOGLE_REFRESH_TOKEN.";
+  } else if (error === "invalid_client") {
+    que = "El ID de cliente existe, pero GOOGLE_CLIENT_SECRET no le corresponde. Copia de nuevo el “Secreto del cliente” (empieza con GOCSPX-) del mismo cliente OAuth (paso 4.4) y pégalo en Secrets.";
+  } else if (error === "deleted_client") {
+    que = "Ese cliente OAuth fue eliminado en Google Cloud. Crea uno nuevo (paso 4.4), actualiza GOOGLE_CLIENT_ID y GOOGLE_CLIENT_SECRET, y repite el paso 4.5.";
+  } else if (error === "unauthorized_client") {
+    que = "El Refresh token se generó con otro cliente OAuth. Repite el paso 4.5 marcando “Use your own OAuth credentials” con el MISMO ID y secreto que están en Secrets.";
+  } else if (error === "invalid_grant") {
+    que = "El Refresh token ya no sirve: se cambió la contraseña del Gmail, se quitó el acceso, la app quedó en modo “Prueba” (vence a los 7 días) o se copió mal. Revisa que la app esté “En producción” (paso 4.3) y repite el paso 4.5.";
+  } else {
+    que = "Revisa los Secrets de Google (paso 5.3).";
+  }
+  return `Google rechazó las credenciales (${error}: ${detalle || "sin detalle"}). ${que}`;
+}
+
 async function googleToken(): Promise<string> {
   if (cacheToken && cacheToken.vence > Date.now() + 60_000) return cacheToken.token;
-  const client_id = Deno.env.get("GOOGLE_CLIENT_ID");
-  const client_secret = Deno.env.get("GOOGLE_CLIENT_SECRET");
-  const refresh_token = Deno.env.get("GOOGLE_REFRESH_TOKEN");
-  if (!client_id || !client_secret || !refresh_token) {
-    throw new Error("Faltan los secrets de Google (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN).");
-  }
+  const { client_id, client_secret, refresh_token } = credencialesGoogle();
   const res = await fetch("https://oauth2.googleapis.com/token", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({ client_id, client_secret, refresh_token, grant_type: "refresh_token" }),
   });
-  const j = await res.json();
-  if (!res.ok) throw new Error(`Google rechazó las credenciales (${j.error ?? res.status}): ${j.error_description ?? "sin detalle"}`);
+  const j = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(explicarErrorGoogle(String(j.error ?? res.status), String(j.error_description ?? ""), client_id));
   cacheToken = { token: j.access_token, vence: Date.now() + (j.expires_in ?? 3600) * 1000 };
   return j.access_token;
 }
@@ -396,6 +454,12 @@ async function borrarEvento(eventId: string) {
   }
 }
 
+// Si todas las sesiones fallaron por lo mismo (p. ej. credenciales), lo dice una sola vez.
+function unirErrores(errores: string[]): string {
+  const sinPrefijo = errores.map((e) => e.replace(/^Sesión \d+: /, ""));
+  return new Set(sinPrefijo).size === 1 ? sinPrefijo[0] : errores.join(" | ");
+}
+
 // Crea Meet + evento para cada sesión que aún no lo tenga.
 async function asegurarEventos(reservaId: string): Promise<{ creados: number; errores: string[] }> {
   const sesiones = await sesionesDe(reservaId);
@@ -414,7 +478,7 @@ async function asegurarEventos(reservaId: string): Promise<{ creados: number; er
         await db.from("sesiones").update({ meet_url: s.sala_fija_url, meet_metodo: "sala_fija" }).eq("id", s.id);
       }
       await db.from("notificaciones").insert({
-        tipo: "google_calendar", reserva_id: reservaId, sesion_id: s.id, ok: false, detalle: msg.slice(0, 500),
+        tipo: "google_calendar", reserva_id: reservaId, sesion_id: s.id, ok: false, detalle: msg.slice(0, 1000),
       });
     }
   }
@@ -445,7 +509,7 @@ function partir76(b64: string): string {
 
 function mensajeMime(o: { para: string[]; cc: string[]; asunto: string; html: string; texto: string; responderA?: string }): string {
   const limite = `rumbo_${crypto.randomUUID()}`;
-  const remitente = Deno.env.get("GOOGLE_EMAIL");
+  const remitente = secreto("GOOGLE_EMAIL");
   const cabeceras = [
     remitente ? `From: ${encabezado("RUMBO Asesorías")} <${remitente}>` : null,
     `To: ${o.para.join(", ")}`,
@@ -510,7 +574,7 @@ async function enviarCorreo(o: {
     console.error("[gmail]", o.tipo, (e as Error).message);
     await db.from("notificaciones").insert({
       tipo: o.tipo, reserva_id: o.reserva_id ?? null, sesion_id: o.sesion_id ?? null,
-      destinatario: [...para, ...cc].join(", "), ok: false, detalle: (e as Error).message.slice(0, 500),
+      destinatario: [...para, ...cc].join(", "), ok: false, detalle: (e as Error).message.slice(0, 1000),
     });
     return false;
   }
@@ -793,7 +857,7 @@ async function avisarReprogramacion(res: any, actor: string) {
       await actualizarHoraEvento(s.google_event_id, s.inicio, s.fin);
     } catch (e) {
       await db.from("notificaciones").insert({
-        tipo: "google_calendar", reserva_id: r.id, sesion_id: s.id, ok: false, detalle: (e as Error).message.slice(0, 500),
+        tipo: "google_calendar", reserva_id: r.id, sesion_id: s.id, ok: false, detalle: (e as Error).message.slice(0, 1000),
       });
     }
   }
@@ -889,7 +953,7 @@ async function accionVerificarPago(m: any, b: any) {
   return {
     ok: true,
     aviso: errores.length
-      ? `Pago verificado y correos enviados, pero no se pudo crear el Meet: ${errores.join(" | ")}. Usa "Reintentar Meet".`
+      ? `Pago verificado y correos enviados, pero no se pudo crear el Meet. ${unirErrores(errores)} Luego usa "Reintentar Meet".`
       : "Pago verificado. Se enviaron la confirmación, la invitación y el link de Meet.",
   };
 }
@@ -985,7 +1049,7 @@ async function accionReasignar(m: any, b: any) {
       }
       await google("PATCH", `https://www.googleapis.com/calendar/v3/calendars/primary/events/${encodeURIComponent(s.google_event_id)}?sendUpdates=all`, cambio);
     } catch (e) {
-      await db.from("notificaciones").insert({ tipo: "google_calendar", reserva_id: id, sesion_id: s.id, ok: false, detalle: (e as Error).message.slice(0, 500) });
+      await db.from("notificaciones").insert({ tipo: "google_calendar", reserva_id: id, sesion_id: s.id, ok: false, detalle: (e as Error).message.slice(0, 1000) });
     }
   }
 
@@ -1035,7 +1099,7 @@ async function accionReservaPanel(m: any, b: any) {
 async function accionReintentarMeet(_m: any, b: any) {
   const id = exigirUuid(b.reserva_id, "reserva");
   const { creados, errores } = await asegurarEventos(id);
-  if (errores.length) throw new ErrorRumbo(`No se pudo crear: ${errores.join(" | ")}`);
+  if (errores.length) throw new ErrorRumbo(`No se pudo crear el Meet. ${unirErrores(errores)}`);
   if (creados && b.reenviar !== false) await correosConfirmacion(id);
   return { ok: true, aviso: creados ? `Se crearon ${creados} evento(s) con Meet y se reenviaron los correos.` : "Todas las sesiones ya tenían su evento." };
 }
@@ -1125,7 +1189,14 @@ async function accionProbarGoogle(admin: any, _b: any) {
     await googleToken();
     resultado.credenciales = "✅ Conectado a Google";
   } catch (e) {
-    return { ok: false, credenciales: `❌ ${(e as Error).message}` };
+    const msg = (e as Error).message;
+    const id = secreto("GOOGLE_CLIENT_ID");
+    const delCliente = id && /GOOGLE_CLIENT_ID|invalid_client|deleted_client|unauthorized_client/.test(msg);
+    return {
+      ok: false,
+      credenciales: `❌ ${msg}`,
+      cliente: delCliente ? `ID de cliente guardado en Supabase: ${id} (${id.length} caracteres). Compáralo letra por letra con el de Google Cloud.` : "",
+    };
   }
   const sala = await crearSalaMeet();
   resultado.meet = sala

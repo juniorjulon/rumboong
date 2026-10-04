@@ -128,9 +128,13 @@
     var t = document.createElement('div');
     t.className = 'rumbo-toast ' + (tipo || 'ok');
     t.textContent = mensaje;
+    t.title = 'Toca para cerrar';
     cont.appendChild(t);
-    setTimeout(function () { t.classList.add('fuera'); }, tipo === 'error' ? 6500 : 4000);
-    setTimeout(function () { t.remove(); }, tipo === 'error' ? 7000 : 4500);
+    // Los mensajes largos (por ejemplo, qué revisar en Google) se quedan más tiempo
+    var dura = Math.min(30000, Math.max(tipo === 'error' ? 6500 : 4000, String(mensaje).length * 70));
+    function cerrar() { t.classList.add('fuera'); setTimeout(function () { t.remove(); }, 500); }
+    t.addEventListener('click', cerrar);
+    setTimeout(cerrar, dura);
   }
 
   // Reduce fotos grandes (capturas de Yape) antes de subirlas.
