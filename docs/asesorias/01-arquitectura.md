@@ -58,7 +58,7 @@ flowchart LR
 
 ```
 asesorias.html            ← página pública de reserva (5 pasos + pago)
-mi-reserva.html           ← página personal del estudiante (enlace secreto)
+mi-reserva.html           ← página personal del estudiante (enlace secreto, o código + correo)
 panel.html                ← panel del equipo (login)
 privacidad.html           ← política de privacidad (Ley 29733)
 css/asesorias.css         ← estilos de las páginas públicas
@@ -243,6 +243,7 @@ erDiagram
 | `registrar_voucher`, `reprogramar_sesion` | Función del servidor | Acciones del estudiante y de coordinación. |
 | `expirar_reservas`, `reclamar_envios` | Tarea automática | Vencimientos y avisos (cada aviso se “reclama” antes de enviarse, así nunca sale dos veces). |
 | `reserva_por_token`, `guardar_diagnostico`, `guardar_encuesta` | Página “Mi reserva” | Solo con el enlace secreto. |
+| `buscar_reserva` | Página “Mi reserva” (sin enlace) | Devuelve el enlace secreto solo si el **código y el correo** coinciden con la misma reserva. Responde con una pequeña pausa para frenar intentos al azar. |
 | `marcar_sesion`, `resumen_panel` | Panel | Marcar realizada / informe enviado; números del mes. |
 
 ---
@@ -282,6 +283,7 @@ Cada integrante puede tener **uno o varios roles**. Solo un **administrador** as
 | **30 min después** | Encuesta de satisfacción (4 preguntas) | Estudiante |
 | **24 h después** (si no marcó el informe) | “📄 Recuerda enviar el informe” | Asesor |
 | Cuando un referido confirma | Cupón `PREMIO-XXXXXX` de S/ 5 | Quien refirió |
+| Cuando lo pide desde “Mi reserva” | “Tus enlaces de reserva” con el código y el enlace de cada reserva activa (máximo 3 envíos por hora) | Estudiante |
 
 ### Sobre Google Meet
 
@@ -313,7 +315,7 @@ Si una reserva vence o se cancela, el uso del código se devuelve.
 - **Claves:** la web solo contiene la clave *pública* de Supabase (es seguro que esté en GitHub). Las claves secretas de Google y la de la tarea automática viven en los *Secrets* de Supabase y nunca llegan al navegador.
 - **Datos del estudiante:** solo los ven el asesor asignado y coordinación. La web pública solo recibe horarios y perfiles del equipo.
 - **Vouchers:** en un espacio privado; coordinación los ve con un enlace que dura 10 minutos.
-- **Enlace “Mi reserva”:** contiene un identificador aleatorio imposible de adivinar. No se indexa en buscadores.
+- **Enlace “Mi reserva”:** contiene un identificador aleatorio imposible de adivinar. No se indexa en buscadores. Sin el enlace, la página `mi-reserva.html` pide **código + correo** (deben coincidir los dos) o reenvía los enlaces **solo al correo de la reserva**; la respuesta es siempre la misma, así nadie puede averiguar si un correo tiene reservas.
 - **Registro público cerrado:** nadie puede crearse una cuenta en el panel; solo el administrador crea accesos.
 - **Ley 29733:** consentimiento explícito, datos del apoderado para menores y política de privacidad en `privacidad.html`. Revisa la nota legal de la guía (sección 13).
 

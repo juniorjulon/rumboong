@@ -103,7 +103,7 @@
   function avisoReservaPrevia() {
     var guardada = null;
     try { guardada = JSON.parse(localStorage.getItem('rumbo-ultima-reserva') || 'null'); } catch (e) { /* sin almacenamiento */ }
-    if (!guardada || !guardada.token || Date.now() - guardada.t > 3 * 864e5) return;
+    if (!guardada || !guardada.token || Date.now() - guardada.t > 45 * 864e5) return;
     var div = document.createElement('div');
     div.className = 'alert alert-y';
     div.style.marginBottom = '16px';

@@ -31,13 +31,14 @@
     if (R.demo) $('#bannerDemo').hidden = false;
     $('#topWsp').href = R.whatsappLink(null, 'Hola RUMBO, tengo una consulta sobre mi reserva.');
     if (!R.configurado) return error('El sistema de reservas aún no está activo. Escríbenos por WhatsApp.');
-    if (!R.demo && !/^[0-9a-f-]{36}$/i.test(token)) return error('El enlace no es válido. Revisa el correo de tu reserva.');
+    if (!token && !R.demo) return pintarBusqueda();
+    if (!R.demo && !/^[0-9a-f-]{36}$/i.test(token)) return pintarBusqueda('El enlace no está completo. Entra con tu código y tu correo.');
     cargar();
   }
 
   function cargar() {
     return R.rpc('reserva_por_token', { p_token: R.demo ? '00000000-0000-4000-8000-000000000000' : token }).then(function (d) {
-      if (!d) return error('No encontramos esta reserva. Revisa que el enlace esté completo.');
+      if (!d) return pintarBusqueda('No encontramos esa reserva. Entra con tu código y tu correo.');
       datos = d;
       pintar();
     }).catch(function (e) { error(e.message); });
@@ -47,6 +48,71 @@
     $('#app').innerHTML = '<div class="card center"><i class="ti ti-alert-circle" style="font-size:34px;color:var(--ink-mute)" aria-hidden="true"></i>' +
       '<h1 class="paso-titulo" style="margin-top:6px">No pudimos abrir tu reserva</h1><p class="paso-sub">' + esc(msg) + '</p>' +
       '<a class="btn btn-wsp" target="_blank" rel="noopener" href="' + esc(R.whatsappLink()) + '"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i> Escribir por WhatsApp</a></div>';
+  }
+
+  function irAReserva(t) {
+    location.href = 'mi-reserva.html?t=' + encodeURIComponent(t) + (R.demo ? '&demo=1' : '');
+  }
+
+  /* ------------------------------------------------------------------
+     Sin enlace: entrar con código + correo, o pedir que se reenvíen
+     ------------------------------------------------------------------ */
+  function pintarBusqueda(aviso) {
+    var guardada = null;
+    try { guardada = JSON.parse(localStorage.getItem('rumbo-ultima-reserva') || 'null'); } catch (e) { /* sin almacenamiento */ }
+    $('#app').innerHTML =
+      '<h1 class="paso-titulo">Consulta tu reserva</h1>' +
+      '<p class="paso-sub">Revisa el estado, sube tu comprobante, reprograma o completa tu diagnóstico.</p>' +
+      (aviso ? '<div class="alert alert-y mb"><i class="ti ti-info-circle" aria-hidden="true"></i><div>' + esc(aviso) + '</div></div>' : '') +
+      (guardada && guardada.token ? '<div class="alert alert-b mb"><i class="ti ti-history" aria-hidden="true"></i><div>En este navegador tienes la reserva <strong style="white-space:nowrap">' + esc(guardada.codigo) +
+        '</strong>. <a href="#" id="lnkUltima">Abrirla</a></div></div>' : '') +
+      '<form class="card" id="formBuscar" novalidate>' +
+        '<div class="card-title">Entra con tu código</div>' +
+        '<div class="grid2">' +
+          '<div class="campo"><label class="form-label" for="bq-codigo">Código de reserva</label><input class="form-input" id="bq-codigo" placeholder="RB-XXXXX" maxlength="20" autocomplete="off" style="text-transform:uppercase"><div class="ayuda">Está en el correo de tu reserva y en la pantalla final.</div></div>' +
+          '<div class="campo"><label class="form-label" for="bq-email">Correo con el que reservaste</label><input class="form-input" id="bq-email" type="email" autocomplete="email" maxlength="160"></div>' +
+        '</div>' +
+        '<button class="btn btn-primary btn-block" type="submit" id="btnBuscar">Ver mi reserva <i class="ti ti-arrow-right" aria-hidden="true"></i></button>' +
+      '</form>' +
+      '<form class="card" id="formRecuperar" novalidate>' +
+        '<div class="card-title">¿No tienes tu código?</div>' +
+        '<p class="paso-sub" style="margin-bottom:12px">Escribe tu correo y te reenviamos los enlaces de tus reservas activas.</p>' +
+        '<div class="fila-codigo fila-recuperar"><input class="form-input" id="rc-email" type="email" autocomplete="email" maxlength="160" placeholder="tu@correo.com" aria-label="Correo para reenviar enlaces">' +
+        '<button class="btn btn-line" type="submit" id="btnRecuperar">Reenviarme mis enlaces</button></div>' +
+        '<div class="honeypot" aria-hidden="true"><label for="rc-web">Tu sitio web</label><input id="rc-web" tabindex="-1" autocomplete="off"></div>' +
+        '<div id="rcMsg" class="ayuda"></div>' +
+      '</form>' +
+      '<p class="small muted center" style="margin-top:18px">¿Aún no reservas? <a href="asesorias.html">Agenda tu asesoría</a></p>';
+
+    var lnk = $('#lnkUltima');
+    if (lnk) lnk.addEventListener('click', function (e) { e.preventDefault(); irAReserva(guardada.token); });
+
+    $('#formBuscar').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var codigo = $('#bq-codigo').value.trim(), email = $('#bq-email').value.trim();
+      if (codigo.replace(/[^a-z0-9]/gi, '').length < 5) { $('#bq-codigo').focus(); R.toast('Escribe tu código de reserva (por ejemplo RB-7K2QM).', 'error'); return; }
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { $('#bq-email').focus(); R.toast('Escribe el correo con el que reservaste.', 'error'); return; }
+      var btn = $('#btnBuscar');
+      cargando(btn, true, 'Buscando…');
+      R.rpc('buscar_reserva', { p_codigo: codigo, p_email: email }).then(function (t) {
+        if (t) { irAReserva(t); return; }
+        R.toast('No encontramos una reserva con ese código y ese correo. Revisa que estén bien escritos.', 'error');
+        cargando(btn, false);
+      }).catch(function (err) { R.toast(err.message, 'error'); cargando(btn, false); });
+    });
+
+    $('#formRecuperar').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = $('#rc-email').value.trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { $('#rc-email').focus(); R.toast('Escribe tu correo.', 'error'); return; }
+      var btn = $('#btnRecuperar');
+      cargando(btn, true, 'Enviando…');
+      R.api('recuperar_reservas', { email: email, sitio_web: $('#rc-web').value }).then(function (r) {
+        $('#rcMsg').textContent = '✓ ' + r.aviso;
+        $('#rcMsg').style.color = 'var(--green-d)';
+      }).catch(function (err) { R.toast(err.message, 'error'); })
+        .then(function () { cargando(btn, false); });
+    });
   }
 
   var ESTADOS = {

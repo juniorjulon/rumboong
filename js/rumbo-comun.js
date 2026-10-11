@@ -7,6 +7,15 @@
   'use strict';
 
   var CFG = window.RUMBO_CONFIG || {};
+  // Tolerancia: si se pegó la dirección con "/rest/v1/" (u otra ruta de la API)
+  // o con espacios, se deja solo https://TU-PROYECTO.supabase.co
+  if (CFG.supabaseUrl) {
+    CFG.supabaseUrl = String(CFG.supabaseUrl).trim()
+      .replace(/\/+$/, '')
+      .replace(/\/(rest|auth|functions|storage)\/v1$/i, '')
+      .replace(/\/+$/, '');
+  }
+  if (CFG.supabaseKey) CFG.supabaseKey = String(CFG.supabaseKey).trim();
   var ZONA = 'America/Lima';
   var params = new URLSearchParams(location.search);
   var configurado = !!(CFG.supabaseUrl && CFG.supabaseKey && window.supabase);
@@ -119,9 +128,13 @@
     var t = document.createElement('div');
     t.className = 'rumbo-toast ' + (tipo || 'ok');
     t.textContent = mensaje;
+    t.title = 'Toca para cerrar';
     cont.appendChild(t);
-    setTimeout(function () { t.classList.add('fuera'); }, tipo === 'error' ? 6500 : 4000);
-    setTimeout(function () { t.remove(); }, tipo === 'error' ? 7000 : 4500);
+    // Los mensajes largos (por ejemplo, qué revisar en Google) se quedan más tiempo
+    var dura = Math.min(30000, Math.max(tipo === 'error' ? 6500 : 4000, String(mensaje).length * 70));
+    function cerrar() { t.classList.add('fuera'); setTimeout(function () { t.remove(); }, 500); }
+    t.addEventListener('click', cerrar);
+    setTimeout(cerrar, dura);
   }
 
   // Reduce fotos grandes (capturas de Yape) antes de subirlas.
@@ -231,6 +244,7 @@
         }
         if (n === 'reserva_por_token') return espera(DEMO.reservaEjemplo());
         if (n === 'guardar_diagnostico' || n === 'guardar_encuesta') return espera(true);
+        if (n === 'buscar_reserva') return espera(/DEMO/i.test(String(p.p_codigo || '')) ? '00000000-0000-4000-8000-000000000000' : null);
         return Promise.reject(new Error('Demo: ' + n + ' no disponible'));
       },
       api: function (accion, d) {
@@ -242,6 +256,7 @@
         }
         if (accion === 'subir_voucher') return espera({ ok: true, estado: 'en_revision' });
         if (accion === 'reprogramar') return espera({ ok: true, inicio: d.inicio });
+        if (accion === 'recuperar_reservas') return espera({ ok: true, aviso: 'Demo: si hay reservas con ese correo, se enviarían sus enlaces.' });
         return Promise.reject(new Error('Demo: acción no disponible'));
       },
       reservaEjemplo: function () {
