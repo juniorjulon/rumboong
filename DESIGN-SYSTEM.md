@@ -210,7 +210,7 @@ la sección Actividades y colisionarían.
 - **`siempre`** (el modo configurado): en **cada carga de la página**, incluidas las
   recargas. No escribe nada en el navegador.
 - **`sesion`**: una sola vez por visita (`sessionStorage`). Si además la persona pulsa
-  «Inscríbete gratis», se anota en `localStorage` y no se le vuelve a mostrar **esa**
+  el botón principal (`data-pop-cta`), se anota en `localStorage` y no se le vuelve a mostrar **esa**
   actividad en ese navegador.
 
 En modo `siempre` no se guarda nada a propósito: si más adelante se cambia a `sesion`,
@@ -419,6 +419,6 @@ git push
 
 ### Versión actual
 
-`css/styles.css?v=14` · `js/main.js?v=14`
+`css/styles.css?v=15` y `js/main.js?v=14`
 
 Actualiza este número cada vez que lo incrementes para tener registro.

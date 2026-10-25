@@ -1187,10 +1187,13 @@ html.is-loading body { overflow: hidden; }
 }
 
 /* Pie adherido al fondo del cuerpo: el CTA queda siempre a la vista,
-   aunque el contenido tenga que desplazarse. */
+   aunque el contenido tenga que desplazarse.
+   El sticky se mide desde el borde interior del padding de .pop-body; con
+   bottom: 0 el pie subía --pop-pad y tapaba el último dato. El bottom
+   negativo lo deja pegado al borde real de la tarjeta. */
 .pop-footer {
   position: sticky;
-  bottom: 0;
+  bottom: calc(-1 * var(--pop-pad));
   z-index: 1;
   margin: auto calc(-1 * var(--pop-pad)) calc(-1 * var(--pop-pad));
   padding: 14px var(--pop-pad) var(--pop-pad);
@@ -1340,7 +1343,8 @@ html.is-loading body { overflow: hidden; }
   .pop-facts li { font-size: 12.5px; gap: 8px; }
   .pop-facts svg { width: 16px; height: 16px; }
   .pop-facts span { font-size: 12px; }
-  .pop-footer   { padding-top: 10px; }
+  /* Aquí desplaza la tarjeta, que no tiene padding: el pie va al borde */
+  .pop-footer   { padding-top: 10px; bottom: 0; }
   .pop-actions  { justify-content: center; margin-bottom: 8px; }
   .pop-cta      { flex: 1 1 auto; justify-content: center; }
 
@@ -1388,7 +1392,8 @@ html.is-loading body { overflow: hidden; }
   .pop-lede    { font-size: 13px; }
   .pop-facts   { gap: 7px; }
   .pop-facts li { font-size: 12.5px; }
-  .pop-footer  { padding: 10px var(--pop-pad) 14px; }
+  /* El padding inferior del cuerpo aquí es 18px, no --pop-pad */
+  .pop-footer  { padding: 10px var(--pop-pad) 14px; margin-bottom: -18px; bottom: -18px; }
   .pop-actions { margin-bottom: 6px; }
 }
 
